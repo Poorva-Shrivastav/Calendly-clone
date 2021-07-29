@@ -75,12 +75,19 @@ body{
 }
 
 .input-meeting{
-    height: 40px;
-    width: 410px;
+    height: 43px;
+    width: 395px;
     border-radius: 8px;
     border: 1px solid lightgray;
     outline: none;
-    /* margin-bottom: 10px; */
+    margin-bottom: 5px;
+    padding-left: 12px;
+    font-size: 15px;
+    font-weight: 100;
+    color: #383838;
+}
+.input-meeting:focus{
+    border: 2px solid #0e70fb;
 }
 
 .add-guest-meeting{
@@ -96,9 +103,13 @@ body{
     margin-bottom: 30px;
 }
 
+.add-guest-meeting:hover{
+    background-color: #d9e9fe;
+}
+
 .textarea-meeting-hidden{
     height: 60px;
-    width: 400px;
+    width: 380px;
     border-radius: 8px;
     border: 1px solid lightgray;
     outline: none;
@@ -109,11 +120,12 @@ body{
     font-weight: 100;
     color: #767676;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    flex-wrap: wrap;
 }
 
 .textarea-meeting{
     height: 60px;
-    width: 400px;
+    width: 380px;
     border-radius: 8px;
     border: 1px solid lightgray;
     outline: none;
@@ -139,8 +151,28 @@ body{
     font-size: 15px;
     padding-bottom: 5px;
 }
-.hidden{
+.display-none{
     display: none;
 }
 
+.show-div{
+    background-color: white;
+}
 
+.p-meeting{
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 25px;
+}
+
+.guestList-invitee-input{
+    border: none;
+    outline: none;
+}
+
+.invitee-list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10px;
+}

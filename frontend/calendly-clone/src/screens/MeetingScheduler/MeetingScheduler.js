@@ -1,9 +1,28 @@
-import React from 'react'
+import React, {useState} from 'react'
 import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import'./MeetingScheduler.css'
 import { useHistory } from 'react-router'
 
 function MeetingScheduler() {
+    const [addGuests, setAddGuests] = useState(false)
+    const [email, setEmail] = useState('')
+    const [emailList, setEmailList] = useState([])
+
+    const addEmailHandler = (e) =>{
+        if(email !=='' && !emailList.includes(email)){
+                setEmailList([
+                    ...emailList,
+                    email
+                ])
+        }
+        if (emailList.length > 9){
+              alert('Cannot send email to more than 10 people at a time')
+        }
+        setEmail('')
+    
+    }
+    console.log(emailList);
+
 
     const history = useHistory();
     const backHandler = () =>{
@@ -11,6 +30,8 @@ function MeetingScheduler() {
         history.push(path)
         
     }
+
+
     return (
         <div>
              <div className="outerdiv-selectedDate">
@@ -33,12 +54,34 @@ function MeetingScheduler() {
                             <label className="meeting-label">Email *</label>
                             <input className="input-meeting"></input>
                         </div>
-                        
-                            <button className="add-guest-meeting">Add Guests</button>
-                        <div className="hidden">
-                            <label className="meeting-label">Guest Email(s)</label>
-                            <textarea className="textarea-meeting-hidden"></textarea>
-                            <p id="p-meeting">Notify up to 10 additional guests of the scheduled event.</p>
+                        <button className={addGuests ? "display-none" : "add-guest-meeting"}
+                                onClick = {(e) => setAddGuests(e.target)}    
+                            >Add Guests
+                        </button>
+
+                        <div>
+                            <label className={addGuests ?  "meeting-label": "display-none"}>Guest Email(s)</label>
+                            <div type="button" className={addGuests ?  "textarea-meeting-hidden": "display-none"}>
+                            <div className="invitee-list">
+                                            {
+                                                emailList.map((item, index) => {
+                                                    return <li key={index}>{item}</li>
+                                                })
+                                            }
+                                               
+                                        </div>
+                                    <input
+                                        className="guestList-invitee-input"
+                                        type="email"
+                                        autoComplete="off"
+                                        spellCheck="false"
+                                        value={email}
+                                        onChange={((e) => setEmail(e.target.value))}
+                                        onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
+                                        ></input>
+                                        
+                                </div>
+                            <p className={addGuests ?  "p-meeting": "display-none"}>Notify up to 10 additional guests of the scheduled event.</p>
                         </div>
                         <div>
                             <label className="meeting-label">Please share anything that will help prepare for our meeting.</label>
