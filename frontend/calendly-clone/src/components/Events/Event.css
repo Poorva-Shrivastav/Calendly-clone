@@ -1,0 +1,46 @@
+.min-meeting{
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+    
+}
+
+.checkbox-div{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+#h2-tag-event{
+    color: rgb(61, 61, 61);
+    font-size: 20px;
+    font-weight: 100;
+
+}
+#p-tag-event{
+    color: rgb(168, 167, 167);
+}
+
+.lower-container{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid lightgray;
+    margin-top: 20px;
+    padding-top: 15px;
+    font-size: 14px;
+    
+}
+
+#button-tag-event{
+    width: 85px;
+    height: 30px;
+    border-radius: 20px;
+    color: rgb(0, 107, 255);
+    outline: none;
+    border: 1px solid rgb(0, 107, 255);
+    background-color: white;
+}
+
+.a-event{
+    color: rgb(0, 107, 255);
+}
