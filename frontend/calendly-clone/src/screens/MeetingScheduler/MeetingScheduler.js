@@ -7,6 +7,7 @@ function MeetingScheduler() {
     const [addGuests, setAddGuests] = useState(false)
     const [email, setEmail] = useState('')
     const [emailList, setEmailList] = useState([])
+    // const [deleteEMail, setDeleteEMail] = useState('')
 
     const addEmailHandler = (e) =>{
         if(email !=='' && !emailList.includes(email)){
@@ -21,8 +22,18 @@ function MeetingScheduler() {
         setEmail('')
     
     }
-    console.log(emailList);
 
+    const isEmail = (email) =>{
+        return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
+    }
+
+    // console.log(emailList);
+
+    const deleteHandler = (index) => {
+        const newEmailLst = [...emailList]
+        newEmailLst.splice(index,1)
+        setEmailList(newEmailLst)
+    }
 
     const history = useHistory();
     const backHandler = () =>{
@@ -62,12 +73,19 @@ function MeetingScheduler() {
                         <div>
                             <label className={addGuests ?  "meeting-label": "display-none"}>Guest Email(s)</label>
                             <div type="button" className={addGuests ?  "textarea-meeting-hidden": "display-none"}>
-                            <div className="invitee-list">
+                            <div className="invitee-list-container">
                                             {
                                                 emailList.map((item, index) => {
-                                                    return <li key={index}>{item}</li>
+                                                    return <li key={index} 
+                                                                // className="list-meeting"
+                                                                className={isEmail ? "list-meeting" : "error-list-meeting"}
+                                                                >{item}
+                                                            <button className="delete-button-meeting"
+                                                                onClick={() => deleteHandler(index)}>X</button>
+                                                    </li>
                                                 })
                                             }
+                                                
                                                
                                         </div>
                                     <input
@@ -78,6 +96,7 @@ function MeetingScheduler() {
                                         value={email}
                                         onChange={((e) => setEmail(e.target.value))}
                                         onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
+                                        // isEmail="true"
                                         ></input>
                                         
                                 </div>
