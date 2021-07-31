@@ -108,20 +108,21 @@ body{
 }
 
 .textarea-meeting-hidden{
-    height: 60px;
+    min-height: 60px;
     width: 380px;
     border-radius: 8px;
     border: 1px solid lightgray;
     outline: none;
     margin-top: 10px;
     /* margin-bottom: 50px; */
-    padding:10px;
+    padding:10px;  
     font-size: 15px;
     font-weight: 100;
     color: #767676;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     flex-wrap: wrap;
     display: flex;
+    overflow: scroll;
 }
 
 .textarea-meeting{
@@ -152,24 +153,37 @@ body{
     display: flex;
     flex-wrap: wrap;
     margin-left: 5px;
+    /* height: 50px; */
+    overflow: auto;
     
+}
+.email-delete-container{
+    display: flex;
+    margin-right: 10px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid #c2d9fa;
+    margin-bottom: 5px;
+    overflow: auto;
+    /* padding: 3px; */
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #d6e7fe;
+    color: black;
 }
 
 .list-meeting{
-    background-color: #d6e7fe;
+    /* background-color: #d6e7fe; */
     opacity: .8;
-    color: black;
-    list-style: none;
+    padding-left: 8px;
+    padding-top: 2px;
+    
+}
+
+.list-meeting-toggle{
+    background-color: none;
     padding: 3px;
-    height: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    overflow: auto;
-    border-radius: 4px;
-    border: 1px solid #c2d9fa;
-    /* color: red; */
+    border: none;
 }
 
 .delete-button-meeting{
@@ -180,21 +194,15 @@ body{
     outline: none;
     cursor: pointer;
 }
+
 .error-list-meeting{
     background-color: rgb(251, 57, 57);
     opacity: .8;
     color: white;
     list-style: none;
     padding: 3px;
-    height: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    overflow: auto;
-    border-radius: 4px;
-    /* border: 1px solid #c2d9fa; */
 }
+
 .error-delete-button-meeting{
     background-color: rgb(251, 57, 57);
     opacity: .8;
@@ -202,6 +210,7 @@ body{
     border: none;
     outline: none;
     cursor: pointer;
+
 }
 
 

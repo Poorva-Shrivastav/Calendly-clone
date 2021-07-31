@@ -9,10 +9,9 @@ function MeetingScheduler() {
     const [email, setEmail] = useState('')
     const [emailList, setEmailList] = useState([])
     const [isValid, setIsValid] = useState(false)
+    const [isEditEmail, setIsEditEmail] = useState(null)
+    const [toggleUpdated, setToggleUpdated] = useState(false)
     
-    const [editing, setEditing] = useState(false)
-    const [currentEmail, setCurrentEmail] = useState({})
-
 
     const history = useHistory();
     const backHandler = () =>{
@@ -21,26 +20,31 @@ function MeetingScheduler() {
         
     }
 
+    const inputHandler = (e) => setEmail(e.target.value)
 
     const addEmailHandler = () =>{
         if(email !=='' && !emailList.includes(email)){
             const emailData = {
                 id:new Date().getTime().toString(),
                 name: email,
-                completed: false,
             }
             setEmailList([...emailList, emailData])
         }
-        // else if(email && !isUpdated){
-        //     setEmailList(
-        //         emailList.map((item) => {
-        //             if(item.id === editEmail){
-        //                 return {...item, name: email}
-        //             }
-        //             return item;
-        //         })
-        //     )
-        // }
+        else if(email && !toggleUpdated){
+            setEmailList(
+                emailList.map((ele) => {
+                    if(ele.id === isEditEmail){
+                        return {...ele, name: email}
+                    }
+                    return ele;
+                })
+            )
+            setToggleUpdated(false)
+
+            setEmail('');
+            
+            setIsEditEmail(null)
+        }
         else if (emailList.length > 9){
             alert('Cannot send email to more than 10 people at a time')
         }
@@ -48,46 +52,16 @@ function MeetingScheduler() {
     
     }
 
-
-    const handleEditEmailChange = (e) => {
-        setCurrentEmail({...currentEmail, name: e.target.value})
-        console.log(currentEmail);
-    }
-
-    const handleEditedEmailSubmit = () => {
-        handleUpdatedEmail(currentEmail.id, currentEmail)
-    }
-
-    const handleUpdatedEmail = (id, updatedEmail) => {
-        const updatedEMailList = emailList.map((email) => {
-            return email.id === id ? updatedEmail : email
+    const editEmail = (index) => {
+        let newEditedEmail = emailList.find((ele) => {
+            return ele.id === index ;
         })
+        // console.log(newEditedEmail);
+        setToggleUpdated(true)
+       
 
-        setEditing(false)
-        setEmailList(updatedEMailList)
+        setIsEditEmail(index)
     }
-
-    const handleEditEmailClick = (email) => {
-        setEditing(true)
-        setCurrentEmail({...email})
-    }
-    // const emailEditHandler = (id) => {
-    //     let newEmailList = emailList.map((item, e) => {
-    //             if(item.id === id){
-    //                 let newInput = e.target
-    //                 return {...newEmailList, name: newInput, isUpdated: true}
-    //             }
-    //     })
-    //     setEmailList(newEmailList)
-
-    // }
-
-
-    // const deleteHandler = (index) => {
-    //     const newEmailLst = [...emailList]
-    //     newEmailLst.splice(index,1)
-    //     setEmailList(newEmailLst)
-    // }
 
     const deleteHandler = (index) =>{
         const newEmailLst = emailList.filter((ele) => {
@@ -97,20 +71,20 @@ function MeetingScheduler() {
     }
 
 
-    
+        
     const emailRegex = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$')
-    
+        
     const validateEmail = () => {
         if(!emailRegex.test(emailList)){
             setIsValid(true)
         }
         
     } 
-    
-
+        
+        
     return (
         <div>
-             <div className="outerdiv-selectedDate">
+            <div className="outerdiv-selectedDate">
                 <div className="left-container-selectedDate">
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar />
@@ -140,74 +114,52 @@ function MeetingScheduler() {
                             <div type="button" className={addGuests ?  "textarea-meeting-hidden": "display-none"}>
                             <div className="invitee-list-container">
                                             {
-                                                emailList.map((item, index) => {
-                                                    return <li key={index}
-                                                                className={isValid ? "list-meeting" : "error-list-meeting"}                                                    
-                                                                className={item ? "list-meeting" : 'error-list-meeting'}
-                                                                onClick={() => handleEditEmailClick(item)} 
-                                                                >{item.name}
-                                                                <button 
-                                                                className={isValid ? "delete-button-meeting" : "error-delete-button-meeting"}
-                                                                // className={!item.isUpdated ? "delete-button-meeting" : ''}
+                                                emailList.map((item) => {
+                                                    return <div class="email-delete-container">
+                                                             <div
                                                                 key={item.id}
+                                                                // className={isValid ? "list-meeting" : "error-list-meeting"}                                                    
+                                                                className={toggleUpdated ? "list-meeting" : "list-meeting-toggle"}
+                                                                onClick={() => editEmail(item.id)}
+                                                                value={email}
+                                                                >{item.name}
+                                                                </div>
+                                                            <button 
+                                                                className="delete-button-meeting"
+                                                                // key={item.id}
                                                                 onClick={() => deleteHandler(item.id)}
-                                                                
-                                                                >X</button>
-                                                                
-                                                    </li>
-                                                })
-                                            }
-                                        </div>
-                                        {
-                                                editing ? (
-                                                    <>
-                                                    <input
-                                                        className="guestList-invitee-input"
-                                                        type="email"
-                                                        value={currentEmail.name}
-                                                        onChange={handleEditEmailChange}
-                                                        onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
-                                                        />
-                                                    {/* <button onClick={()=>setEditing(true)}></button> */}
-                                                    </>  
-                                                )
-                                                :(
-                                                    <input
-                                                        className="guestList-invitee-input"
-                                                        type="email"
-                                                        autoComplete="off"
-                                                        spellCheck="false"
-                                                        value={email}
-                                                        onChange={(e) => setEmail(e.target.value)}
-                                                        onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
-                                                        onClick={validateEmail}
-                                                        ></input>
-                                                )
-                                            }
-                                    {/* <input
-                                        className="guestList-invitee-input"
-                                        type="email"
-                                        autoComplete="off"
-                                        spellCheck="false"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
-                                        onClick={validateEmail}
-                                        ></input> */}
-                                        
-                                </div>
-                            <p className={addGuests ?  "p-meeting": "display-none"}>Notify up to 10 additional guests of the scheduled event.</p>
-                        </div>
-                        <div>
-                            <label className="meeting-label">Please share anything that will help prepare for our meeting.</label>
-                            <textarea className="textarea-meeting"></textarea>
-                            <button className="schedule-event-button">Schedule Event</button>
-                        </div>
+                                                            >X</button>
+                                                    </div>
+     
+                                            })  
+                                        }
+                                    </div>
+                                    
+                                <input
+                                    className="guestList-invitee-input"
+                                    type="email"
+                                    autoComplete="off"
+                                    spellCheck="false"
+                                    value={email}
+                                    onChange={inputHandler}
+                                    onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
+                                    
+                                />
+                                    
+                            </div>
+                        <p className={addGuests ?  "p-meeting": "display-none"}>Notify up to 10 additional guests of the scheduled event.</p>
+                    </div>
+                    <div>
+                        <label className="meeting-label">Please share anything that will help prepare for our meeting.</label>
+                        <textarea className="textarea-meeting"></textarea>
+                        <button className="schedule-event-button">Schedule Event</button>
                     </div>
                 </div>
-        </div>
-        </div >
-    )
+            </div>
+    </div>
+    </div >
+)
+
 }
 
 export default MeetingScheduler
