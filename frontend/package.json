@@ -5,7 +5,8 @@
   "dependencies": {
     "react-redux": "^7.2.4",
     "react-time-range": "^1.0.4",
-    "redux": "^4.1.0"
+    "redux": "^4.1.0",
+    "validator": "^13.6.0"
   },
   "devDependencies": {},
   "scripts": {

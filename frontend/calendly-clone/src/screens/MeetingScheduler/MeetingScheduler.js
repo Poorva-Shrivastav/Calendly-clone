@@ -8,9 +8,12 @@ function MeetingScheduler() {
     const [addGuests, setAddGuests] = useState(false)
     const [email, setEmail] = useState('')
     const [emailList, setEmailList] = useState([])
-    const [isValid, setIsValid] = useState(false)
+    // const [isValid, setIsValid] = useState(false)
     const [isEditEmail, setIsEditEmail] = useState(null)
     const [toggleUpdated, setToggleUpdated] = useState(true)
+    const [emailError, setEmailError] = useState('')    
+
+    // const initialEmailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
     const history = useHistory();
     const backHandler = () =>{
@@ -38,7 +41,6 @@ function MeetingScheduler() {
             
             setIsEditEmail(null)
 
-            // setIsValid(true)
         }
 
         else if (emailList.length > 9){
@@ -52,21 +54,25 @@ function MeetingScheduler() {
             }
             setEmailList([...emailList, emailData])
             
-
-            const emailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-                if(emailRegex.test(email)){
-                setIsValid(true)   
-
+            if (validator.isEmail(email)) {
+                setEmailError('Valid Email :)')
+              } else {
+                setEmailError('Enter valid Email!')
                 }
-                else {
-                    setIsValid(false);
-                }
+            
+
+            // const emailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            //     if(!emailRegex.test(email)){
+            //         setIsValid(true)   
+            //     }
+            //     else {
+            //         setIsValid(false);
+            //     }
+                // setIsValid(false)
 
         setEmail('')
-        
         }
         
-    
     }
 
     const editEmail = (id) => {
@@ -80,6 +86,7 @@ function MeetingScheduler() {
         console.log(isEditEmail);
     }
 
+
     const deleteHandler = (index) =>{
         const newEmailLst = emailList.filter((ele) => {
             return index !== ele.id
@@ -88,19 +95,20 @@ function MeetingScheduler() {
     }
 
 
-        
-    // const emailRegex = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$')
-        
-    const validateEmail = () => {
-        const emailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        if(!emailRegex.test(email)){
-            setIsValid(false)   
-        }
-        else{
-            setIsValid(true)   
-        }
-        
-    } 
+    // const validateEmail = (email) => {
+    //     const emailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+    //         if(emailRegex.test(email)){
+    //             setIsValid(false)
+    //         }
+    //         else{
+    //             setIsValid(true)   
+    //         }
+    
+
+      
+    // } 
+    
         
         
     return (
@@ -138,41 +146,46 @@ function MeetingScheduler() {
                     
                             >
                                 {
-                                                emailList.map((item) => {
-                                                    return <div class="email-delete-container" >
-                                                             <div
-                                                                key={item.id}
-                                                                className={isValid ? "list-meeting" : "error-list-meeting"}   
-                                                                type="text"                                           
-                                                                // className="list-meeting"
-                                                                // onChange = {validateEmail}
-                                                                onClick={() => editEmail(item.id)}
-                                                                value={item.name}
-                                                                > {item.name}
-                                                                </div>
-                                                            <button 
-                                                                className={isValid ? "delete-button-meeting" : "error-delete-button-meeting"}
-                                                                // key={item.id}
-                                                                onClick={() => deleteHandler(item.id)}
-                                                            >X</button>
-                                                    </div>
-     
+                                    emailList.map((item) => {
+                                        return <div 
+                                                    // className={validator.isEmail(email) ?  "error-list-meeting" : "email-delete-container"  }   
+                                                    className="email-delete-container"
+                                                    key={item.id}>
+                                                    <span style={{
+                                                        fontWeight: 'bold',
+                                                        color: 'red',
+                                                        }}>{emailError}</span>
+                                                <div
+                                                    className="list-meeting"
+                                                    type="text" 
+                                                    onClick={() => editEmail(item.id)}
+                                                    value={item.name}
+                                                    > 
+                                                    {item.name}
+                                                    
+                                                </div>
+                                                <button 
+                                                    className="delete-button-meeting"
+                                                    onClick={() => deleteHandler(item.id)}
+                                                >X</button>
+                                            </div>
                                             })  
                                         }
-                                    </div>
-                                    
+                            </div>
+                                
                                 <input
                                     className="guestList-invitee-input"
-                                    type="email"
+                                    id={email}
+                                    type={email}
                                     autoComplete="off"
                                     spellCheck="false"
                                     value={email}
                                     onChange={inputHandler}
-                                    // onChange={validateEmail}
                                     // onChange={isEditEmail ? inputHandler : null}
                                     onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
-        
+                                    // onKeyDown=
                                 />
+                                    
                                     
                             </div>
                         <p className={addGuests ?  "p-meeting": "display-none"}>Notify up to 10 additional guests of the scheduled event.</p>

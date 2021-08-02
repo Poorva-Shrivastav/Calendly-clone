@@ -201,8 +201,9 @@ body{
     background-color: rgb(251, 57, 57);
     opacity: .8;
     color: white;
-    list-style: none;
     padding: 3px;
+    border: none;
+    outline: none;
 } 
 
 .error-delete-button-meeting{
