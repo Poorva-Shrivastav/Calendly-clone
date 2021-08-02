@@ -172,6 +172,8 @@ body{
     color: black;
 }
 
+
+
 .list-meeting{
     /* background-color: #d6e7fe; */
     opacity: .8;
@@ -180,11 +182,11 @@ body{
     
 }
 
-.list-meeting-toggle{
+/* .list-meeting-toggle{
     background-color: none;
     padding: 3px;
     border: none;
-}
+} */
 
 .delete-button-meeting{
     background-color: #d6e7fe;
@@ -201,7 +203,7 @@ body{
     color: white;
     list-style: none;
     padding: 3px;
-}
+} 
 
 .error-delete-button-meeting{
     background-color: rgb(251, 57, 57);

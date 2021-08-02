@@ -10,8 +10,7 @@ function MeetingScheduler() {
     const [emailList, setEmailList] = useState([])
     const [isValid, setIsValid] = useState(false)
     const [isEditEmail, setIsEditEmail] = useState(null)
-    const [toggleUpdated, setToggleUpdated] = useState(false)
-    
+    const [toggleUpdated, setToggleUpdated] = useState(true)
 
     const history = useHistory();
     const backHandler = () =>{
@@ -23,14 +22,8 @@ function MeetingScheduler() {
     const inputHandler = (e) => setEmail(e.target.value)
 
     const addEmailHandler = () =>{
-        if(email !=='' && !emailList.includes(email)){
-            const emailData = {
-                id:new Date().getTime().toString(),
-                name: email,
-            }
-            setEmailList([...emailList, emailData])
-        }
-        else if(email && !toggleUpdated){
+        
+        if(email && !toggleUpdated){
             setEmailList(
                 emailList.map((ele) => {
                     if(ele.id === isEditEmail){
@@ -39,28 +32,52 @@ function MeetingScheduler() {
                     return ele;
                 })
             )
-            setToggleUpdated(false)
+            setToggleUpdated(true)
 
             setEmail('');
             
             setIsEditEmail(null)
+
+            // setIsValid(true)
         }
+
         else if (emailList.length > 9){
             alert('Cannot send email to more than 10 people at a time')
         }
+
+        else if(email !==''){ //&& !emailList.includes(email)
+            const emailData = {
+                id:new Date().getTime().toString(),
+                name: email,
+            }
+            setEmailList([...emailList, emailData])
+            
+
+            const emailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                if(emailRegex.test(email)){
+                setIsValid(true)   
+
+                }
+                else {
+                    setIsValid(false);
+                }
+
         setEmail('')
+        
+        }
+        
     
     }
 
-    const editEmail = (index) => {
+    const editEmail = (id) => {
         let newEditedEmail = emailList.find((ele) => {
-            return ele.id === index ;
+            return ele.id === id ;
         })
         // console.log(newEditedEmail);
-        setToggleUpdated(true)
-       
-
-        setIsEditEmail(index)
+        setToggleUpdated(false)
+        setEmail(newEditedEmail.name)
+        setIsEditEmail(id)
+        console.log(isEditEmail);
     }
 
     const deleteHandler = (index) =>{
@@ -72,11 +89,15 @@ function MeetingScheduler() {
 
 
         
-    const emailRegex = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$')
+    // const emailRegex = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$')
         
     const validateEmail = () => {
-        if(!emailRegex.test(emailList)){
-            setIsValid(true)
+        const emailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if(!emailRegex.test(email)){
+            setIsValid(false)   
+        }
+        else{
+            setIsValid(true)   
         }
         
     } 
@@ -112,20 +133,25 @@ function MeetingScheduler() {
                         <div>
                             <label className={addGuests ?  "meeting-label": "display-none"}>Guest Email(s)</label>
                             <div type="button" className={addGuests ?  "textarea-meeting-hidden": "display-none"}>
-                            <div className="invitee-list-container">
-                                            {
+                            
+                            <div className="invitee-list-container" 
+                    
+                            >
+                                {
                                                 emailList.map((item) => {
-                                                    return <div class="email-delete-container">
+                                                    return <div class="email-delete-container" >
                                                              <div
                                                                 key={item.id}
-                                                                // className={isValid ? "list-meeting" : "error-list-meeting"}                                                    
-                                                                className={toggleUpdated ? "list-meeting" : "list-meeting-toggle"}
+                                                                className={isValid ? "list-meeting" : "error-list-meeting"}   
+                                                                type="text"                                           
+                                                                // className="list-meeting"
+                                                                // onChange = {validateEmail}
                                                                 onClick={() => editEmail(item.id)}
-                                                                value={email}
-                                                                >{item.name}
+                                                                value={item.name}
+                                                                > {item.name}
                                                                 </div>
                                                             <button 
-                                                                className="delete-button-meeting"
+                                                                className={isValid ? "delete-button-meeting" : "error-delete-button-meeting"}
                                                                 // key={item.id}
                                                                 onClick={() => deleteHandler(item.id)}
                                                             >X</button>
@@ -142,8 +168,10 @@ function MeetingScheduler() {
                                     spellCheck="false"
                                     value={email}
                                     onChange={inputHandler}
+                                    // onChange={validateEmail}
+                                    // onChange={isEditEmail ? inputHandler : null}
                                     onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
-                                    
+        
                                 />
                                     
                             </div>
