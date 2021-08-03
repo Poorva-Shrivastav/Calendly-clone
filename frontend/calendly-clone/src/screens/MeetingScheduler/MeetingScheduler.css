@@ -90,6 +90,34 @@ body{
     border: 2px solid #0e70fb;
 }
 
+.input-meeting-error{
+    height: 43px;
+    width: 395px;
+    border-radius: 8px;
+    border: 1px solid #c96161;
+    outline: none;
+    margin-bottom: 5px;
+    padding-left: 12px;
+    font-size: 15px;
+    font-weight: 100;
+    color: #383838;
+}
+.input-meeting-error-hidden{
+    height: 20px;
+    width: 395px;
+    border-radius: 4px;
+    border: 1px solid #c96161;
+    background-color: #f07d7d;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding-left: 12px;
+    padding-top: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+}
+
 .add-guest-meeting{
     height: 30px;
     width: 100px;

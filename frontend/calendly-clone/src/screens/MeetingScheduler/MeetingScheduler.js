@@ -6,12 +6,16 @@ import validator from 'validator'
 
 function MeetingScheduler() {
     const [addGuests, setAddGuests] = useState(false)
+    const [name, setName] = useState('')
+    const [mainEmail, setMainEmail] = useState('')
     const [email, setEmail] = useState('')
+    const [isEmptyName, setIsEmptyName] = useState(false)
+    const [isEmptyEmail, setIsEmptyEmail] = useState(false)
     const [emailList, setEmailList] = useState([])
-    // const [isValid, setIsValid] = useState(false)
     const [isEditEmail, setIsEditEmail] = useState(null)
     const [toggleUpdated, setToggleUpdated] = useState(true)
     const [emailError, setEmailError] = useState('')    
+    // const [isValid, setIsValid] = useState(false)
 
     // const initialEmailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
@@ -22,8 +26,27 @@ function MeetingScheduler() {
         
     }
 
+    const nameChangeHandler = (e) => setName(e.target.value)
+    //     if(name == ''){
+    //         setIsEmptyName(true)
+    //     }else if(name !== ''){
+    //         setName(e.target.value)
+    //         setIsEmptyName(false)
+    //     }
+    // }
+    
+    const emailChangeHandler = (e) => setMainEmail(e.target.value)
+    //     if(email == ''){setIsEmptyEmail(true)}
+    //     else if(email !== ''){
+    //         setMainEmail(e.target.value)
+    //         setMainEmail(false)
+    //     }
+    // }
+    
+
     const inputHandler = (e) => setEmail(e.target.value)
 
+    
     const addEmailHandler = () =>{
         
         if(email && !toggleUpdated){
@@ -104,13 +127,28 @@ function MeetingScheduler() {
     //         else{
     //             setIsValid(true)   
     //         }
-    
-
-      
     // } 
-    
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if(name == ''){
+            setName(true)
+        }
         
+        else if(mainEmail == ''){
+            setIsEmptyEmail(true)
+        }
+        else if(name !== '' && mainEmail !== ''){
+            let path = `/signin/user/15min/date/meeting-confirmation`
+            history.push(path)
+            setIsEmptyName(false)
+            setIsEmptyEmail(false)
+        }
+
         
+    }
+
+     
     return (
         <div>
             <div className="outerdiv-selectedDate">
@@ -122,16 +160,24 @@ function MeetingScheduler() {
 
                 </div>
 
-                <div className="right-container-selectedDate">
+                <form method="POST" onSubmit={submitHandler} className="right-container-selectedDate">
                     <div>
                         <p class="meetingp">Enter Details</p>
                         <div className="input-container-meeting">
                             <label className="meeting-label">Name *</label>
-                            <input className="input-meeting"></input>
+                            <input 
+                                className={isEmptyName? "input-meeting-error" :"input-meeting" }
+                                value={name} 
+                                onChange={nameChangeHandler}></input>
+                            <div className={isEmptyName? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>    
                         </div>
                         <div className="input-container-meeting">
                             <label className="meeting-label">Email *</label>
-                            <input className="input-meeting"></input>
+                            <input className={isEmptyEmail? "input-meeting-error" :"input-meeting"}
+                                type="email"
+                                value={mainEmail} 
+                                onChange={emailChangeHandler}></input>
+                            <div className={isEmptyEmail? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>
                         </div>
                         <button className={addGuests ? "display-none" : "add-guest-meeting"}
                                 onClick = {(e) => setAddGuests(e.target)}    
@@ -193,10 +239,10 @@ function MeetingScheduler() {
                     <div>
                         <label className="meeting-label">Please share anything that will help prepare for our meeting.</label>
                         <textarea className="textarea-meeting"></textarea>
-                        <button className="schedule-event-button">Schedule Event</button>
+                        <button type="submit" value="Submit"className="schedule-event-button">Schedule Event</button>
                     </div>
                 </div>
-            </div>
+            </form>
     </div>
     </div >
 )
