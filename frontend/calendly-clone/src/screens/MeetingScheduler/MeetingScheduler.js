@@ -17,36 +17,18 @@ function MeetingScheduler() {
     const [emailError, setEmailError] = useState('')    
     // const [isValid, setIsValid] = useState(false)
 
-    // const initialEmailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-
     const history = useHistory();
     const backHandler = () =>{
         let path = `/signin/user/15min/date`
-        history.push(path)
-        
+        history.push(path)    
     }
 
     const nameChangeHandler = (e) => setName(e.target.value)
-    //     if(name == ''){
-    //         setIsEmptyName(true)
-    //     }else if(name !== ''){
-    //         setName(e.target.value)
-    //         setIsEmptyName(false)
-    //     }
-    // }
-    
+
     const emailChangeHandler = (e) => setMainEmail(e.target.value)
-    //     if(email == ''){setIsEmptyEmail(true)}
-    //     else if(email !== ''){
-    //         setMainEmail(e.target.value)
-    //         setMainEmail(false)
-    //     }
-    // }
-    
 
     const inputHandler = (e) => setEmail(e.target.value)
 
-    
     const addEmailHandler = () =>{
         
         if(email && !toggleUpdated){

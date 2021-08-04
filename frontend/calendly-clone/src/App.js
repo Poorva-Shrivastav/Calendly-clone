@@ -10,7 +10,8 @@ import FifteenMin from './screens/FifteenMin/FifteenMin';
 import SelectedDate from './screens/FifteenMin/SelectedDate/SelectedDate';
 import MeetingScheduler from './screens/MeetingScheduler/MeetingScheduler';
 import CalendarReact from './screens/FifteenMin/Calendar/CalendarReact';
-import MeetingConfirmation from './screens/MeetingConfirmation/MeetingConfirmation/MeetingConfirmation';
+import MeetingConfirmation from './screens/MeetingConfirmation/MeetingConfirmation';
+
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
             <Route exact path="/signin/user/15min"><FifteenMin /></Route> 
             <Route exact path="/signin/user/15min/date"><SelectedDate component={CalendarReact}/></Route> 
             <Route exact path="/signin/user/15min/date/meeting"><MeetingScheduler/> </Route>
-            <Route exact path="/signin/user/15min/date/meeting-confirmation"><MeetingConfirmation/> </Route>
+            <Route exact path="/signin/user/15min/date/meeting-confirmation"><MeetingConfirmation /> </Route>
         </div>
      </Switch>
     </Router>
