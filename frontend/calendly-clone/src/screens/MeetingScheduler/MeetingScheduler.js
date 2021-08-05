@@ -9,6 +9,7 @@ function MeetingScheduler() {
     const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
     const [email, setEmail] = useState('')
+    const [message, setMessage] = useState('')
     const [isEmptyName, setIsEmptyName] = useState(false)
     const [isEmptyEmail, setIsEmptyEmail] = useState(false)
     const [emailList, setEmailList] = useState([])
@@ -27,8 +28,10 @@ function MeetingScheduler() {
 
     const emailChangeHandler = (e) => setMainEmail(e.target.value)
 
-    const inputHandler = (e) => setEmail(e.target.value)
+    const messageChangeHandler = (e) => setMessage(e.target.value)
 
+    const inputHandler = (e) => setEmail(e.target.value)
+    
     const addEmailHandler = () =>{
         
         if(email && !toggleUpdated){
@@ -57,6 +60,7 @@ function MeetingScheduler() {
                 id:new Date().getTime().toString(),
                 name: email,
             }
+            console.log(emailList);
             setEmailList([...emailList, emailData])
             
             if (validator.isEmail(email)) {
@@ -111,23 +115,46 @@ function MeetingScheduler() {
     //         }
     // } 
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
+
         if(name == ''){
             setName(true)
-        }
-        
-        else if(mainEmail == ''){
+        }else if(mainEmail == ''){
             setIsEmptyEmail(true)
-        }
-        else if(name !== '' && mainEmail !== ''){
+        }else if(name !== '' && mainEmail !== ''){
             let path = `/signin/user/15min/date/meeting-confirmation`
             history.push(path)
-            setIsEmptyName(false)
-            setIsEmptyEmail(false)
-        }
+            const response = await fetch("http://localhost:8000/send", {
+            method: "POST",
+            headers: {
+                "Content-type" : "application/json",
+            },
+            body: JSON.stringify({name, mainEmail, message }),
+            })
+            .then((res) => res.json())
+            .then(async(res) => {
+                const resData = await res;
+                console.log(resData);
+                if(resData.status === "success"){
+                    // alert('email sent')
+                    setIsEmptyName(false)
+                    setIsEmptyEmail(false)
+                }
+                else if(resData.status === 'fail'){
+                    alert('Email sending failed')
+                    
+                }
+            })
+            .then(() => {
+                setName('')
+                setEmail('')
+                setMessage('')
+                setEmailList('')
+            })
 
-        
+            
+        }        
     }
 
      
@@ -220,7 +247,10 @@ function MeetingScheduler() {
                     </div>
                     <div>
                         <label className="meeting-label">Please share anything that will help prepare for our meeting.</label>
-                        <textarea className="textarea-meeting"></textarea>
+                        <textarea className="textarea-meeting" 
+                            value={message} 
+                            onChange={messageChangeHandler}
+                            ></textarea>
                         <button type="submit" value="Submit"className="schedule-event-button">Schedule Event</button>
                     </div>
                 </div>

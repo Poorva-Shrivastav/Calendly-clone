@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import "./SigninValidation.css"
 import logo from '../../components/Images/logo.png'
 import { GoogleLogin} from 'react-google-login'
+import { env } from 'process'
 
 function SigninValidation() {
     const [email, setEmail] = useState("")
@@ -22,11 +23,11 @@ function SigninValidation() {
             <a class="anchor-signinVal" href="./signup">(This is not me.)</a>
             <div className="inner-signin">
                 <GoogleLogin 
-                        clientId = "1051195399308-odlc2nv9r2ml1ud7rro852lc1uj49mpi.apps.googleusercontent.com"
+                        client_id = {process.env.CLIENTID}
                         render = {(renderProps) => (
                             <button id="button-signin" 
                                     fullWidth onClick={renderProps.onClick} 
-                                    disabled={renderProps.disabled} v
+                                    disabled={renderProps.disabled}
                                     ariant="contained">Log in with Google</button>
                         )}
                         onSuccess= {googleSuccess}
@@ -35,7 +36,7 @@ function SigninValidation() {
                     
                 />
                 <p className="existing">Don't have an account?
-                <a class="anchor-signinVal" href="./signup"> Sign up</a></p>
+                <a class="anchor-signinVal" href="../signup"> Sign up</a></p>
             </div>
         </div>
     )
