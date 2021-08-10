@@ -8,4 +8,5 @@
     border: 1px solid rgb(0, 107, 255);
     font-weight: 600;
     cursor: pointer;
+    /* position: inherit; */
 }

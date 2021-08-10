@@ -4,11 +4,11 @@ import './BannerSignin.css'
 import Button from '../Button/Button'
 import { useHistory } from 'react-router'
 
-function BannerSignin() {
+function BannerSignin({email}) {
 
     const history = useHistory();
     const signinHandler = () =>{
-        let path = `/signin/email`
+        let path = `/signin/${email}`
         history.push(path)
     }
     return (
