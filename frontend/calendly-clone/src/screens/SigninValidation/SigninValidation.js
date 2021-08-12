@@ -1,29 +1,36 @@
 import React, {useState} from 'react'
-import "./SigninValidation.css"
 import logo from '../../components/Images/logo.png'
+import GoogleAccount from '../../components/GoogleAccount/GoogleAccount'
 import { GoogleLogin} from 'react-google-login'
-import { env } from 'process'
+import "./SigninValidation.css"
+import {useHistory, useParams} from 'react-router-dom'
+
+
 
 function SigninValidation() {
-    const [email, setEmail] = useState("")
+    // const [email, setEmail] = useState("")
 
-    const googleSuccess = async (res) => {
-        console.log(res);
-    }
+    const {email} = useParams()
+    // const googleSuccess = async (res) => {
+    //     console.log(res);
+    // }
 
-    const googleFailure = (error) => {
-        console.log(error);
-        console.log("Google Signin was unsuccessful. Try Again later");
-    }
-
+    // const googleFailure = (error) => {
+    //     console.log(error);
+    //     console.log("Google Signin was unsuccessful. Try Again later");
+    // }
+    
+    
     return (
         <div className="signup">
             <img className="logo" src={logo} alt="logo" />
-            <p id="p-signin">Welcome back, poorva0305@gmail.com{email}!</p>
+            <p id="p-signin">Welcome back, {email}!</p>
             <a class="anchor-signinVal" href="./signup">(This is not me.)</a>
             <div className="inner-signin">
-                <GoogleLogin 
-                        client_id = {process.env.CLIENTID}
+                <GoogleAccount>Log in with Google</GoogleAccount>
+                {/* <GoogleLogin
+                        clientId = {process.env.REACT_APP_API_KEY}
+                        
                         render = {(renderProps) => (
                             <button id="button-signin" 
                                     fullWidth onClick={renderProps.onClick} 
@@ -34,7 +41,7 @@ function SigninValidation() {
                         onFailure={googleFailure}
                         cookiePolicy = "single_host_origin"
                     
-                />
+                />  */}
                 <p className="existing">Don't have an account?
                 <a class="anchor-signinVal" href="../signup"> Sign up</a></p>
             </div>
