@@ -10,7 +10,7 @@ import {useHistory, useParams} from 'react-router-dom'
 function SigninValidation() {
     // const [email, setEmail] = useState("")
 
-    const {email} = useParams()
+    const {loginEmail} = useParams()
     // const googleSuccess = async (res) => {
     //     console.log(res);
     // }
@@ -24,8 +24,8 @@ function SigninValidation() {
     return (
         <div className="signup">
             <img className="logo" src={logo} alt="logo" />
-            <p id="p-signin">Welcome back, {email}!</p>
-            <a class="anchor-signinVal" href="./signup">(This is not me.)</a>
+            <p id="p-signin">Welcome back, {loginEmail}!</p>
+            <a class="anchor-signinVal" href="../signup">(This is not me.)</a>
             <div className="inner-signin">
                 <GoogleAccount>Log in with Google</GoogleAccount>
                 {/* <GoogleLogin

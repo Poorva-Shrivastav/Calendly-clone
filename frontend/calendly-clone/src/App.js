@@ -23,7 +23,7 @@ function App({email}) {
             <Route path="/signup/:email" ><SignupWithGoogle email={email}/></Route> 
             {/* <Link to="/signup/email="><SignupWithGoogle/></Link> */}
             <Route exact path="/signin"><Signin/></Route>  
-            <Route exact path="/signin/email"><SigninValidation/></Route>  
+            <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
             <Route exact path="/signin/user"><EventTypes/></Route>  
             <Route exact path="/signin/user/event-types"><EventTypes/></Route>  
             <Route exact path="/signin/user/15min"><FifteenMin /></Route> 
