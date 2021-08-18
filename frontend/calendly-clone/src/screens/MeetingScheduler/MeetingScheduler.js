@@ -20,7 +20,7 @@ function MeetingScheduler() {
 
     const history = useHistory();
     const backHandler = () =>{
-        let path = `/signin/user/15min/date`
+        let path = `/user/15min/date`
         history.push(path)    
     }
 
@@ -160,8 +160,8 @@ function MeetingScheduler() {
      
     return (
         <div>
-            <div className="outerdiv-selectedDate">
-                <div className="left-container-selectedDate">
+            <div className="outerdiv-meeting">
+                <div className="left-container-meeting">
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar />
                     <p id="event-string-p">🗓️ 9:30am - 9:45am, Friday, July 30, 2021</p>
@@ -169,7 +169,7 @@ function MeetingScheduler() {
 
                 </div>
 
-                <form method="POST" onSubmit={submitHandler} className="right-container-selectedDate">
+                <form method="POST" onSubmit={submitHandler} className="right-container-meeting">
                     <div>
                         <p class="meetingp">Enter Details</p>
                         <div className="input-container-meeting">

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 // import 'react-calendar/dist/Calendar.css';
 
 
-function CalendarReact({props}) {
+function CalendarReact({time}) {
     const [date, setDate] = useState(new Date())
     const [selectedDate, setSelectedDate] = useState('')
 
@@ -17,7 +17,7 @@ function CalendarReact({props}) {
     }
     
     const selectedDateSetter = (value, e) => {
-        let path = `/signin/user/15min/date`
+        let path = `/user/15min/date`
         history.push(path)
         setSelectedDate(e.target.ariaLabel)
     }

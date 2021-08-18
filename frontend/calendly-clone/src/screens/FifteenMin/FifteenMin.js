@@ -12,7 +12,7 @@ function FifteenMin({time, selectedDate}) {
         <div class="outermost-date-container">
         <div class="main-date-container">
             <div class="left-container-15">
-                <TimeBar />
+                <TimeBar time={15}/>
             </div>
 
             <div class="right-container-15">

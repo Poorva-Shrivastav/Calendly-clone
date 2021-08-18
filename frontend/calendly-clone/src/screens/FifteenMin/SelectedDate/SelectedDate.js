@@ -1,34 +1,69 @@
 import React, {useState} from 'react'
-import CalendarReact from '../Calendar/CalendarReact'
+// import CalendarReact from '../Calendar/CalendarReact'
 import TimeBar from '../TimeBar/TimeBar'
 import { useHistory } from 'react-router'
-
+import './SelectedDate.css'
 // import TimeRange from 'react-time-range';
 // import moment from 'moment';
 
-import './SelectedDate.css'
+import '../Calendar/CalendarReact.css'
+import Calendar from 'react-calendar'
+import dateFormat from 'dateformat';
 
-function SelectedDate({selectedDate}) {
+
+
+function SelectedDate({time}) {
     const [timeSetter, SettimeSetter] = useState('')
     const [clicked, setClicked] = useState(false)
 
+    const [date, setDate] = useState(new Date())
+    const [selectedDate, setSelectedDate] = useState('')
+    
     const history = useHistory();
+
     const meetingScheduleHandler = () => {
-        let path = `/signin/user/15min/date/meeting`
+        let path = `/user/15min/date/meeting`
         history.push(path)
     
     }
+
+    //new
+    const dateHandler = () => {
+        setDate(date)
+    }
+    
+    const selectedDateSetter = (value, e) => {
+        let path = `/user/15min/date`
+        history.push(path)
+        setSelectedDate(e.target.ariaLabel)
+    }
+
+    //----
     return (
         <div>
             <div className="outerdiv-selectedDate">
                 <div className="left-container-selectedDate">
-                    <TimeBar />
+                    <TimeBar time={15}/>
                 </div>
 
                 <div className="right-container-selectedDate">
                     <div>
                         <h2 id="bottom-h2-date">Select a Date & Time</h2>
-                        <CalendarReact/>
+                        {/* <CalendarReact/> */}
+                        <div>
+                    <Calendar 
+                        value={date} 
+                        onChange={dateHandler} 
+                        selectRange={false}
+                        minDate ={date}
+                        onClickDay={selectedDateSetter}
+                        selectedDate={selectedDate}
+                    
+                    />
+                
+        </div>
+
+
                         <div className="timezone">
                             Time Zone - Yet to fix
                         </div>

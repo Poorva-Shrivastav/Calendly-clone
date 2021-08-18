@@ -13,7 +13,7 @@ import CalendarReact from './screens/FifteenMin/Calendar/CalendarReact';
 import MeetingConfirmation from './screens/MeetingConfirmation/MeetingConfirmation';
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 
-function App({email}) {
+function App({loginEmail, email, time, selectedDate}) {
   return (
     <Router>  
       <Switch>
@@ -24,12 +24,11 @@ function App({email}) {
             {/* <Link to="/signup/email="><SignupWithGoogle/></Link> */}
             <Route exact path="/signin"><Signin/></Route>  
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
-            <Route exact path="/signin/user"><EventTypes/></Route>  
-            <Route exact path="/signin/user/event-types"><EventTypes/></Route>  
-            <Route exact path="/signin/user/15min"><FifteenMin /></Route> 
-            <Route exact path="/signin/user/15min/date"><SelectedDate component={CalendarReact}/></Route> 
-            <Route exact path="/signin/user/15min/date/meeting"><MeetingScheduler/> </Route>
-            <Route exact path="/signin/user/15min/date/meeting-confirmation"><MeetingConfirmation /> </Route>
+            <Route exact path="/user"><EventTypes time={time}/></Route>  
+            <Route exact path="/user/:time"><FifteenMin/></Route> 
+            <Route exact path="/user/15min/date"><SelectedDate selectedDate={selectedDate}/></Route> 
+            <Route exact path="/user/15min/date/meeting"><MeetingScheduler/> </Route>
+            <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation /> </Route>
         </div>
      </Switch>
     </Router>

@@ -16,7 +16,7 @@ function GoogleAccount({children}) {
 
     return (
         <GoogleLogin 
-        clientId = {process.env.REACT_APP_API_KEY}
+        clientId = {process.env.REACT_APP_CLIENT_ID}
                         render = {(renderProps) => (
                             <button id="button-Goglesignin" 
                                     fullWidth onClick={renderProps.onClick} 
