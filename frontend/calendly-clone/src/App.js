@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { Children, useState } from 'react';
 import Home from './screens/Home/Home';
 import Signup from './screens/Signup/Signup';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
@@ -13,7 +13,10 @@ import CalendarReact from './screens/FifteenMin/Calendar/CalendarReact';
 import MeetingConfirmation from './screens/MeetingConfirmation/MeetingConfirmation';
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 
-function App({loginEmail, email, time, selectedDate}) {
+function App({loginEmail, email, time, name}) {
+
+  const [selectedDate, setSelectedDate] = useState('')
+
   return (
     <Router>  
       <Switch>
@@ -27,7 +30,7 @@ function App({loginEmail, email, time, selectedDate}) {
             <Route exact path="/user"><EventTypes time={time}/></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
             <Route exact path="/user/15min/date"><SelectedDate selectedDate={selectedDate}/></Route> 
-            <Route exact path="/user/15min/date/meeting"><MeetingScheduler/> </Route>
+            <Route exact path="/user/15min/date/meeting"><MeetingScheduler CalendarReact={selectedDate}/></Route>
             <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation /> </Route>
         </div>
      </Switch>

@@ -2,14 +2,14 @@ import React from 'react'
 // import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import './MeetingConfirmation.css'
 
-function MeetingConfirmation() {
+function MeetingConfirmation({name}) {
     return (
         // <div>
             <div className="outerdiv-meetingConf">
                 <div className="sub-container-meetingConf">
                     <div className="upper-div-meetingConf">
                         <h3 id="h3-meetingConf">Confirmed</h3>
-                        <p id="p-meetingConf">You are scheduled with {'Poorva Shrivastav'}.</p>
+                        <p id="p-meetingConf">You are scheduled with {name}</p>
                     </div>                    
                     <div className="lower-div-meetingConf">
                         <h4 id="event-string-h4-meetingConf">🟡 {"15 Minute Meeting"}</h4>

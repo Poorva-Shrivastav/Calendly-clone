@@ -9,6 +9,7 @@ import './SelectedDate.css'
 import '../Calendar/CalendarReact.css'
 import Calendar from 'react-calendar'
 import dateFormat from 'dateformat';
+import MeetingScheduler from '../../MeetingScheduler/MeetingScheduler'
 
 
 
@@ -215,7 +216,8 @@ function SelectedDate({time}) {
                                 <button className={clicked=='4.45' ? 'newSetTime' : 'setTime'} value="4.45">4:45pm</button>
                                 <button className={clicked=='4.45' ? 'available-onClick' : 'display-none'} value="4.45" onClick={meetingScheduleHandler}>Confirm</button>
                             </div>
-                        
+
+                            <MeetingScheduler selectedDate={selectedDate}/>
                           
                         </div>
                     </div>

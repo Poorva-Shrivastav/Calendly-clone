@@ -3,8 +3,10 @@ import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import'./MeetingScheduler.css'
 import { useHistory, useParams } from 'react-router'
 import validator from 'validator'
+// import CalendarReact from '../FifteenMin/Calendar/CalendarReact'
+import SelectedDate from '../FifteenMin/SelectedDate/SelectedDate'
 
-function MeetingScheduler({selectedDate, value}) {
+function MeetingScheduler({selectedDate}) {
     const [addGuests, setAddGuests] = useState(false)
     const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
@@ -24,6 +26,8 @@ function MeetingScheduler({selectedDate, value}) {
         let path = `/user/15min/date`
         history.push(path)    
     }
+
+    console.log(selectedDate);
 
     const nameChangeHandler = (e) => setName(e.target.value)
 
@@ -124,7 +128,7 @@ function MeetingScheduler({selectedDate, value}) {
         }else if(mainEmail == ''){
             setIsEmptyEmail(true)
         }else if(name !== '' && mainEmail !== ''){
-            let path = `/signin/user/15min/date/meeting-confirmation`
+            let path = `/user/15min/date/meeting-confirmation`
             history.push(path)
             const response = await fetch("http://localhost:8000/send", {
             method: "POST",
@@ -158,7 +162,7 @@ function MeetingScheduler({selectedDate, value}) {
         }        
     }
 
-     
+
     return (
         <div>
             <div className="outerdiv-meeting">
@@ -166,7 +170,7 @@ function MeetingScheduler({selectedDate, value}) {
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar time={15}/>
                     <p id="event-string-p">🗓️ 9:30am - 9:45am, Friday, July 30, 2021</p>
-                    <p id="event-string-p">🗓️ {value}- 9:45am, {selectedDate}</p>
+                    <p id="event-string-p">🗓️ 9:30am - 9:45am, {selectedDate}</p>
                     <p id="time-zone">🌎 India Standard Time</p>
 
                 </div>
@@ -239,7 +243,7 @@ function MeetingScheduler({selectedDate, value}) {
                                     value={email}
                                     onChange={inputHandler}
                                     // onChange={isEditEmail ? inputHandler : null}
-                                    onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : null}
+                                    onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : ''}
                                     // onKeyDown=
                                 />
                                     
@@ -253,10 +257,11 @@ function MeetingScheduler({selectedDate, value}) {
                             value={message} 
                             onChange={messageChangeHandler}
                             ></textarea>
-                        <button type="submit" value="Submit"className="schedule-event-button">Schedule Event</button>
+                        <button type="submit" value="Submit" className="schedule-event-button">Schedule Event</button>
                     </div>
                 </div>
             </form>
+            
     </div>
     </div >
 )
