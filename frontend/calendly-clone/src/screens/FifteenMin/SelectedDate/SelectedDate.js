@@ -37,6 +37,7 @@ function SelectedDate({time}) {
         history.push(path)
         setSelectedDate(e.target.ariaLabel)
     }
+  
 
     //----
     return (
@@ -58,21 +59,20 @@ function SelectedDate({time}) {
                         minDate ={date}
                         onClickDay={selectedDateSetter}
                         selectedDate={selectedDate}
-                    
                     />
                 
+                
         </div>
-
-
                         <div className="timezone">
-                            Time Zone - Yet to fix
+                            Time Zone - Yet to fix 
                         </div>
                     </div>
                 </div>
                 <div className="rightmost-popup-selectedDate">
                     <div>
                         <div className="selected-date">
-                            <p>Selected date - {selectedDate}</p>
+                            {/* <p>Selected date - {selectedDate}</p> */}
+                            <p>{selectedDate}</p>
                         </div>
                         <div 
                             className="button-container" 

@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import'./MeetingScheduler.css'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import validator from 'validator'
 
-function MeetingScheduler() {
+function MeetingScheduler({selectedDate, value}) {
     const [addGuests, setAddGuests] = useState(false)
     const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
@@ -18,6 +18,7 @@ function MeetingScheduler() {
     const [emailError, setEmailError] = useState('')    
     // const [isValid, setIsValid] = useState(false)
 
+    const {time} = useParams();
     const history = useHistory();
     const backHandler = () =>{
         let path = `/user/15min/date`
@@ -163,8 +164,9 @@ function MeetingScheduler() {
             <div className="outerdiv-meeting">
                 <div className="left-container-meeting">
                     <button className="back-button" onClick={backHandler}>⬅</button>
-                    <TimeBar />
+                    <TimeBar time={15}/>
                     <p id="event-string-p">🗓️ 9:30am - 9:45am, Friday, July 30, 2021</p>
+                    <p id="event-string-p">🗓️ {value}- 9:45am, {selectedDate}</p>
                     <p id="time-zone">🌎 India Standard Time</p>
 
                 </div>
