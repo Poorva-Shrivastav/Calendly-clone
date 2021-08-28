@@ -12,6 +12,9 @@ import MeetingScheduler from './screens/MeetingScheduler/MeetingScheduler';
 import CalendarReact from './screens/FifteenMin/Calendar/CalendarReact';
 import MeetingConfirmation from './screens/MeetingConfirmation/MeetingConfirmation';
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
+import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
+
+
 
 function App({loginEmail, email, time, name}) {
 
@@ -21,6 +24,7 @@ function App({loginEmail, email, time, name}) {
     <Router>  
       <Switch>
         <div className="App">
+            
             <Route exact path="/"><Home/></Route>  
             <Route exact path="/signup" ><Signup/></Route> 
             <Route path="/signup/:email" ><SignupWithGoogle email={email}/></Route> 
@@ -32,6 +36,8 @@ function App({loginEmail, email, time, name}) {
             <Route exact path="/user/15min/date"><SelectedDate selectedDate={selectedDate}/></Route> 
             <Route exact path="/user/15min/date/meeting"><MeetingScheduler CalendarReact={selectedDate}/></Route>
             <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation /> </Route>
+
+            <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
         </div>
      </Switch>
     </Router>
