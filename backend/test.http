@@ -1,0 +1,9 @@
+POST http://localhost:8000/api/signup
+Content-Type: application/json
+
+{
+    "name":"Princess Diana",
+    "username":"prince",
+    "email":"diana1234@gmail.com",
+    "password":"test"
+} 

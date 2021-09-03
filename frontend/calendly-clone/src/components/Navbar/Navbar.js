@@ -10,7 +10,7 @@ function Navbar() {
     
     const history = useHistory();
     const signupHandler = () =>{
-        let path = `/signin`
+        let path = `/signup`
         history.push(path)
     }
 

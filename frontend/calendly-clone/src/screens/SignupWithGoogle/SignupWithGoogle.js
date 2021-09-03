@@ -17,7 +17,7 @@ function SignupWithGoogle() {
             </div>
             <div id="lower-container-signupG">
                 <p id="first-p-signupG">The easiest way for you to sign up is with Google. This will automatically connect your calendar so you can start using Calendly right away!</p>
-                <GoogleAccount>Sign up with Google</GoogleAccount>
+                <GoogleAccount >Sign up with Google</GoogleAccount>
                 {/* <button 
                     id="Google-signup-signupG"
                     
