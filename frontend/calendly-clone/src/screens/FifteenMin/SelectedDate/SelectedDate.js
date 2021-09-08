@@ -1,17 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 // import CalendarReact from '../Calendar/CalendarReact'
 import TimeBar from '../TimeBar/TimeBar'
 import { useHistory } from 'react-router'
 import './SelectedDate.css'
-// import TimeRange from 'react-time-range';
-// import moment from 'moment';
-
 import '../Calendar/CalendarReact.css'
 import Calendar from 'react-calendar'
 import dateFormat from 'dateformat';
 import MeetingScheduler from '../../MeetingScheduler/MeetingScheduler'
-
-
+import TimeSlotContext from '../../../App'
 
 function SelectedDate({time}) {
     const [timeSetter, SettimeSetter] = useState('')
@@ -19,16 +15,22 @@ function SelectedDate({time}) {
 
     const [date, setDate] = useState(new Date())
     const [selectedDate, setSelectedDate] = useState('')
-    
+
+    const {timeRange, setTimeRange} = useContext(TimeSlotContext)
+    // const [timeSlot, setTimeSlot] = useState('')
+
     const history = useHistory();
 
-    const meetingScheduleHandler = () => {
+    const meetingScheduleHandler = (e) => {
         let path = `/user/15min/date/meeting`
-        history.push(path)
-    
+        history.push({
+            pathname: path,
+            state: timeRange
+            })
     }
 
-    //new
+    const timeSlotSetter = (e) => setTimeRange(e.target.name)
+   
     const dateHandler = () => {
         setDate(date)
     }
@@ -39,10 +41,9 @@ function SelectedDate({time}) {
         setSelectedDate(e.target.ariaLabel)
     }
   
-
-    //----
-    return (
+    return (        
         <div>
+            {/* <TimeSlotContext.Provider value={timeSlot}> */}
             <div className="outerdiv-selectedDate">
                 <div className="left-container-selectedDate">
                     <TimeBar time={15}/>
@@ -66,6 +67,8 @@ function SelectedDate({time}) {
         </div>
                         <div className="timezone">
                             Time Zone - Yet to fix 
+                            Hi - {timeRange}
+                            
                         </div>
                     </div>
                 </div>
@@ -80,8 +83,10 @@ function SelectedDate({time}) {
                             onClick={(e) => setClicked(e.target.value)}
                         >
                             <div>
-                                <button className={clicked == '9' ? 'newSetTime' : 'setTime'} value="9">9:00am</button>
-                                <button className={clicked == '9'? 'available-onClick' : 'display-none'} value="9" onClick={meetingScheduleHandler}>Confirm</button>
+                                <button className={clicked == '9' ? 'newSetTime' : 'setTime'} value="9" name="9:00:00-9:15:00" onClick={timeSlotSetter}>9:00am</button>
+                                <button className={clicked == '9'? 'available-onClick' : 'display-none'} value="9:00:00-9:15:00" 
+                                onClick={meetingScheduleHandler}
+                                >Confirm</button>
                             </div>
                             <div>
                                 <button className={clicked=='9.15' ? 'newSetTime' : 'setTime'} value="9.15">9:15am</button>
@@ -215,14 +220,15 @@ function SelectedDate({time}) {
                             <div>
                                 <button className={clicked=='4.45' ? 'newSetTime' : 'setTime'} value="4.45">4:45pm</button>
                                 <button className={clicked=='4.45' ? 'available-onClick' : 'display-none'} value="4.45" onClick={meetingScheduleHandler}>Confirm</button>
-                            </div>
-
-                            <MeetingScheduler selectedDate={selectedDate}/>
-                          
+                            </div>   
                         </div>
                     </div>
                 </div>
             </div>
+            <MeetingScheduler selectedDate={selectedDate} />
+            {/* </TimeSlotContext.Provider> */}
+            
+                          
         </div>
     )
 }

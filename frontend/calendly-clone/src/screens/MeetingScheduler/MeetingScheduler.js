@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import'./MeetingScheduler.css'
 import { useHistory, useParams } from 'react-router'
@@ -6,8 +6,9 @@ import validator from 'validator'
 // import CalendarReact from '../FifteenMin/Calendar/CalendarReact'
 import SelectedDate from '../FifteenMin/SelectedDate/SelectedDate'
 import CalendarGoogle from '../../calendarGoogleApi/CalendarGoogle'
+import TimeSlotContext from '../../App'
 
-function MeetingScheduler({selectedDate}) {
+function MeetingScheduler({selectedDate, timeSlot}) {
     const [addGuests, setAddGuests] = useState(false)
     const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
@@ -20,6 +21,8 @@ function MeetingScheduler({selectedDate}) {
     const [toggleUpdated, setToggleUpdated] = useState(true)
     const [emailError, setEmailError] = useState('')    
     // const [isValid, setIsValid] = useState(false)
+    
+    const {timeRange, setTimeRange} = useContext(TimeSlotContext)
 
     const {time} = useParams();
     const history = useHistory();
@@ -28,7 +31,6 @@ function MeetingScheduler({selectedDate}) {
         history.push(path)    
     }
 
-    console.log(selectedDate);
 
     const nameChangeHandler = (e) => setName(e.target.value)
 
@@ -152,15 +154,19 @@ function MeetingScheduler({selectedDate}) {
                 gapi.auth2.getAuthInstance().signIn()
                 .then(() => {
                     var event = {
-                       'summary': 'Trial',
+                    //    'summary': 'Trial',
+                        'summary': `Meeting with ${name}`,
+
                     //    'location': '800 Howard St., San Francisco, CA 94103',
                     //    'description': 'A chance to hear more about Google\'s developer products.',
                         'start': {
                           'dateTime': '2021-08-28T09:00:00-07:00',
+                            // 'dateTime': `${selectedDate}T${timeSlot}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'end': {
                           'dateTime': '2021-08-28T17:00:00-07:00',
+                        //   'dateTime': `${selectedDate}T${timeSlot}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'recurrence': [
@@ -227,17 +233,15 @@ function MeetingScheduler({selectedDate}) {
            
     }
 
-
     return (
         <div>
             <div className="outerdiv-meeting">
                 <div className="left-container-meeting">
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar time={15}/>
-                    <p id="event-string-p">🗓️ 9:30am - 9:45am, Friday, July 30, 2021</p>
-                    <p id="event-string-p">🗓️ 9:30am - 9:45am, {selectedDate}</p>
+                    <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p>
+                    <p id="event-string-p">🗓️ {timeRange}</p>
                     <p id="time-zone">🌎 India Standard Time</p>
-
                 </div>
 
                 <form method="POST" onSubmit={submitHandler} className="right-container-meeting">
@@ -309,7 +313,7 @@ function MeetingScheduler({selectedDate}) {
                                     onChange={inputHandler}
                                     // onChange={isEditEmail ? inputHandler : null}
                                     onKeyPress={(e)=> e.key === "Enter" ? addEmailHandler(e) : ''}
-                                    // onKeyDown=
+                               
                                 />
                                     
                                     

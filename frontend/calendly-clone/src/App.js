@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react';
+import React, {createContext, useState} from 'react';
 import Home from './screens/Home/Home';
 import Signup from './screens/Signup/Signup';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
@@ -14,17 +14,20 @@ import MeetingConfirmation from './screens/MeetingConfirmation/MeetingConfirmati
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
 
-
+export const TimeSlotContext = createContext(null);
 
 function App({loginEmail, email, time, name}) {
 
-  const [selectedDate, setSelectedDate] = useState('')
+  const [selectedDate, setSelectedDate] = useState('0')
+  const [timeRange, setTimeRange] = useState('Hello from UseContext')
 
   return (
+    
     <Router>  
       <Switch>
+      <TimeSlotContext.Provider value={{ timeRange, setTimeRange }}>
         <div className="App">
-            
+        
             <Route exact path="/"><Home/></Route>  
             <Route exact path="/signup" ><Signup/></Route> 
             <Route path="/signup/:email" ><SignupWithGoogle email={email}/></Route> 
@@ -35,13 +38,15 @@ function App({loginEmail, email, time, name}) {
             <Route exact path="/user/:time"><FifteenMin/></Route> 
             <Route exact path="/user/15min/date"><SelectedDate selectedDate={selectedDate}/></Route> 
             <Route exact path="/user/15min/date/meeting"><MeetingScheduler CalendarReact={selectedDate}/></Route>
-            <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation /> </Route>
-
+            <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation /></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
+            
         </div>
+        </TimeSlotContext.Provider>
      </Switch>
     </Router>
-  );
+    
+  )
 }
 
 export default App;

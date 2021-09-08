@@ -37,7 +37,7 @@ googleloginRouter.post('/googlelogin',async(req, res)=>{
                                                 console.log("learn from old course")
                                             }
                                             else{ //user doesn't exits in db
-
+                                                let newUser = 
                                             }
                                         }
                                     })
