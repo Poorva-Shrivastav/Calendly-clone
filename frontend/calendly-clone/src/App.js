@@ -19,13 +19,13 @@ export const TimeSlotContext = createContext(null);
 function App({loginEmail, email, time, name}) {
 
   const [selectedDate, setSelectedDate] = useState('0')
-  const [timeRange, setTimeRange] = useState('Hello from UseContext')
+  // const [timeRange, setTimeRange] = useState('Hello from UseContext')
 
   return (
     
     <Router>  
       <Switch>
-      <TimeSlotContext.Provider value={{ timeRange, setTimeRange }}>
+      {/* <TimeSlotContext.Provider value={{ timeRange, setTimeRange }}> */}
         <div className="App">
         
             <Route exact path="/"><Home/></Route>  
@@ -42,7 +42,7 @@ function App({loginEmail, email, time, name}) {
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             
         </div>
-        </TimeSlotContext.Provider>
+        {/* </TimeSlotContext.Provider> */}
      </Switch>
     </Router>
     
