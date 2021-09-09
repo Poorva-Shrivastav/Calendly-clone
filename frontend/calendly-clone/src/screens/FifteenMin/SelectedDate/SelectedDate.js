@@ -20,16 +20,11 @@ function SelectedDate({ time }) {
   const [timeSlot, setTimeSlot] = useState("");
 
   const history = useHistory();
-//   const params = useParams();
 
   const meetingScheduleHandler = (e) => {
-    let path = `/user/15min/date/meeting`;
-    {console.log("I am from history ",timeSlot)}
-    history.push({
-      pathname: path,
-      // <MeetingScheduler />
-      state:{selectedDate: selectedDate, timeSlot: timeSlot}
-    });
+    let path = `/user/15min/date/meeting`;  
+    history.push(path);
+    // setTimeSlot(e.target.value);
   };
 
   const timeSlotSetter = (e) => setTimeSlot(e.target.name);
@@ -635,7 +630,7 @@ function SelectedDate({ time }) {
         </div>
       </div>
       {console.log("I'm from Selected Date - ", timeSlot, selectedDate)}
-      <MeetingScheduler selectedDate={selectedDate} timeSlot={timeSlot} />
+      {/* <MeetingScheduler selectedDate={selectedDate} timeSlot={timeSlot} /> */}
       {/* </TimeSlotContext.Provider> */}
     </div>
   );
