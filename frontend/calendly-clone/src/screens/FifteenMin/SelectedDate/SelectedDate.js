@@ -7,9 +7,10 @@ import "../Calendar/CalendarReact.css";
 import Calendar from "react-calendar";
 import dateFormat from "dateformat";
 import MeetingScheduler from "../../MeetingScheduler/MeetingScheduler";
-import TimeSlotContext from "../../../App";
 
-function SelectedDate({ time }) {
+// import TimeSlotContext from "../../../App";
+
+function SelectedDate({ time, setTimeSlot }) {
   const [timeSetter, SettimeSetter] = useState("");
   const [clicked, setClicked] = useState(false);
 
@@ -17,17 +18,21 @@ function SelectedDate({ time }) {
   const [selectedDate, setSelectedDate] = useState("");
 
   // const {timeRange, setTimeRange} = useContext(TimeSlotContext)
-  const [timeSlot, setTimeSlot] = useState("");
+  // const [timeSlot, setTimeSlot] = useState("Yo Yo");
 
   const history = useHistory();
 
   const meetingScheduleHandler = (e) => {
     let path = `/user/15min/date/meeting`;  
-    history.push(path);
-    // setTimeSlot(e.target.value);
+    history.push
+    // (path);
+    ({
+      pathname: path,
+      // timeSlot:timeSlot
+    })
   };
 
-  const timeSlotSetter = (e) => setTimeSlot(e.target.name);
+  // const timeSlotSetter = (e) => setTimeSlot(e.target.name);
 
   const dateHandler = () => {
     setDate(date);
@@ -81,8 +86,9 @@ function SelectedDate({ time }) {
                 <button
                   className={clicked == "9" ? "newSetTime" : "setTime"}
                   value="9"
-                  name="9:00:00-9:15:00"
-                  onClick={timeSlotSetter}
+                  name="9:00-9:15"
+                  onClick={setTimeSlot}
+                
                 >
                   9:00am
                 </button>
@@ -90,7 +96,6 @@ function SelectedDate({ time }) {
                   className={
                     clicked == "9" ? "available-onClick" : "display-none"
                   }
-                  value="9:00:00-9:15:00"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -100,6 +105,8 @@ function SelectedDate({ time }) {
                 <button
                   className={clicked == "9.15" ? "newSetTime" : "setTime"}
                   value="9.15"
+                  name="9:15-9.30"
+                  onClick={setTimeSlot}
                 >
                   9:15am
                 </button>
@@ -629,9 +636,7 @@ function SelectedDate({ time }) {
           </div>
         </div>
       </div>
-      {console.log("I'm from Selected Date - ", timeSlot, selectedDate)}
-      {/* <MeetingScheduler selectedDate={selectedDate} timeSlot={timeSlot} /> */}
-      {/* </TimeSlotContext.Provider> */}
+      {console.log("I'm from Selected Date - ", selectedDate)}
     </div>
   );
 }

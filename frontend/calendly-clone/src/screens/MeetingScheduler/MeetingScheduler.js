@@ -7,6 +7,7 @@ import validator from 'validator'
 import SelectedDate from '../FifteenMin/SelectedDate/SelectedDate'
 import CalendarGoogle from '../../calendarGoogleApi/CalendarGoogle'
 import {useLocation} from 'react-router-dom'
+import Calendar from "react-calendar";
 
 // import TimeSlotContext from '../../App'
 
@@ -24,17 +25,13 @@ function MeetingScheduler({selectedDate, timeSlot}) {
     const [emailError, setEmailError] = useState('')    
     // const [isValid, setIsValid] = useState(false)
     
-    // const {timeRange, setTimeRange} = useContext(TimeSlotContext)
 
     const {time} = useParams();
-    // const {selectedDate , timeSlot} = useParams();
-    // const location = useLocation()
     const history = useHistory();
     const backHandler = () =>{
         let path = `/user/15min/date`
         history.push(path)    
     }
-
     console.log(`I'm from Meeting - ${timeSlot} - ${selectedDate}`)
 
     const nameChangeHandler = (e) => setName(e.target.value)
@@ -245,7 +242,7 @@ function MeetingScheduler({selectedDate, timeSlot}) {
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar time={15}/>
                     <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p>
-                    <p id="event-string-p">🗓️ {timeSlot} - {selectedDate}</p>
+                    <p id="event-string-p">🗓️ {timeSlot} am - {selectedDate}</p>
                     <p id="time-zone">🌎 India Standard Time</p>
                 </div>
 

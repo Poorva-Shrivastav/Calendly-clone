@@ -2,7 +2,7 @@ import React from 'react'
 // import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import './MeetingConfirmation.css'
 
-function MeetingConfirmation({name}) {
+function MeetingConfirmation({name, timeSlot}) {
     return (
         // <div>
             <div className="outerdiv-meetingConf">

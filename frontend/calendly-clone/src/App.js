@@ -10,7 +10,7 @@ import FifteenMin from './screens/FifteenMin/FifteenMin';
 import SelectedDate from './screens/FifteenMin/SelectedDate/SelectedDate';
 import MeetingScheduler from './screens/MeetingScheduler/MeetingScheduler';
 import CalendarReact from './screens/FifteenMin/Calendar/CalendarReact';
-import MeetingConfirmation from './screens/MeetingConfirmation/MeetingConfirmation';
+import MeetingConfirmation from './screens/FifteenMin/MeetingConfirmation/MeetingConfirmation';
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
 
@@ -18,8 +18,10 @@ export const TimeSlotContext = createContext(null);
 
 function App({loginEmail, email, time, name}) {
 
-  const [selectedDate, setSelectedDate] = useState('0')
-  // const [timeRange, setTimeRange] = useState('Hello from UseContext')
+  const [selectedDate, setSelectedDate] = useState("I'm date from App.js")
+  const [timeSlot, setTimeSlot] = useState('Hello from App.js')
+
+  const timeSlotSetter = (e) => setTimeSlot(e.target.name);
 
   return (
     
@@ -36,8 +38,8 @@ function App({loginEmail, email, time, name}) {
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
             <Route exact path="/user"><EventTypes time={time}/></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
-            <Route exact path="/user/15min/date"><SelectedDate selectedDate={selectedDate}/></Route> 
-            <Route exact path="/user/15min/date/meeting"><MeetingScheduler CalendarReact={selectedDate}/></Route>
+            <Route exact path="/user/15min/date"><SelectedDate selectedDate={selectedDate} setTimeSlot={timeSlotSetter}/></Route> 
+            <Route exact path="/user/15min/date/meeting"><MeetingScheduler CalendarReact={selectedDate} timeSlot={timeSlot}/></Route>
             <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation /></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             
