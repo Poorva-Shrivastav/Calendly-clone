@@ -5,48 +5,42 @@ import { useHistory, useParams } from "react-router";
 import "./SelectedDate.css";
 import "../Calendar/CalendarReact.css";
 import Calendar from "react-calendar";
-import dateFormat from "dateformat";
-import MeetingScheduler from "../../MeetingScheduler/MeetingScheduler";
+// import dateFormat from "dateformat";
+import Moment from 'react-moment'
 
-// import TimeSlotContext from "../../../App";
 
-function SelectedDate({ time, setTimeSlot }) {
-  const [timeSetter, SettimeSetter] = useState("");
+function SelectedDate({ time, setNewDate, newDate, setTimeSlot }) {
   const [clicked, setClicked] = useState(false);
 
-  const [date, setDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState("");
+  const dateToFormat = '2021-09-10';
+    const [date, setDate] = useState(new Date(dateToFormat))
+    const value = new Date(dateToFormat)
 
-  // const {timeRange, setTimeRange} = useContext(TimeSlotContext)
-  // const [timeSlot, setTimeSlot] = useState("Yo Yo");
+    const history = useHistory()
+    const selectedDateSetHandler = (e) => {
+        let path = `/user/15min/date`;
+        history.push(path);
+      };
+    
 
-  const history = useHistory();
+    console.log(newDate);
+    
+    const meetingScheduleHandler = (e) => {
+      let path = `/user/15min/date/meeting`;  
+      history.push(path)
+    };
+/*
+    const dateHandler = () => setDate(date);
 
-  const meetingScheduleHandler = (e) => {
-    let path = `/user/15min/date/meeting`;  
-    history.push
-    // (path);
-    ({
-      pathname: path,
-      // timeSlot:timeSlot
-    })
-  };
-
-  // const timeSlotSetter = (e) => setTimeSlot(e.target.name);
-
-  const dateHandler = () => {
-    setDate(date);
-  };
-
-  const selectedDateSetter = (value, e) => {
-    let path = `/user/15min/date`;
-    history.push(path);
-    setSelectedDate(e.target.ariaLabel);
-  };
+    const selectedDateSetHandler = (value, e) => {
+      let path = `/user/15min/date`;
+      history.push(path);
+      // {selectedDateSetter}
+    };
+*/
 
   return (
     <div>
-      {/* <TimeSlotContext.Provider value={timeSlot}> */}
       <div className="outerdiv-selectedDate">
         <div className="left-container-selectedDate">
           <TimeBar time={15} />
@@ -55,28 +49,34 @@ function SelectedDate({ time, setTimeSlot }) {
         <div className="right-container-selectedDate">
           <div>
             <h2 id="bottom-h2-date">Select a Date & Time</h2>
-            {/* <CalendarReact/> */}
             <div>
-              <Calendar
+            <Calendar 
+                activeStartDate={date}
+                selectRange={false}
+                minDate={date}
+                onClickDay= {setNewDate} 
+                onChange={selectedDateSetHandler} 
+            />
+              {/* <Calendar
                 value={date}
                 onChange={dateHandler}
                 selectRange={false}
                 minDate={date}
-                onClickDay={selectedDateSetter}
-                selectedDate={selectedDate}
-              />
+                onClickDay={setSelectedDate}                
+                onClick={selectedDateSetHandler}
+                // selectedDate={selectedDate}
+              /> */}
             </div>
             <div className="timezone">
               Time Zone - Yet to fix
-              {/* Hi - {timeRange} */}
             </div>
           </div>
         </div>
         <div className="rightmost-popup-selectedDate">
           <div>
             <div className="selected-date">
-              {/* <p>Selected date - {selectedDate}</p> */}
-              <p>{selectedDate}</p>
+              {/* <p>{selectedDate}</p> */}
+              <Moment format="MMM DD YYYY" date={newDate} />
             </div>
             <div
               className="button-container"
@@ -636,7 +636,7 @@ function SelectedDate({ time, setTimeSlot }) {
           </div>
         </div>
       </div>
-      {console.log("I'm from Selected Date - ", selectedDate)}
+      
     </div>
   );
 }

@@ -3,15 +3,13 @@ import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import'./MeetingScheduler.css'
 import { useHistory, useParams } from 'react-router'
 import validator from 'validator'
-// import CalendarReact from '../FifteenMin/Calendar/CalendarReact'
-import SelectedDate from '../FifteenMin/SelectedDate/SelectedDate'
 import CalendarGoogle from '../../calendarGoogleApi/CalendarGoogle'
 import {useLocation} from 'react-router-dom'
-import Calendar from "react-calendar";
+import Moment from 'react-moment'
 
 // import TimeSlotContext from '../../App'
 
-function MeetingScheduler({selectedDate, timeSlot}) {
+function MeetingScheduler({ newDate ,timeSlot}) {
     const [addGuests, setAddGuests] = useState(false)
     const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
@@ -23,7 +21,7 @@ function MeetingScheduler({selectedDate, timeSlot}) {
     const [isEditEmail, setIsEditEmail] = useState(null)
     const [toggleUpdated, setToggleUpdated] = useState(true)
     const [emailError, setEmailError] = useState('')    
-    // const [isValid, setIsValid] = useState(false)
+
     
 
     const {time} = useParams();
@@ -32,7 +30,7 @@ function MeetingScheduler({selectedDate, timeSlot}) {
         let path = `/user/15min/date`
         history.push(path)    
     }
-    console.log(`I'm from Meeting - ${timeSlot} - ${selectedDate}`)
+    console.log(`I'm from Meeting - ${timeSlot} - ${newDate}`)
 
     const nameChangeHandler = (e) => setName(e.target.value)
 
@@ -163,7 +161,7 @@ function MeetingScheduler({selectedDate, timeSlot}) {
                     //    'description': 'A chance to hear more about Google\'s developer products.',
                         'start': {
                           'dateTime': '2021-08-28T09:00:00-07:00',
-                            // 'dateTime': `${selectedDate}T${timeSlot}`,
+                            // 'dateTime': `${newDate}T${timeSlot}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'end': {
@@ -193,16 +191,12 @@ function MeetingScheduler({selectedDate, timeSlot}) {
                       });
     
                       request.execute(event => {
-                        // window.open(event.htmlLink)
                         history.push(path)
                       });
                 })
     
             })
 
-
-            // let path = `/user/15min/date/meeting-confirmation`
-            // history.push(path)
             const response = await fetch("http://localhost:8000/send", {
             method: "POST",
             headers: {
@@ -242,7 +236,8 @@ function MeetingScheduler({selectedDate, timeSlot}) {
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar time={15}/>
                     <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p>
-                    <p id="event-string-p">🗓️ {timeSlot} am - {selectedDate}</p>
+                    <p id="event-string-p">🗓️ {timeSlot} - 
+                    <Moment format="MMM DD YYYY" date={newDate} /> </p>
                     <p id="time-zone">🌎 India Standard Time</p>
                 </div>
 
@@ -328,7 +323,7 @@ function MeetingScheduler({selectedDate, timeSlot}) {
                             value={message} 
                             onChange={messageChangeHandler}
                             ></textarea>
-                        <button type="submit" value="Submit" className="schedule-event-button">Schedule Event</button>
+                        <button type="submit" value="Submit" className="schedule-event-button" onClick={submitHandler}>Schedule Event</button>
                     </div>
                 </div>
             </form>

@@ -13,8 +13,7 @@ import CalendarReact from './screens/FifteenMin/Calendar/CalendarReact';
 import MeetingConfirmation from './screens/FifteenMin/MeetingConfirmation/MeetingConfirmation';
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
-
-export const TimeSlotContext = createContext(null);
+// import { useHistory } from 'react-router';
 
 function App({loginEmail, email, time, name}) {
 
@@ -23,11 +22,16 @@ function App({loginEmail, email, time, name}) {
 
   const timeSlotSetter = (e) => setTimeSlot(e.target.name);
 
+  // const selectedDateSetter = (e) => setSelectedDate(e)
+  
+  const dateToFormat = '2021-09-10';
+  const [newDate, setNewDate] = useState(new Date(dateToFormat))
+  const dateSetter = (e) => setNewDate(e)
+
   return (
     
     <Router>  
       <Switch>
-      {/* <TimeSlotContext.Provider value={{ timeRange, setTimeRange }}> */}
         <div className="App">
         
             <Route exact path="/"><Home/></Route>  
@@ -38,13 +42,12 @@ function App({loginEmail, email, time, name}) {
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
             <Route exact path="/user"><EventTypes time={time}/></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
-            <Route exact path="/user/15min/date"><SelectedDate selectedDate={selectedDate} setTimeSlot={timeSlotSetter}/></Route> 
-            <Route exact path="/user/15min/date/meeting"><MeetingScheduler CalendarReact={selectedDate} timeSlot={timeSlot}/></Route>
-            <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation /></Route>
+            <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter}/></Route> 
+            <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot}/></Route>
+            <Route exact path="/user/15min/date/meeting-confirmation" newDate={newDate} timeSlot={timeSlot}><MeetingConfirmation /></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             
         </div>
-        {/* </TimeSlotContext.Provider> */}
      </Switch>
     </Router>
     
