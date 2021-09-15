@@ -17,15 +17,11 @@ import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
 
 function App({loginEmail, email, time, name}) {
 
-  const [selectedDate, setSelectedDate] = useState("I'm date from App.js")
+  // const [selectedDate, setSelectedDate] = useState("I'm date from App.js")
   const [timeSlot, setTimeSlot] = useState('Hello from App.js')
-
   const timeSlotSetter = (e) => setTimeSlot(e.target.name);
-
-  // const selectedDateSetter = (e) => setSelectedDate(e)
   
-  const dateToFormat = '2021-09-10';
-  const [newDate, setNewDate] = useState(new Date(dateToFormat))
+  const [newDate, setNewDate] = useState(new Date())
   const dateSetter = (e) => setNewDate(e)
 
   return (
@@ -37,7 +33,6 @@ function App({loginEmail, email, time, name}) {
             <Route exact path="/"><Home/></Route>  
             <Route exact path="/signup" ><Signup/></Route> 
             <Route path="/signup/:email" ><SignupWithGoogle email={email}/></Route> 
-            {/* <Link to="/signup/email="><SignupWithGoogle/></Link> */}
             <Route exact path="/signin"><Signin/></Route>  
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
             <Route exact path="/user"><EventTypes time={time}/></Route>  

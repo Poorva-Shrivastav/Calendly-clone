@@ -154,19 +154,16 @@ function MeetingScheduler({ newDate ,timeSlot}) {
                 gapi.auth2.getAuthInstance().signIn()
                 .then(() => {
                     var event = {
-                    //    'summary': 'Trial',
                         'summary': `Meeting with ${name}`,
-
-                    //    'location': '800 Howard St., San Francisco, CA 94103',
                     //    'description': 'A chance to hear more about Google\'s developer products.',
                         'start': {
                           'dateTime': '2021-08-28T09:00:00-07:00',
-                            // 'dateTime': `${newDate}T${timeSlot}`,
+                            // 'dateTime': `<Moment format="YYYY-MM-DD" date={newDate}/>T${timeSlot}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'end': {
-                          'dateTime': '2021-08-28T17:00:00-07:00',
-                        //   'dateTime': `${selectedDate}T${timeSlot}`,
+                          'dateTime': '2021-08-28T17:00:00',
+                        // 'dateTime': `<Moment format="YYYY-MM-DD" date={newDate}/>T${timeSlot}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'recurrence': [
@@ -235,9 +232,8 @@ function MeetingScheduler({ newDate ,timeSlot}) {
                 <div className="left-container-meeting">
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar time={15}/>
-                    <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p>
-                    <p id="event-string-p">🗓️ {timeSlot} - 
-                    <Moment format="MMM DD YYYY" date={newDate} /> </p>
+                    {/* <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p> */}
+                    <p id="event-string-p">🗓️ {timeSlot}, <Moment format="MMM DD YYYY" date={newDate} /> </p>
                     <p id="time-zone">🌎 India Standard Time</p>
                 </div>
 
