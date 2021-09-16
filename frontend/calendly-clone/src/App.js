@@ -14,6 +14,7 @@ import MeetingConfirmation from './screens/FifteenMin/MeetingConfirmation/Meetin
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
 import SignupWithPassword from './screens/SignupWithPassword/SignupWithPassword';
+import SignupWithPasswordVerification from './screens/SignupWithPasswordVerification/SignupWithPasswordVerification';
 // import { useHistory } from 'react-router';
 
 function App({loginEmail, email, time}) {
@@ -49,6 +50,7 @@ function App({loginEmail, email, time}) {
             <Route exact path="/signup" ><Signup firstEmail={firstEmail}/></Route> 
             <Route path="/signup/:email" ><SignupWithGoogle email={email}/></Route> 
             <Route path="/signupwithpassword" ><SignupWithPassword/></Route> 
+            <Route path="/signupwithpassword-verify" ><SignupWithPasswordVerification/></Route> 
             <Route exact path="/signin"><Signin/></Route>  
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
             <Route exact path="/user"><EventTypes time={time}/></Route>  
