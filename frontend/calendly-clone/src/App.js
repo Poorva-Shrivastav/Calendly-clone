@@ -19,7 +19,13 @@ function App({loginEmail, email, time, name}) {
 
   // const [selectedDate, setSelectedDate] = useState("I'm date from App.js")
   const [timeSlot, setTimeSlot] = useState('Hello from App.js')
-  const timeSlotSetter = (e) => setTimeSlot(e.target.name);
+  const [start, setStart] = useState('Im start from App.js')
+  const [end, setEnd] = useState('Im end from App.js')
+  const timeSlotSetter = (e) => {
+    setTimeSlot(e.target.name);
+    setStart(e.target.dataset.start)
+    setEnd(e.target.dataset.end)
+  }
   
   const [newDate, setNewDate] = useState(new Date())
   const dateSetter = (e) => setNewDate(e)
@@ -37,8 +43,8 @@ function App({loginEmail, email, time, name}) {
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
             <Route exact path="/user"><EventTypes time={time}/></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
-            <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter}/></Route> 
-            <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot}/></Route>
+            <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter} start={start} end={end}/></Route> 
+            <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot} start={start} end={end}/></Route>
             <Route exact path="/user/15min/date/meeting-confirmation" newDate={newDate} timeSlot={timeSlot}><MeetingConfirmation /></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             

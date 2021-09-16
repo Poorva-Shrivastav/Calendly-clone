@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 
 // import TimeSlotContext from '../../App'
 
-function MeetingScheduler({ newDate ,timeSlot}) {
+function MeetingScheduler({ newDate ,timeSlot, start, end}) {
     const [addGuests, setAddGuests] = useState(false)
     const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
@@ -22,7 +22,6 @@ function MeetingScheduler({ newDate ,timeSlot}) {
     const [toggleUpdated, setToggleUpdated] = useState(true)
     const [emailError, setEmailError] = useState('')    
 
-    
 
     const {time} = useParams();
     const history = useHistory();
@@ -122,6 +121,9 @@ function MeetingScheduler({ newDate ,timeSlot}) {
     //             setIsValid(true)   
     //         }
     // } 
+    const formattedDate = newDate.toISOString().split('T')[0];
+    const startTime = `${formattedDate}T${start}:00-07:00`
+    const endTime = `${formattedDate}T${end}:00-07:00`
 
     var gapi = window.gapi
     var CLIENT_ID = process.env.REACT_APP_CLIENT_ID
@@ -155,15 +157,15 @@ function MeetingScheduler({ newDate ,timeSlot}) {
                 .then(() => {
                     var event = {
                         'summary': `Meeting with ${name}`,
-                    //    'description': 'A chance to hear more about Google\'s developer products.',
+                       'description': 'A chance to hear more about Google\'s developer products.',
                         'start': {
                           'dateTime': '2021-08-28T09:00:00-07:00',
-                            // 'dateTime': `<Moment format="YYYY-MM-DD" date={newDate}/>T${timeSlot}`,
+                            'dateTime': `${startTime}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'end': {
                           'dateTime': '2021-08-28T17:00:00',
-                        // 'dateTime': `<Moment format="YYYY-MM-DD" date={newDate}/>T${timeSlot}`,
+                        'dateTime': `${endTime}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'recurrence': [
