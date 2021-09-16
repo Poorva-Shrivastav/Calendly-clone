@@ -15,12 +15,16 @@ import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
 // import { useHistory } from 'react-router';
 
-function App({loginEmail, email, time, name}) {
+function App({loginEmail, email, time}) {
 
   // const [selectedDate, setSelectedDate] = useState("I'm date from App.js")
   const [timeSlot, setTimeSlot] = useState('Hello from App.js')
   const [start, setStart] = useState('Im start from App.js')
   const [end, setEnd] = useState('Im end from App.js')
+
+  const [name, setName] = useState('')
+  const nameChangeHandler = (e) => setName(e.target.value)
+
   const timeSlotSetter = (e) => {
     setTimeSlot(e.target.name);
     setStart(e.target.dataset.start)
@@ -44,8 +48,8 @@ function App({loginEmail, email, time, name}) {
             <Route exact path="/user"><EventTypes time={time}/></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
             <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter} start={start} end={end}/></Route> 
-            <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot} start={start} end={end}/></Route>
-            <Route exact path="/user/15min/date/meeting-confirmation" newDate={newDate} timeSlot={timeSlot}><MeetingConfirmation /></Route>
+            <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot} start={start} end={end} setName={nameChangeHandler} name={name}/></Route>
+            <Route exact path="/user/15min/date/meeting-confirmation" newDate={newDate} timeSlot={timeSlot} name={name}><MeetingConfirmation /></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             
         </div>

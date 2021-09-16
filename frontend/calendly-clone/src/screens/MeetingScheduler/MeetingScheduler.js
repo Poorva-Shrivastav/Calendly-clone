@@ -9,9 +9,9 @@ import Moment from 'react-moment'
 
 // import TimeSlotContext from '../../App'
 
-function MeetingScheduler({ newDate ,timeSlot, start, end}) {
+function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
     const [addGuests, setAddGuests] = useState(false)
-    const [name, setName] = useState('')
+    // const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
@@ -31,7 +31,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end}) {
     }
     console.log(`I'm from Meeting - ${timeSlot} - ${newDate}`)
 
-    const nameChangeHandler = (e) => setName(e.target.value)
+    // const nameChangeHandler = (e) => setName(e.target.value)
 
     const emailChangeHandler = (e) => setMainEmail(e.target.value)
 
@@ -247,7 +247,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end}) {
                             <input 
                                 className={isEmptyName? "input-meeting-error" :"input-meeting" }
                                 value={name} 
-                                onChange={nameChangeHandler}></input>
+                                onChange={setName}></input>
                             <div className={isEmptyName? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>    
                         </div>
                         <div className="input-container-meeting">
