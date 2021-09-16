@@ -13,6 +13,7 @@ import CalendarReact from './screens/FifteenMin/Calendar/CalendarReact';
 import MeetingConfirmation from './screens/FifteenMin/MeetingConfirmation/MeetingConfirmation';
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
+import SignupWithPassword from './screens/SignupWithPassword/SignupWithPassword';
 // import { useHistory } from 'react-router';
 
 function App({loginEmail, email, time}) {
@@ -21,9 +22,12 @@ function App({loginEmail, email, time}) {
   const [timeSlot, setTimeSlot] = useState('Hello from App.js')
   const [start, setStart] = useState('Im start from App.js')
   const [end, setEnd] = useState('Im end from App.js')
-
+  const [newDate, setNewDate] = useState(new Date())
   const [name, setName] = useState('')
-  const nameChangeHandler = (e) => setName(e.target.value)
+
+  //signup
+  const [firstEmail, setFirstEmail] = useState('')
+  const firstEmailHandler = e => setFirstEmail(e.target.value)
 
   const timeSlotSetter = (e) => {
     setTimeSlot(e.target.name);
@@ -31,18 +35,20 @@ function App({loginEmail, email, time}) {
     setEnd(e.target.dataset.end)
   }
   
-  const [newDate, setNewDate] = useState(new Date())
   const dateSetter = (e) => setNewDate(e)
+  
+  const nameChangeHandler = (e) => setName(e.target.value)
 
   return (
     
     <Router>  
       <Switch>
         <div className="App">
-        
-            <Route exact path="/"><Home/></Route>  
-            <Route exact path="/signup" ><Signup/></Route> 
+            {/* <Route exact path="/"> {loggedIn ? <Redirect to="/user" /> : <Home/>}</Route> */}
+            <Route exact path="/"><Home setFirstEmail={firstEmailHandler} firstEmail={firstEmail}/></Route>  
+            <Route exact path="/signup" ><Signup firstEmail={firstEmail}/></Route> 
             <Route path="/signup/:email" ><SignupWithGoogle email={email}/></Route> 
+            <Route path="/signupwithpassword" ><SignupWithPassword/></Route> 
             <Route exact path="/signin"><Signin/></Route>  
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
             <Route exact path="/user"><EventTypes time={time}/></Route>  

@@ -2,14 +2,14 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
 }
 .main-container-signupG{
     margin-left: 34.5%;
     margin-top: 5%;
     margin-right: 34.5%;
     color: rgb(75, 75, 75);
-    font-weight: 100;
-    
+    font-weight: 100; 
 }
 
 .logo-welcome-signupG{
@@ -36,7 +36,7 @@ body{
 
 }
 
-#Google-signup-signupG{
+/* #Google-signup-signupG{
     background-color: #006bff;
     border-radius: 30px;
     font-size: 15px;
@@ -49,6 +49,9 @@ body{
     margin-right: 27%;
     margin-top: 20px;
 
+} */
+#signup-Google-Button{
+    margin-left: 27%;
 }
 
 #inner-container-p-signupG{
