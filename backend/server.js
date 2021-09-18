@@ -29,67 +29,6 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json())
 app.use(cors())
 
-/*
-const OAuth2Client = new OAuth2
-(process.env.OAUTH_CLIENTID, 
-  process.env.OAUTH_CLIENT_SECRET
-  )
-
-OAuth2Client.setCredentials({refresh_token : process.env.OAUTH_REFRESH_TOKEN
-  
-  ,})
-
-const calendar = google.calendar({version: 'v3', auth:OAuth2Client})
-
-const eventStartTime = new Date()
-eventStartTime.setDate(eventStartTime.getDay() + 2) //for setting date for tomorrow
-
-const eventEndTime = new Date();
-eventEndTime.setDate(eventEndTime.getDay() + 4)
-eventEndTime.setMinutes(eventEndTime.getMinutes() + 15)
-
-const event = {
-  summary : 'Meeting with Manu',
-  description: 'Meeting with Manu to discuss project and how to add google calendar api',
-  start: {
-  dateTime: eventStartTime,
-  timezone: 'India/Mumbai'
-  },
-  end:{
-  dateTime: eventEndTime,
-  timezone: 'America/Denver'
-  },
-  colorId: 1,
-
-}
-
-calendar.freebusy.query({
-  resource: {
-    timeMin: eventStartTime,
-    timeMax: eventEndTime,
-    timezone: 'America/Denver',
-    items: [{id: 'primary'}] //we can also add multiple calendars here
-  }
-}, (err, res) => {
-    if(err) return(console.error(`Free busy query ${err}`))
-
-    const eventsArray = res.data.calendars.primary.busy
-
-    if(eventsArray.length === 0)return calendar.events.insert({
-      calendarId: 'primary',
-      resource: event
-    }, (err)=>{
-        if(err) return(console.error(`calendar event creation error ${err}`))
-
-        return (console.log("Calendar event created"))
-    })
-
-    //handling if calendar is busy
-    return (console.log("Calendar is busy")) 
-})
-
-*/
-
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

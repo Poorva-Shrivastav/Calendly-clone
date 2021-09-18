@@ -2,14 +2,19 @@ const express = require('express');
 const signupRouter = express.Router();
 const signuptemplate  = require('../models/signupModel') 
 const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
-
-
-signupRouter.use(bodyParser.json())
+// signupRouter.use(bodyParser.json())
 signupRouter.post('/signup', async (request, response) =>{
+    const signedUpUser = new signuptemplate({
+        name: request.body.name,
+        email: request.body.email,
+        password: request.body.password,
+    })
 
-    const {name, username, email, password} = request.body;
+    signedUpUser.save()
+
+    // const {name, email, password} = request.body;
      try{
         const existingUser = await signuptemplate.findOne({ username })
         if(existingUser) return response.status(400).json({ message : "Username already in use. Try another username"})

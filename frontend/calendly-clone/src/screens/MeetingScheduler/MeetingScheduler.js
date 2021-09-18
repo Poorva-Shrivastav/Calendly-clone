@@ -157,7 +157,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                 .then(() => {
                     var event = {
                         'summary': `Meeting with ${name}`,
-                       'description': 'A chance to hear more about Google\'s developer products.',
+                    //    'description': 'A chance to hear more about Google\'s developer products.',
                         'start': {
                           'dateTime': '2021-08-28T09:00:00-07:00',
                             'dateTime': `${startTime}`,
