@@ -1,52 +1,42 @@
 import React, { useState, useContext } from "react";
-// import CalendarReact from '../Calendar/CalendarReact'
 import TimeBar from "../TimeBar/TimeBar";
 import { useHistory, useParams } from "react-router";
 import "./SelectedDate.css";
 import "../Calendar/CalendarReact.css";
 import Calendar from "react-calendar";
-import dateFormat from "dateformat";
-import MeetingScheduler from "../../MeetingScheduler/MeetingScheduler";
-import TimeSlotContext from "../../../App";
+import Moment from 'react-moment'
 
-function SelectedDate({ time }) {
-  const [timeSetter, SettimeSetter] = useState("");
+function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
   const [clicked, setClicked] = useState(false);
 
-  const [date, setDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState("");
+  const dateToFormat = '2021-09-10';
+    const [date, setDate] = useState(new Date(dateToFormat))
+    const value = new Date(dateToFormat)
 
-  // const {timeRange, setTimeRange} = useContext(TimeSlotContext)
-  const [timeSlot, setTimeSlot] = useState("");
+    const history = useHistory()
+    const selectedDateSetHandler = (e) => {
+        let path = `/user/15min/date`;
+        history.push(path);
+    };
 
-  const history = useHistory();
-//   const params = useParams();
+    console.log(newDate);
+    
+    const meetingScheduleHandler = (e) => {
+      let path = `/user/15min/date/meeting`;  
+      history.push(path)
+    };
+/*
+    const dateHandler = () => setDate(date);
 
-  const meetingScheduleHandler = (e) => {
-    let path = `/user/15min/date/meeting`;
-    {console.log("I am from history ",timeSlot)}
-    history.push({
-      pathname: path,
-      // <MeetingScheduler />
-      state:{selectedDate: selectedDate, timeSlot: timeSlot}
-    });
-  };
-
-  const timeSlotSetter = (e) => setTimeSlot(e.target.name);
-
-  const dateHandler = () => {
-    setDate(date);
-  };
-
-  const selectedDateSetter = (value, e) => {
-    let path = `/user/15min/date`;
-    history.push(path);
-    setSelectedDate(e.target.ariaLabel);
-  };
+    const selectedDateSetHandler = (value, e) => {
+      let path = `/user/15min/date`;
+      history.push(path);
+      // {selectedDateSetter}
+    };
+*/
 
   return (
     <div>
-      {/* <TimeSlotContext.Provider value={timeSlot}> */}
       <div className="outerdiv-selectedDate">
         <div className="left-container-selectedDate">
           <TimeBar time={15} />
@@ -55,47 +45,47 @@ function SelectedDate({ time }) {
         <div className="right-container-selectedDate">
           <div>
             <h2 id="bottom-h2-date">Select a Date & Time</h2>
-            {/* <CalendarReact/> */}
             <div>
-              <Calendar
+            <Calendar 
+                activeStartDate={date}
+                selectRange={false}
+                minDate={date}
+                onClickDay= {setNewDate} 
+                onChange={selectedDateSetHandler} 
+            />
+              {/* <Calendar
                 value={date}
                 onChange={dateHandler}
                 selectRange={false}
                 minDate={date}
-                onClickDay={selectedDateSetter}
-                selectedDate={selectedDate}
-              />
+                onClickDay={setSelectedDate}                
+                onClick={selectedDateSetHandler}
+                // selectedDate={selectedDate}
+              /> */}
             </div>
             <div className="timezone">
               Time Zone - Yet to fix
-              {/* Hi - {timeRange} */}
             </div>
           </div>
         </div>
         <div className="rightmost-popup-selectedDate">
           <div>
             <div className="selected-date">
-              {/* <p>Selected date - {selectedDate}</p> */}
-              <p>{selectedDate}</p>
+              {/* <p>{selectedDate}</p> */}
+              <Moment format="MMM DD YYYY" date={newDate} />
             </div>
             <div
               className="button-container"
               onClick={(e) => setClicked(e.target.value)}
             >
               <div>
-                <button
-                  className={clicked == "9" ? "newSetTime" : "setTime"}
-                  value="9"
-                  name="9:00:00-9:15:00"
-                  onClick={timeSlotSetter}
-                >
+                <button className={clicked == "9" ? "newSetTime" : "setTime"} value="9" name="9:00am - 9:15am" data-start="9:00" data-end="9:15"onClick={setTimeSlot}>
                   9:00am
                 </button>
                 <button
                   className={
                     clicked == "9" ? "available-onClick" : "display-none"
                   }
-                  value="9:00:00-9:15:00"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -103,9 +93,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "9.15" ? "newSetTime" : "setTime"}
-                  value="9.15"
-                >
+                  className={clicked == "9.15" ? "newSetTime" : "setTime"} value="9.15" name="9:15am - 9:30am" data-start="9:15" data-end="9:30" onClick={setTimeSlot}>
                   9:15am
                 </button>
                 <button
@@ -120,10 +108,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "9.30" ? "newSetTime" : "setTime"}
-                  value="9.30"
-                >
-                  9:30am
+                  className={clicked == "9.30" ? "newSetTime" : "setTime"} value="9.30" name="9:30am - 9.45am" data-start="9:30" data-end="9:45"onClick={setTimeSlot}>
+                9:30am
                 </button>
                 <button
                   className={
@@ -137,9 +123,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "9.45" ? "newSetTime" : "setTime"}
-                  value="9.45"
-                >
+                  className={clicked == "9.45" ? "newSetTime" : "setTime"} value="9.45" name="9.45am - 10.00am" data-start="9:45" data-end="10:00" onClick={setTimeSlot}>
                   9:45am
                 </button>
                 <button
@@ -154,10 +138,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "10" ? "newSetTime" : "setTime"}
-                  value="10"
-                >
-                  10:00am
+                  className={clicked == "10" ? "newSetTime" : "setTime"} value="10" name="10.00am - 10.15am" data-start="10:00" data-end="10:15"onClick={setTimeSlot}>
+                10:00am
                 </button>
                 <button
                   className={
@@ -170,10 +152,8 @@ function SelectedDate({ time }) {
                 </button>
               </div>
               <div>
-                <button
-                  className={clicked == "10.15" ? "newSetTime" : "setTime"}
-                  value="10.15"
-                >
+                <button 
+                className={clicked == "10.15" ? "newSetTime" : "setTime"} value="10.15" name="10.15am - 10:30am" data-start="10:15" data-end="10:30" onClick={setTimeSlot}>
                   10:15am
                 </button>
                 <button
@@ -188,9 +168,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "10.30" ? "newSetTime" : "setTime"}
-                  value="10.30"
-                >
+                  className={clicked == "10.30" ? "newSetTime" : "setTime"} value="10.30" name="10.30am - 10:45am" data-start="10:30" data-end="10:45"onClick={setTimeSlot}>
                   10:30am
                 </button>
                 <button
@@ -205,9 +183,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "10.45" ? "newSetTime" : "setTime"}
-                  value="10.45"
-                >
+                  className={clicked == "10.45" ? "newSetTime" : "setTime"} value="10.45" name="10.45am - 11:00am" data-start="10:45" data-end="11:00" onClick={setTimeSlot}>
                   10:45am
                 </button>
                 <button
@@ -222,10 +198,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1" ? "newSetTime" : "setTime"}
-                  value="11"
-                >
-                  10:00am
+                  className={clicked == "11" ? "newSetTime" : "setTime"} value="11" name="11.00am - 11:15am" data-start="11:00" data-end="11:15" onClick={setTimeSlot}>
+                  11:00am
                 </button>
                 <button
                   className={
@@ -239,10 +213,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "11.15" ? "newSetTime" : "setTime"}
-                  value="11.15"
-                >
-                  11:15am
+                  className={clicked == "11.15" ? "newSetTime" : "setTime"} value="11.15" name="11.15am - 11:30am" data-start="11:15" data-end="11:30" onClick={setTimeSlot}>
+                 11:15am
                 </button>
                 <button
                   className={
@@ -256,9 +228,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "11.30" ? "newSetTime" : "setTime"}
-                  value="11.30"
-                >
+                  className={clicked == "11.30" ? "newSetTime" : "setTime"} value="11:30" name="11.30am - 11:45am" data-start="11:30" data-end="11:45" onClick={setTimeSlot}>
                   11:30am
                 </button>
                 <button
@@ -273,8 +243,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "11.45" ? "newSetTime" : "setTime"}
-                  value="11.45"
+                  className={clicked == "11.45" ? "newSetTime" : "setTime"} value="11.45"name="11:45am - 12:00pm" data-start="11:45" data-end="12:00" onClick={setTimeSlot}>
                 >
                   11:45am
                 </button>
@@ -290,10 +259,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "12" ? "newSetTime" : "setTime"}
-                  value="12"
-                >
-                  12:00pm
+                  className={clicked == "12" ? "newSetTime" : "setTime"} value="12" name="12.00pm - 12:15pm" data-start="12:00" data-end="12:15" onClick={setTimeSlot}>
+                12:00pm
                 </button>
                 <button
                   className={
@@ -307,9 +274,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "12.15" ? "newSetTime" : "setTime"}
-                  value="12.15"
-                >
+                  className={clicked == "12.15" ? "newSetTime" : "setTime"} value="12.15"name="12.15pm - 12:30pm" data-start="12:15" data-end="12:30" onClick={setTimeSlot}>
                   12:15pm
                 </button>
                 <button
@@ -324,10 +289,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "12.30" ? "newSetTime" : "setTime"}
-                  value="12.30"
-                >
-                  12:30pm
+                  className={clicked == "12.30" ? "newSetTime" : "setTime"} value="12.30" name="12.30pm - 12:45pm" data-start="12:30" data-end="12:45" onClick={setTimeSlot}>
+                12:30pm
                 </button>
                 <button
                   className={
@@ -341,10 +304,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "12.45" ? "newSetTime" : "setTime"}
-                  value="12.45"
-                >
-                  12:45pm
+                  className={clicked == "12.45" ? "newSetTime" : "setTime"} value="12.45"name="12.45pm - 1:00pm" data-start="12:45" data-end="1:00" onClick={setTimeSlot}>
+                12:45pm
                 </button>
                 <button
                   className={
@@ -358,10 +319,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1" ? "newSetTime" : "setTime"}
-                  value="1"
-                >
-                  1:00pm
+                  className={clicked == "1" ? "newSetTime" : "setTime"} value="1" name="1.00pm - 1:15pm" data-start="1:00" data-end="1:15" onClick={setTimeSlot}>
+                1:00pm
                 </button>
                 <button
                   className={
@@ -375,8 +334,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1.15" ? "newSetTime" : "setTime"}
-                  value="1.15"
+                  className={clicked == "1.15" ? "newSetTime" : "setTime"} value="1.15" name="1.15pm - 1:30pm" data-start="1:15" data-end="1:30" onClick={setTimeSlot}>
                 >
                   1:15pm
                 </button>
@@ -392,10 +350,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1.30" ? "newSetTime" : "setTime"}
-                  value="1.30"
-                >
-                  1:30pm
+                  className={clicked == "1.30" ? "newSetTime" : "setTime"} value="1.30" name="1.30pm - 1:45pm" data-start="1:30" data-end="1:45" onClick={setTimeSlot}>
+                1:30pm
                 </button>
                 <button
                   className={
@@ -409,10 +365,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1.45" ? "newSetTime" : "setTime"}
-                  value="1.45"
-                >
-                  1:45pm
+                  className={clicked == "1.45" ? "newSetTime" : "setTime"} value="1.45" name="1.45pm - 2:00pm" data-start="1:45" data-end="2:00" onClick={setTimeSlot}>
+                1:45pm
                 </button>
                 <button
                   className={
@@ -426,10 +380,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "2" ? "newSetTime" : "setTime"}
-                  value="2"
-                >
-                  2:00pm
+                  className={clicked == "2" ? "newSetTime" : "setTime"} value="2" name="2.00pm - 2:15pm" data-start="2:00" data-end="2:15" onClick={setTimeSlot}>
+                2:00pm
                 </button>
                 <button
                   className={
@@ -443,10 +395,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "2.15" ? "newSetTime" : "setTime"}
-                  value="2.15"
-                >
-                  2:15pm
+                  className={clicked == "2.15" ? "newSetTime" : "setTime"} value="2.15" name="2.15pm - 2:30pm" data-start="2:15" data-end="2:30" onClick={setTimeSlot}>
+                2:15pm
                 </button>
                 <button
                   className={
@@ -460,10 +410,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "2.30" ? "newSetTime" : "setTime"}
-                  value="2.30"
-                >
-                  2:30pm
+                  className={clicked == "2.30" ? "newSetTime" : "setTime"} value="2.30" name="2.30pm - 2:45pm" data-start="2:30" data-end="2:45" onClick={setTimeSlot}>
+                2:30pm
                 </button>
                 <button
                   className={
@@ -477,10 +425,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "2.45" ? "newSetTime" : "setTime"}
-                  value="2.45"
-                >
-                  2:45pm
+                  className={clicked == "2.45" ? "newSetTime" : "setTime"}value="2.45" name="2.45pm - 3:00pm" data-start="2:45" data-end="3:00" onClick={setTimeSlot}>
+                2:45pm
                 </button>
                 <button
                   className={
@@ -494,10 +440,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "3" ? "newSetTime" : "setTime"}
-                  value="3"
-                >
-                  3:00pm
+                  className={clicked == "3" ? "newSetTime" : "setTime"} value="3" name="3.00pm - 3:15pm" data-start="3:00" data-end="3:15" onClick={setTimeSlot}>
+                 3:00pm
                 </button>
                 <button
                   className={
@@ -512,9 +456,7 @@ function SelectedDate({ time }) {
 
               <div>
                 <button
-                  className={clicked == "3.15" ? "newSetTime" : "setTime"}
-                  value="3.15"
-                >
+                  className={clicked == "3.15" ? "newSetTime" : "setTime"} value="3.15"  name="3.15pm - 3:30pm" data-start="3:15" data-end="3:30" onClick={setTimeSlot}>
                   3:15pm
                 </button>
                 <button
@@ -529,10 +471,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "3.30" ? "newSetTime" : "setTime"}
-                  value="3.30"
-                >
-                  3:30pm
+                  className={clicked == "3.30" ? "newSetTime" : "setTime"} value="3.30" name="3.30pm - 3:35pm" data-start="3:30" data-end="3:45" onClick={setTimeSlot}>
+                3:30pm
                 </button>
                 <button
                   className={
@@ -546,9 +486,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "3.45" ? "newSetTime" : "setTime"}
-                  value="3.45"
-                >
+                  className={clicked == "3.45" ? "newSetTime" : "setTime"} value="3.45" name="3.45pm - 4:00pm" data-start="3:45" data-end="4:00" onClick={setTimeSlot}>
                   3:45pm
                 </button>
                 <button
@@ -563,10 +501,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "4" ? "newSetTime" : "setTime"}
-                  value="4"
-                >
-                  4:00pm
+                  className={clicked == "4" ? "newSetTime" : "setTime"} value="4" name="4.00pm - 4:15pm" data-start="4:00" data-end="4:15" onClick={setTimeSlot}>
+                4:00pm
                 </button>
                 <button
                   className={
@@ -581,10 +517,8 @@ function SelectedDate({ time }) {
 
               <div>
                 <button
-                  className={clicked == "4.15" ? "newSetTime" : "setTime"}
-                  value="4.15"
-                >
-                  4:15pm
+                  className={clicked == "4.15" ? "newSetTime" : "setTime"} value="4.15" name="4.15pm - 4:30pm" data-start="4:15" data-end="4:30" onClick={setTimeSlot}>
+                 4:15pm
                 </button>
                 <button
                   className={
@@ -598,9 +532,7 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "4.30" ? "newSetTime" : "setTime"}
-                  value="4.30"
-                >
+                  className={clicked == "4.30" ? "newSetTime" : "setTime"} value="4.30" name="4.15pm - 4:30pm" data-start="4:15" data-end="4:30" onClick={setTimeSlot}>
                   4:30pm
                 </button>
                 <button
@@ -615,10 +547,8 @@ function SelectedDate({ time }) {
               </div>
               <div>
                 <button
-                  className={clicked == "4.45" ? "newSetTime" : "setTime"}
-                  value="4.45"
-                >
-                  4:45pm
+                  className={clicked == "4.45" ? "newSetTime" : "setTime"} value="4.45" name="4.45pm - 5:00pm" data-start="4:45" data-end="5:00" onClick={setTimeSlot}>
+                4:45pm
                 </button>
                 <button
                   className={
@@ -634,9 +564,7 @@ function SelectedDate({ time }) {
           </div>
         </div>
       </div>
-      {console.log("I'm from Selected Date - ", timeSlot, selectedDate)}
-      <MeetingScheduler selectedDate={selectedDate} timeSlot={timeSlot} />
-      {/* </TimeSlotContext.Provider> */}
+      
     </div>
   );
 }

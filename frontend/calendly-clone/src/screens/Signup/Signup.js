@@ -3,10 +3,8 @@ import "./Signup.css"
 import logo from '../../components/Images/logo.png'
 import {useHistory, useParams } from 'react-router'
 
-
 function Signup({firstEmail}) {
     const [email, setEmail] = useState("")
-    // const {id} = useParams();
     const history = useHistory();
 
     const submitHandler = (e) => {
@@ -16,6 +14,7 @@ function Signup({firstEmail}) {
         if(email!== ''){
             let path = `/signup/${email}`
             history.push(path)
+            
         }
     }
 

@@ -3,14 +3,15 @@ import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import'./MeetingScheduler.css'
 import { useHistory, useParams } from 'react-router'
 import validator from 'validator'
-// import CalendarReact from '../FifteenMin/Calendar/CalendarReact'
-import SelectedDate from '../FifteenMin/SelectedDate/SelectedDate'
 import CalendarGoogle from '../../calendarGoogleApi/CalendarGoogle'
+import {useLocation} from 'react-router-dom'
+import Moment from 'react-moment'
+
 // import TimeSlotContext from '../../App'
 
-function MeetingScheduler(props) {
+function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
     const [addGuests, setAddGuests] = useState(false)
-    const [name, setName] = useState('')
+    // const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
@@ -20,23 +21,17 @@ function MeetingScheduler(props) {
     const [isEditEmail, setIsEditEmail] = useState(null)
     const [toggleUpdated, setToggleUpdated] = useState(true)
     const [emailError, setEmailError] = useState('')    
-    // const [isValid, setIsValid] = useState(false)
-    
-    // const {timeRange, setTimeRange} = useContext(TimeSlotContext)
+
 
     const {time} = useParams();
-    // const {selectedDate , timeSlot} = useParams();
     const history = useHistory();
     const backHandler = () =>{
         let path = `/user/15min/date`
-
         history.push(path)    
     }
+    console.log(`I'm from Meeting - ${timeSlot} - ${newDate}`)
 
-    // console.log(`I'm from Meeting - ${timeSlot} - ${selectedDate}`)
-
-
-    const nameChangeHandler = (e) => setName(e.target.value)
+    // const nameChangeHandler = (e) => setName(e.target.value)
 
     const emailChangeHandler = (e) => setMainEmail(e.target.value)
 
@@ -126,6 +121,9 @@ function MeetingScheduler(props) {
     //             setIsValid(true)   
     //         }
     // } 
+    const formattedDate = newDate.toISOString().split('T')[0];
+    const startTime = `${formattedDate}T${start}:00-07:00`
+    const endTime = `${formattedDate}T${end}:00-07:00`
 
     var gapi = window.gapi
     var CLIENT_ID = process.env.REACT_APP_CLIENT_ID
@@ -158,19 +156,16 @@ function MeetingScheduler(props) {
                 gapi.auth2.getAuthInstance().signIn()
                 .then(() => {
                     var event = {
-                    //    'summary': 'Trial',
                         'summary': `Meeting with ${name}`,
-
-                    //    'location': '800 Howard St., San Francisco, CA 94103',
-                    //    'description': 'A chance to hear more about Google\'s developer products.',
+                       'description': 'A chance to hear more about Google\'s developer products.',
                         'start': {
                           'dateTime': '2021-08-28T09:00:00-07:00',
-                            // 'dateTime': `${selectedDate}T${timeSlot}`,
+                            'dateTime': `${startTime}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'end': {
-                          'dateTime': '2021-08-28T17:00:00-07:00',
-                        //   'dateTime': `${selectedDate}T${timeSlot}`,
+                          'dateTime': '2021-08-28T17:00:00',
+                        'dateTime': `${endTime}`,
                           'timeZone': 'America/Los_Angeles'
                         },
                         'recurrence': [
@@ -195,16 +190,12 @@ function MeetingScheduler(props) {
                       });
     
                       request.execute(event => {
-                        // window.open(event.htmlLink)
                         history.push(path)
                       });
                 })
     
             })
 
-
-            // let path = `/user/15min/date/meeting-confirmation`
-            // history.push(path)
             const response = await fetch("http://localhost:8000/send", {
             method: "POST",
             headers: {
@@ -243,8 +234,8 @@ function MeetingScheduler(props) {
                 <div className="left-container-meeting">
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar time={15}/>
-                    <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p>
-                    <p id="event-string-p">🗓️ {props.timeSlot} - {props.selectedDate}</p>
+                    {/* <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p> */}
+                    <p id="event-string-p">🗓️ {timeSlot}, <Moment format="MMM DD YYYY" date={newDate} /> </p>
                     <p id="time-zone">🌎 India Standard Time</p>
                 </div>
 
@@ -256,7 +247,7 @@ function MeetingScheduler(props) {
                             <input 
                                 className={isEmptyName? "input-meeting-error" :"input-meeting" }
                                 value={name} 
-                                onChange={nameChangeHandler}></input>
+                                onChange={setName}></input>
                             <div className={isEmptyName? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>    
                         </div>
                         <div className="input-container-meeting">
@@ -330,7 +321,7 @@ function MeetingScheduler(props) {
                             value={message} 
                             onChange={messageChangeHandler}
                             ></textarea>
-                        <button type="submit" value="Submit" className="schedule-event-button">Schedule Event</button>
+                        <button type="submit" value="Submit" className="schedule-event-button" onClick={submitHandler}>Schedule Event</button>
                     </div>
                 </div>
             </form>

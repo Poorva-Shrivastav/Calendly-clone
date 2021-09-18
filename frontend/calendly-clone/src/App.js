@@ -10,39 +10,57 @@ import FifteenMin from './screens/FifteenMin/FifteenMin';
 import SelectedDate from './screens/FifteenMin/SelectedDate/SelectedDate';
 import MeetingScheduler from './screens/MeetingScheduler/MeetingScheduler';
 import CalendarReact from './screens/FifteenMin/Calendar/CalendarReact';
-import MeetingConfirmation from './screens/MeetingConfirmation/MeetingConfirmation';
+import MeetingConfirmation from './screens/FifteenMin/MeetingConfirmation/MeetingConfirmation';
 import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
+import SignupWithPassword from './screens/SignupWithPassword/SignupWithPassword';
+import SignupWithPasswordVerification from './screens/SignupWithPasswordVerification/SignupWithPasswordVerification';
+// import { useHistory } from 'react-router';
 
-export const TimeSlotContext = createContext(null);
+function App({loginEmail, email, time}) {
 
-function App({loginEmail, email, time, name}) {
+  // const [selectedDate, setSelectedDate] = useState("I'm date from App.js")
+  const [timeSlot, setTimeSlot] = useState('Hello from App.js')
+  const [start, setStart] = useState('Im start from App.js')
+  const [end, setEnd] = useState('Im end from App.js')
+  const [newDate, setNewDate] = useState(new Date())
+  const [name, setName] = useState('')
 
-  const [selectedDate, setSelectedDate] = useState('0')
-  // const [timeRange, setTimeRange] = useState('Hello from UseContext')
+  //signup
+  const [firstEmail, setFirstEmail] = useState('')
+  const firstEmailHandler = e => setFirstEmail(e.target.value)
+
+  const timeSlotSetter = (e) => {
+    setTimeSlot(e.target.name);
+    setStart(e.target.dataset.start)
+    setEnd(e.target.dataset.end)
+  }
+  
+  const dateSetter = (e) => setNewDate(e)
+  
+  const nameChangeHandler = (e) => setName(e.target.value)
 
   return (
     
     <Router>  
       <Switch>
-      {/* <TimeSlotContext.Provider value={{ timeRange, setTimeRange }}> */}
         <div className="App">
-        
-            <Route exact path="/"><Home/></Route>  
-            <Route exact path="/signup" ><Signup/></Route> 
+            {/* <Route exact path="/"> {loggedIn ? <Redirect to="/user" /> : <Home/>}</Route> */}
+            <Route exact path="/"><Home setFirstEmail={firstEmailHandler} firstEmail={firstEmail}/></Route>  
+            <Route exact path="/signup" ><Signup firstEmail={firstEmail}/></Route> 
             <Route path="/signup/:email" ><SignupWithGoogle email={email}/></Route> 
-            {/* <Link to="/signup/email="><SignupWithGoogle/></Link> */}
+            <Route path="/signupwithpassword" ><SignupWithPassword/></Route> 
+            <Route path="/signupwithpassword-verify" ><SignupWithPasswordVerification/></Route> 
             <Route exact path="/signin"><Signin/></Route>  
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
             <Route exact path="/user"><EventTypes time={time}/></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
-            <Route exact path="/user/15min/date"><SelectedDate selectedDate={selectedDate}/></Route> 
-            <Route exact path="/user/15min/date/meeting"><MeetingScheduler CalendarReact={selectedDate}/></Route>
-            <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation /></Route>
+            <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter} start={start} end={end}/></Route> 
+            <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot} start={start} end={end} setName={nameChangeHandler} name={name}/></Route>
+            <Route exact path="/user/15min/date/meeting-confirmation" newDate={newDate} timeSlot={timeSlot} name={name}><MeetingConfirmation /></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             
         </div>
-        {/* </TimeSlotContext.Provider> */}
      </Switch>
     </Router>
     

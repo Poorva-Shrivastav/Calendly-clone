@@ -73,3 +73,19 @@ body{
     font-weight: 400;
 
 }
+
+#back-link-p-meetingConf{
+    /* color: #5ac8a4; */
+    color: rgb(0, 107, 255);
+    height: 16px;
+    margin-left: 30%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+#back-link-p-meetingConf:hover{
+    color: hotpink;
+}
