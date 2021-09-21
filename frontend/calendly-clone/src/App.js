@@ -15,20 +15,22 @@ import SignupWithGoogle from './screens/SignupWithGoogle/SignupWithGoogle';
 import CalendarGoogle from './calendarGoogleApi/CalendarGoogle';
 import SignupWithPassword from './screens/SignupWithPassword/SignupWithPassword';
 import SignupWithPasswordVerification from './screens/SignupWithPasswordVerification/SignupWithPasswordVerification';
+import SigninEmail from './screens/SigninEmail/SigninEmail';
+import SigninPasswordRequired from './screens/SigninPasswordRequired/SigninPasswordRequired';
 // import { useHistory } from 'react-router';
 
-function App({loginEmail, email, time}) {
+function App({email, time}) {
 
   // const [selectedDate, setSelectedDate] = useState("I'm date from App.js")
   const [timeSlot, setTimeSlot] = useState('Hello from App.js')
   const [start, setStart] = useState('Im start from App.js')
   const [end, setEnd] = useState('Im end from App.js')
   const [newDate, setNewDate] = useState(new Date())
-  const [name, setName] = useState('')
 
   //signup
   const [firstEmail, setFirstEmail] = useState('')
-  const firstEmailHandler = e => setFirstEmail(e.target.value)
+  const [receiverName, setReceiverName] = useState('')
+  const [loginEmail, setLoginEmail] = useState('Login Email from App')
 
   const timeSlotSetter = (e) => {
     setTimeSlot(e.target.name);
@@ -36,9 +38,13 @@ function App({loginEmail, email, time}) {
     setEnd(e.target.dataset.end)
   }
   
+  const firstEmailHandler = e => setFirstEmail(e.target.value)
+  
   const dateSetter = (e) => setNewDate(e)
   
-  const nameChangeHandler = (e) => setName(e.target.value)
+  const receiverNameChangeHandler = (e) => setReceiverName(e.target.value)
+
+  const loginEmailSetter = (e) => setLoginEmail(e.target.value)
 
   return (
     
@@ -49,15 +55,17 @@ function App({loginEmail, email, time}) {
             <Route exact path="/"><Home setFirstEmail={firstEmailHandler} firstEmail={firstEmail}/></Route>  
             <Route exact path="/signup" ><Signup firstEmail={firstEmail}/></Route> 
             <Route path="/signup/:email" ><SignupWithGoogle email={email}/></Route> 
-            <Route path="/signupwithpassword" ><SignupWithPassword/></Route> 
+            <Route path="/signupwithpassword" ><SignupWithPassword /></Route> 
             <Route path="/signupwithpassword-verify" ><SignupWithPasswordVerification/></Route> 
-            <Route exact path="/signin"><Signin/></Route>  
-            <Route exact path="/signin/:loginEmail"><SigninValidation/></Route>  
+            <Route exact path="/signin-email"><Signin/></Route> 
+            <Route exact path="/signin"><SigninEmail loginEmail={loginEmail} setLoginEmail={loginEmailSetter}/></Route> 
+            <Route exact path="/signin/:loginEmail"><SigninValidation/></Route> 
+            <Route path="/signin-pwd" ><SigninPasswordRequired loginEmail={loginEmail}/></Route>  
             <Route exact path="/user"><EventTypes time={time}/></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
             <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter} start={start} end={end}/></Route> 
-            <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot} start={start} end={end} setName={nameChangeHandler} name={name}/></Route>
-            <Route exact path="/user/15min/date/meeting-confirmation" newDate={newDate} timeSlot={timeSlot} name={name}><MeetingConfirmation /></Route>
+            <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot} start={start} end={end} setReceiverName={receiverNameChangeHandler} receiverName={receiverName}/></Route>
+            <Route exact path="/user/15min/date/meeting-confirmation" newDate={newDate} timeSlot={timeSlot} receiverName={receiverName}><MeetingConfirmation /></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             
         </div>

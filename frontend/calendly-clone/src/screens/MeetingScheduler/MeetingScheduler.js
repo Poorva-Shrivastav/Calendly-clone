@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 
 // import TimeSlotContext from '../../App'
 
-function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
+function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, receiverName}) {
     const [addGuests, setAddGuests] = useState(false)
     // const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
@@ -65,7 +65,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
         else if(email !==''){ //&& !emailList.includes(email)
             const emailData = {
                 id:new Date().getTime().toString(),
-                name: email,
+                email: email,
             }
             console.log(emailList);
             setEmailList([...emailList, emailData])
@@ -97,7 +97,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
         })
         // console.log(newEditedEmail);
         setToggleUpdated(false)
-        setEmail(newEditedEmail.name)
+        setEmail(newEditedEmail.email)
         setIsEditEmail(id)
         console.log(isEditEmail);
     }
@@ -134,11 +134,11 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
     
     const submitHandler = async (e) => {
         e.preventDefault();
-        if(name == ''){
-            setName(true)
+        if(receiverName == ''){
+            setReceiverName(true)
         }else if(mainEmail == ''){
             setIsEmptyEmail(true)
-        }else if(name !== '' && mainEmail !== ''){
+        }else if(receiverName !== '' && mainEmail !== ''){
             let path = `/user/15min/date/meeting-confirmation`
             
             gapi.load('client: auth2', () => {
@@ -156,7 +156,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                 gapi.auth2.getAuthInstance().signIn()
                 .then(() => {
                     var event = {
-                        'summary': `Meeting with ${name}`,
+                        'summary': `Meeting with ${receiverName}`,
                     //    'description': 'A chance to hear more about Google\'s developer products.',
                         'start': {
                           'dateTime': '2021-08-28T09:00:00-07:00',
@@ -201,7 +201,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
             headers: {
                 "Content-type" : "application/json",
             },
-            body: JSON.stringify({name, mainEmail, message }),
+            body: JSON.stringify({receiverName, mainEmail, message }),
             })
             .then((res) => res.json())
             .then(async(res) => {
@@ -218,7 +218,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                 }
             })
             .then(() => {
-                setName('')
+                setReceiverName('')
                 setEmail('')
                 setMessage('')
                 setEmailList('')
@@ -246,8 +246,8 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                             <label className="meeting-label">Name *</label>
                             <input 
                                 className={isEmptyName? "input-meeting-error" :"input-meeting" }
-                                value={name} 
-                                onChange={setName}></input>
+                                value={receiverName} 
+                                onChange={setReceiverName}></input>
                             <div className={isEmptyName? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>    
                         </div>
                         <div className="input-container-meeting">
