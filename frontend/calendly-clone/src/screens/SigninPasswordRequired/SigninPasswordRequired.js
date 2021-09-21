@@ -6,7 +6,7 @@ import axios from 'axios'
 function SigninPasswordRequired({loginEmail}) {
     const [password, setPassword] = useState('')
 
-    console.log(loginEmail);
+    console.log(`I'm from SigninPass - ${loginEmail}`)
     const history = useHistory()
     const submitHandler = (e) => {
         e.preventDefault();
@@ -15,7 +15,7 @@ function SigninPasswordRequired({loginEmail}) {
             // let path = `/user`
             // history.push(path)
 
-            const loginPassword = {password: password}
+            const loginPassword = {loginEmail:loginEmail, password: password}
             axios.post('http://localhost:8000/api/signinpwd', loginPassword)
                 .then(res => { console.log(res.data)
                 window.location = '/user'

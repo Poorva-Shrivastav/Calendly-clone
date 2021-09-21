@@ -30,7 +30,7 @@ function App({email, time}) {
   //signup
   const [firstEmail, setFirstEmail] = useState('')
   const [receiverName, setReceiverName] = useState('')
-  const [loginEmail, setLoginEmail] = useState('Login Email from App')
+  // const [loginEmail, setLoginEmail] = useState('Login Email from App')
 
   const timeSlotSetter = (e) => {
     setTimeSlot(e.target.name);
@@ -39,12 +39,12 @@ function App({email, time}) {
   }
   
   const firstEmailHandler = e => setFirstEmail(e.target.value)
-  
+
   const dateSetter = (e) => setNewDate(e)
   
   const receiverNameChangeHandler = (e) => setReceiverName(e.target.value)
 
-  const loginEmailSetter = (e) => setLoginEmail(e.target.value)
+  // const loginEmailSetter = (e) => setLoginEmail(e.target.value)
 
   return (
     
@@ -58,9 +58,9 @@ function App({email, time}) {
             <Route path="/signupwithpassword" ><SignupWithPassword /></Route> 
             <Route path="/signupwithpassword-verify" ><SignupWithPasswordVerification/></Route> 
             <Route exact path="/signin-email"><Signin/></Route> 
-            <Route exact path="/signin"><SigninEmail loginEmail={loginEmail} setLoginEmail={loginEmailSetter}/></Route> 
+            <Route exact path="/signin"><SigninEmail /></Route> 
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route> 
-            <Route path="/signin-pwd" ><SigninPasswordRequired loginEmail={loginEmail}/></Route>  
+            {/* <Route path="/signin-pwd" ><SigninPasswordRequired/></Route>   */}
             <Route exact path="/user"><EventTypes time={time}/></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
             <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter} start={start} end={end}/></Route> 
