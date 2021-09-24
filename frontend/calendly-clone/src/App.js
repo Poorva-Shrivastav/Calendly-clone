@@ -30,7 +30,6 @@ function App({email, time}) {
   //signup
   const [firstEmail, setFirstEmail] = useState('')
   const [receiverName, setReceiverName] = useState('')
-  // const [loginEmail, setLoginEmail] = useState('Login Email from App')
 
   const timeSlotSetter = (e) => {
     setTimeSlot(e.target.name);

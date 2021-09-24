@@ -158,23 +158,24 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                     var event = {
                         'summary': `Meeting with ${receiverName}`,
                     //    'description': 'A chance to hear more about Google\'s developer products.',
+                        'description': 'Golden chance to meet Minki, The Calendly Bai',
                         'start': {
                           'dateTime': '2021-08-28T09:00:00-07:00',
                             'dateTime': `${startTime}`,
-                          'timeZone': 'America/Los_Angeles'
+                          'timeZone': 'Asia/Calcutta'
                         },
                         'end': {
                           'dateTime': '2021-08-28T17:00:00',
                         'dateTime': `${endTime}`,
-                          'timeZone': 'America/Los_Angeles'
+                          'timeZone': 'Asia/Calcutta'
                         },
                         'recurrence': [
                           'RRULE:FREQ=DAILY;COUNT=2'
                         ],
-                        'attendees': [
-                          {'email': 'lpage@example.com'},
-                          {'email': 'sbrin@example.com'}
-                        ],
+                        // 'attendees': [
+                        //   {'email': 'lpage@example.com'},
+                        //   {'email': 'sbrin@example.com'}
+                        // ],
                         'reminders': {
                           'useDefault': false,
                           'overrides': [
@@ -235,7 +236,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar time={15}/>
                     {/* <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p> */}
-                    <p id="event-string-p">🗓️ {timeSlot}, <Moment format="MMM DD YYYY" date={newDate} /> </p>
+                    <p id="event-string-p" name="timeslot">🗓️ {timeSlot}, <Moment format="MMM DD YYYY" date={newDate} /> </p>
                     <p id="time-zone">🌎 India Standard Time</p>
                 </div>
 
@@ -247,6 +248,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                             <input 
                                 className={isEmptyName? "input-meeting-error" :"input-meeting" }
                                 value={receiverName} 
+                                name="receiverName"
                                 onChange={setReceiverName}></input>
                             <div className={isEmptyName? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>    
                         </div>
@@ -255,6 +257,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                             <input className={isEmptyEmail? "input-meeting-error" :"input-meeting"}
                                 type="email"
                                 value={mainEmail} 
+                                name="mainEmail"
                                 onChange={emailChangeHandler}></input>
                             <div className={isEmptyEmail? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>
                         </div>
@@ -321,6 +324,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                             value={message} 
                             onChange={messageChangeHandler}
                             ></textarea>
+
                         <button type="submit" value="Submit" className="schedule-event-button" onClick={submitHandler}>Schedule Event</button>
                     </div>
                 </div>
