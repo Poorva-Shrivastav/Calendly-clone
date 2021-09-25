@@ -202,7 +202,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
             headers: {
                 "Content-type" : "application/json",
             },
-            body: JSON.stringify({receiverName, mainEmail, message }),
+            body: JSON.stringify({receiverName, mainEmail, message, timeSlot, newDate }),
             })
             .then((res) => res.json())
             .then(async(res) => {
@@ -325,6 +325,10 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                             onChange={messageChangeHandler}
                             ></textarea>
 
+                        <div>
+                        <input className="display-none" type="text" value={timeSlot} name="timeSlot" ></input>
+                        <input className="display-none" type="text" value={newDate} name="timeSlot" ></input>
+                        </div>
                         <button type="submit" value="Submit" className="schedule-event-button" onClick={submitHandler}>Schedule Event</button>
                     </div>
                 </div>

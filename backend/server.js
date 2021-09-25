@@ -45,17 +45,17 @@ app.post('/send', (req, res) => {
   let mailOptions = {
     from: process.env.EMAIL, // sender address
     to: `${req.body.mainEmail}`,// list of receivers
-    subject: `New Event: ${req.body.receiverName} - ${req.body.timeSlot}, ${req.body.newDate} - 15 Minute Meeting`, // Subject line
+    subject: `New Event: ${req.body.receiverName} - 15 Minute Meeting - ${req.body.timeSlot}, ${req.body.newDate} `, 
     html:`<p> Hi ${req.body.receiverName},</p> 
           <p>A new event has been scheduled</p>
           <p>Event Type: 
           15 Minute Meeting</p>
           <p>Invitee: 
-          Poorva</p>
+          Sender name</p>
           <p>Invitee Email: 
-          poorva0305@gmail.com</p>
+          sender email</p>
           <p>Event Date/Time:
-          10:15am - Friday, 27 August 2021 (India Standard Time)</p>
+          ${req.body.timeSlot} - ${req.body.newDate}</p>
           <p>Message, if any:
           ${req.body.message}</p>`
   };
