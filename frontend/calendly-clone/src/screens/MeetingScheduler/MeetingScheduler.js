@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 
 // import TimeSlotContext from '../../App'
 
-function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
+function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, receiverName}) {
     const [addGuests, setAddGuests] = useState(false)
     // const [name, setName] = useState('')
     const [mainEmail, setMainEmail] = useState('')
@@ -65,7 +65,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
         else if(email !==''){ //&& !emailList.includes(email)
             const emailData = {
                 id:new Date().getTime().toString(),
-                name: email,
+                email: email,
             }
             console.log(emailList);
             setEmailList([...emailList, emailData])
@@ -97,7 +97,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
         })
         // console.log(newEditedEmail);
         setToggleUpdated(false)
-        setEmail(newEditedEmail.name)
+        setEmail(newEditedEmail.email)
         setIsEditEmail(id)
         console.log(isEditEmail);
     }
@@ -122,8 +122,8 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
     //         }
     // } 
     const formattedDate = newDate.toISOString().split('T')[0];
-    const startTime = `${formattedDate}T${start}:00-07:00`
-    const endTime = `${formattedDate}T${end}:00-07:00`
+    const startTime = `${formattedDate}T${start}:00-06:30`
+    const endTime = `${formattedDate}T${end}:00-06:30`
 
     var gapi = window.gapi
     var CLIENT_ID = process.env.REACT_APP_CLIENT_ID
@@ -134,11 +134,11 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
     
     const submitHandler = async (e) => {
         e.preventDefault();
-        if(name == ''){
-            setName(true)
+        if(receiverName == ''){
+            setReceiverName(true)
         }else if(mainEmail == ''){
             setIsEmptyEmail(true)
-        }else if(name !== '' && mainEmail !== ''){
+        }else if(receiverName !== '' && mainEmail !== ''){
             let path = `/user/15min/date/meeting-confirmation`
             
             gapi.load('client: auth2', () => {
@@ -156,25 +156,23 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                 gapi.auth2.getAuthInstance().signIn()
                 .then(() => {
                     var event = {
-                        'summary': `Meeting with ${name}`,
-                       'description': 'A chance to hear more about Google\'s developer products.',
+                        'summary': `Meeting with ${receiverName}`,
+                        'description': '',
                         'start': {
-                          'dateTime': '2021-08-28T09:00:00-07:00',
                             'dateTime': `${startTime}`,
-                          'timeZone': 'America/Los_Angeles'
+                          'timeZone': 'Asia/Calcutta'
                         },
                         'end': {
-                          'dateTime': '2021-08-28T17:00:00',
                         'dateTime': `${endTime}`,
-                          'timeZone': 'America/Los_Angeles'
+                          'timeZone': 'Asia/Calcutta'
                         },
                         'recurrence': [
                           'RRULE:FREQ=DAILY;COUNT=2'
                         ],
-                        'attendees': [
-                          {'email': 'lpage@example.com'},
-                          {'email': 'sbrin@example.com'}
-                        ],
+                        // 'attendees': [
+                        //   {'email': 'lpage@example.com'},
+                        //   {'email': 'sbrin@example.com'}
+                        // ],
                         'reminders': {
                           'useDefault': false,
                           'overrides': [
@@ -182,7 +180,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                             {'method': 'popup', 'minutes': 10}
                           ]
                         }
-                      };
+                      }
     
                       var request = gapi.client.calendar.events.insert({
                         'calendarId': 'primary',
@@ -201,7 +199,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
             headers: {
                 "Content-type" : "application/json",
             },
-            body: JSON.stringify({name, mainEmail, message }),
+            body: JSON.stringify({receiverName, mainEmail, message, timeSlot, newDate }),
             })
             .then((res) => res.json())
             .then(async(res) => {
@@ -218,7 +216,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                 }
             })
             .then(() => {
-                setName('')
+                setReceiverName('')
                 setEmail('')
                 setMessage('')
                 setEmailList('')
@@ -228,6 +226,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
            
     }
 
+
     return (
         <div>
             <div className="outerdiv-meeting">
@@ -235,7 +234,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                     <button className="back-button" onClick={backHandler}>⬅</button>
                     <TimeBar time={15}/>
                     {/* <p id="event-string-p">🗓️ 9:00am - 9:15am, Friday, July 30, 2021</p> */}
-                    <p id="event-string-p">🗓️ {timeSlot}, <Moment format="MMM DD YYYY" date={newDate} /> </p>
+                    <p id="event-string-p" name="timeslot">🗓️ {timeSlot}, <Moment format="MMM DD YYYY" date={newDate} /> </p>
                     <p id="time-zone">🌎 India Standard Time</p>
                 </div>
 
@@ -246,8 +245,9 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                             <label className="meeting-label">Name *</label>
                             <input 
                                 className={isEmptyName? "input-meeting-error" :"input-meeting" }
-                                value={name} 
-                                onChange={setName}></input>
+                                value={receiverName} 
+                                name="receiverName"
+                                onChange={setReceiverName}></input>
                             <div className={isEmptyName? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>    
                         </div>
                         <div className="input-container-meeting">
@@ -255,6 +255,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                             <input className={isEmptyEmail? "input-meeting-error" :"input-meeting"}
                                 type="email"
                                 value={mainEmail} 
+                                name="mainEmail"
                                 onChange={emailChangeHandler}></input>
                             <div className={isEmptyEmail? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>
                         </div>
@@ -321,6 +322,12 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setName, name}) {
                             value={message} 
                             onChange={messageChangeHandler}
                             ></textarea>
+
+                        <div>
+                        <p className="display-none" name="timeslot">🗓️ {timeSlot}, <Moment format="MMM DD YYYY" date={newDate} /> </p>
+                        {/* <input className="display-none" type="text" value={timeSlot} name="timeSlot" ></input>
+                        <input className="display-none" type="text" value={newDate} name="timeSlot" ></input> */}
+                        </div>
                         <button type="submit" value="Submit" className="schedule-event-button" onClick={submitHandler}>Schedule Event</button>
                     </div>
                 </div>

@@ -9,7 +9,8 @@ function BannerSignin({email}) {
     const history = useHistory();
 
     const signinHandler = () =>{
-        let path = `/signin/${loginEmail}`
+        // let path = `/signin/${loginEmail}`
+        let path = `/signin`
         history.push(path)
     }
     return (

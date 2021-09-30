@@ -8,8 +8,6 @@ function Banner({setFirstEmail, firstEmail}) {
     // const [firstEmail, setFirstEmail] = useState('')
     const history = useHistory();
 
-    // const {id} = useParams();
-    // console.log(id);
     const signupHandler = () =>{
         let path = `/signup`
         history.push(path)

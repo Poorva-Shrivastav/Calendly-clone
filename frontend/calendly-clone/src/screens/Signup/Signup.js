@@ -9,7 +9,6 @@ function Signup({firstEmail}) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        let register = {email}
 
         if(email!== ''){
             let path = `/signup/${email}`

@@ -15,7 +15,7 @@ function Navbar() {
     }
 
     const signinHandler = () =>{
-        let path = `/signin`
+        let path = `/signin-email`
         history.push(path)
     }
 
