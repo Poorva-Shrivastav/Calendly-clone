@@ -2,51 +2,56 @@ const express = require('express');
 const bcrypt = require('bcrypt')
 const googleloginRouter = express.Router();
 const signuptemplate  = require('../models/signupModel') 
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 let bodyParser = require('body-parser');
-// const auth = require('../middlewares/middleware')
 
-const { google } = require('googleapis') 
+
+const { google } = require('googleapis'); 
 const { OAuth2 } = google.auth
 
 const OAuth2Client = new OAuth2(
                     process.env.OAUTH_CLIENTID, 
-                    // process.env.OAUTH_CLIENT_SECRET
+                    process.env.OAUTH_CLIENT_SECRET
                     )
-
 
 
 googleloginRouter.use(bodyParser.json())
 
-googleloginRouter.post('/googlelogin',async(req, res)=>{
-    const {tokenId} = req.body;
+googleloginRouter.post('/googlelogin',async(request, response)=>{
+    const {tokenId} = request.body;
 
    OAuth2Client.verifyIdToken({idToken: tokenId, 
                                 audience:process.env.OAUTH_CLIENTID})
-                            .then(res =>{
-                                const{email_verified, name, email} = res.payload;
+                            .then(response =>{
+                                const{email_verified, name, email, at_hash} = response.payload;
                                 if(email_verified){
-                                    User.findOne({email}).exec((err, user) => {
-                                        if(err){
-                                            return res.status(404).json({
-                                                error: "Something went wrong"
-                                            })
-                                        }
-                                        else{
-                                            if(user){ //user exits in db
-                                                console.log("learn from old course")
+                                    // const existingUser = signuptemplate.findOne({email})
+                                    // if(existingUser){
+                                    //     return response.json({ message : "User already exists"})
+                                    // }
+                                    signuptemplate.findOne({email})
+                                        .then((user) => {
+                                            if(user){
+                                                response.status(200).json({user}) 
                                             }
-                                            else{ //user doesn't exits in db
-                                                // let newUser = 
-                                                console.log("yet to fix")
+                                            else{                                            
+                                                const newUser = new signuptemplate({name: name, email: email, password: at_hash}) 
+                                                newUser.save()
+                                                .then((data) => {
+                                                    const token = jwt.sign({email: data.email, id: data._id}, "text", {expiresIn: 60*1000})
+                                                    response.status(200).json({data, token})                                    
+                                                    console.log("new User payload: ", response.payload);
+                                                })
                                             }
+                                        })
+                                        .catch(err => {console.log(err)})                            
                                         }
                                     })
-                                }
-                                console.log(res.payload);
-                            })       
+                            
+                            // })       
    
 
 })
 
 module.exports = googleloginRouter;
+

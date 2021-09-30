@@ -1,35 +1,43 @@
 import React from 'react'
 import { GoogleLogin} from 'react-google-login'
-// import { env } from 'process'
 import './GoogleAccount.css'
 import axios from 'axios'
+// import {useHistory} from 'react-router-dom'
+
 
 function GoogleAccount({children}) {
-
     const googleSuccess = (res) => {
-        console.log(res);
+        // const userData = {tokenId: res.tokenId}
+        // axios.post('http://localhost:8000/api/googlelogin', userData)
         axios({
             method: "POST",
             url: "http://localhost:8000/api/googlelogin",
             data: {tokenId: res.tokenId}
-        }).then(res => {
+        })
+        .then(res => {
+            // window.location = 'http://localhost:3000/user'
             console.log(res)
+            // history.push('http://localhost:3000/user')
+     
         })
     }
 
     const googleFailure = (error) => {
         console.log(error);
-        console.log("Google Signin was unsuccessful. Try Again later");
+        console.log("Google login was unsuccessful. Try Again later");
     }
 
     return (
         <GoogleLogin
             clientId= {process.env.REACT_APP_CLIENT_ID}
-            buttonText={children}
+            render={renderProps => (
+                <button id="button-Goglesignin"onClick={renderProps.onClick} disabled={renderProps.disabled}>{children}</button>
+              )}
             onSuccess={googleSuccess}
             onFailure={googleFailure}
             cookiePolicy={'single_host_origin'}
             id="button-Goglesignin"
+            isSignedIn={true}
         />
         // <GoogleLogin 
         // clientId = {process.env.REACT_APP_CLIENT_ID}

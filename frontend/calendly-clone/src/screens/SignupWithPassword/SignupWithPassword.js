@@ -5,7 +5,6 @@ import { useParams, useHistory} from 'react-router'
 import axios from 'axios'
 
 function SignupWithPassword(props) {
-    // const {name, email, password} = useParams()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -17,9 +16,6 @@ function SignupWithPassword(props) {
             name:name,
             email: email,
             password: password
-            // name: document.getElementById('name').value,
-            // email: document.getElementById('email').value,
-            // password:document.getElementById('password').value
         }
 
         if(password.length < 8){

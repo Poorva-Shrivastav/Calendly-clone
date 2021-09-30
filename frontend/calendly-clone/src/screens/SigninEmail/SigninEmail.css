@@ -35,7 +35,7 @@
 
 }
 
-#input{
+.input-signin{
     height: 40px;
     width: 90%;
     border-radius: 10px;
@@ -43,6 +43,7 @@
     outline: lightgray;
     font-size: 15px;
     padding-left: 15px;
+    margin-bottom: 10px;
     /* background-color: rgb(220, 239, 246); */
 }
 

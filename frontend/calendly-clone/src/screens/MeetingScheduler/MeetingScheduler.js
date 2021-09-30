@@ -122,8 +122,8 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
     //         }
     // } 
     const formattedDate = newDate.toISOString().split('T')[0];
-    const startTime = `${formattedDate}T${start}:00-07:00`
-    const endTime = `${formattedDate}T${end}:00-07:00`
+    const startTime = `${formattedDate}T${start}:00-06:30`
+    const endTime = `${formattedDate}T${end}:00-06:30`
 
     var gapi = window.gapi
     var CLIENT_ID = process.env.REACT_APP_CLIENT_ID
@@ -157,15 +157,12 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                 .then(() => {
                     var event = {
                         'summary': `Meeting with ${receiverName}`,
-                    //    'description': 'A chance to hear more about Google\'s developer products.',
-                        'description': 'Golden chance to meet Minki, The Calendly Bai',
+                        'description': '',
                         'start': {
-                          'dateTime': '2021-08-28T09:00:00-07:00',
                             'dateTime': `${startTime}`,
                           'timeZone': 'Asia/Calcutta'
                         },
                         'end': {
-                          'dateTime': '2021-08-28T17:00:00',
                         'dateTime': `${endTime}`,
                           'timeZone': 'Asia/Calcutta'
                         },
@@ -183,7 +180,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                             {'method': 'popup', 'minutes': 10}
                           ]
                         }
-                      };
+                      }
     
                       var request = gapi.client.calendar.events.insert({
                         'calendarId': 'primary',
@@ -228,6 +225,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
         }   
            
     }
+
 
     return (
         <div>
@@ -326,8 +324,9 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                             ></textarea>
 
                         <div>
-                        <input className="display-none" type="text" value={timeSlot} name="timeSlot" ></input>
-                        <input className="display-none" type="text" value={newDate} name="timeSlot" ></input>
+                        <p className="display-none" name="timeslot">🗓️ {timeSlot}, <Moment format="MMM DD YYYY" date={newDate} /> </p>
+                        {/* <input className="display-none" type="text" value={timeSlot} name="timeSlot" ></input>
+                        <input className="display-none" type="text" value={newDate} name="timeSlot" ></input> */}
                         </div>
                         <button type="submit" value="Submit" className="schedule-event-button" onClick={submitHandler}>Schedule Event</button>
                     </div>

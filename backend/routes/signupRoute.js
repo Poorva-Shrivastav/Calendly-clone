@@ -5,26 +5,8 @@ const bcrypt = require('bcrypt'); //for encrypting the password
 const jwt = require('jsonwebtoken')
 
 signupRouter.post('/signup', async (request, response) =>{
-
-    // const saltPassword = await bcrypt.genSalt(10)
-    // const securePassword = await bcrypt.hash(request.body.password, saltPassword)
-
-    // const signedUpUser = new signuptemplate({
-    //     name: request.body.name,
-    //     email: request.body.email,
-    //     password: securePassword,
-    // })
-
-    // signedUpUser.save()
-
-    // .then(data => {
-    //     response.json(data)
-    // })
-    // .catch(err => {
-    //     response.json(err)
-    // })
-
     const {name, email, password} = request.body;
+    
      try{
         const existingUser = await signuptemplate.findOne({ name })
         if(existingUser) return response.status(400).json({ message : "Name already in use. Try another name"})
@@ -45,10 +27,13 @@ signupRouter.post('/signup', async (request, response) =>{
 
         response.status(200).json({result, token})
         response.status(200).json({result})
+
     }catch(error){
         console.log(error)
         response.status(500).json({message : "Something went wrong"})        
     }    
 })
+
+
 
 module.exports = signupRouter;

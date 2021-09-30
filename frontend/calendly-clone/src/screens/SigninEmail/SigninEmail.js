@@ -35,10 +35,10 @@ function SigninEmail() {
 
             <form className="inner-signup" method="POST" onSubmit={submitHandler}>
                 <h3 id="h3">Enter your email to get started.</h3>
-                <input type="email" value={email} id="input"
+                <input type="email" value={email} className="input-signin"
                     placeholder="email address"
                     onChange={(e) => setEmail(e.target.value)}></input>
-                <input type="password" value={password} id="input"
+                <input type="password" value={password} className="input-signin"
                     placeholder="password"
                     onChange={(e) => setPassword(e.target.value)}></input>
                 <button type="submit" value="Submit" id="button-signup">Continue</button>
