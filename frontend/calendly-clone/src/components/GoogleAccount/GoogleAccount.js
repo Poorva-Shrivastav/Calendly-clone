@@ -7,16 +7,16 @@ import axios from 'axios'
 
 function GoogleAccount({children}) {
     const googleSuccess = (res) => {
-        // const userData = {tokenId: res.tokenId}
-        // axios.post('http://localhost:8000/api/googlelogin', userData)
-        axios({
-            method: "POST",
-            url: "http://localhost:8000/api/googlelogin",
-            data: {tokenId: res.tokenId}
-        })
+        const userData = {tokenId: res.tokenId}
+        axios.post('http://localhost:8000/api/googlelogin', userData)
+        // axios({
+        //     method: "POST",
+        //     url: "http://localhost:8000/api/googlelogin",
+        //     data: {tokenId: res.tokenId}
+        // })
         .then(res => {
-            // window.location = 'http://localhost:3000/user'
             console.log(res)
+            window.location = '/user'
             // history.push('http://localhost:3000/user')
      
         })
