@@ -27,6 +27,7 @@ function SigninValidation() {
             <p id="p-signin">Welcome back, {loginEmail}!</p>
             <a class="anchor-signinVal" href="../signup">(This is not me.)</a>
             <div className="inner-signin">
+                
                 <GoogleAccount>Log in with Google</GoogleAccount>
                 {/* <GoogleLogin
                         clientId = {process.env.REACT_APP_API_KEY}

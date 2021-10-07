@@ -12,7 +12,6 @@ const googleloginUrls = require('./routes/auth')
 const moment = require('moment')
 const dbURI = process.env.DATABASE_ACCESS
 
-
 mongoose.connect(dbURI)
     .then(console.log("Database Connected"))
 
@@ -55,9 +54,9 @@ app.post('/send', (req, res) => {
           <p>Event Type: 
           15 Minute Meeting</p>
           <p>Invitee: 
-          ${name}</p>
+          Calendly Clone </p>
           <p>Invitee Email: 
-          ${email}</p>
+          test.calendlyclone@gmail.com</p>
           <p>Event Date/Time:
           ${req.body.timeSlot} - ${emailDate}</p>
           <p>Message, if any:

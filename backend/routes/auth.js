@@ -14,7 +14,6 @@ const OAuth2Client = new OAuth2(
                     )
 
 googleloginRouter.use(express.json())
-// googleloginRouter.use(bodyParser.json())
 
 googleloginRouter.post('/googlelogin',(req, res)=>{
     const {tokenId} = req.body;

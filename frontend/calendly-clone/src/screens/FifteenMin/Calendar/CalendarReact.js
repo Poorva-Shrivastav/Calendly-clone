@@ -9,6 +9,7 @@ import { useHistory } from 'react-router';
 function CalendarReact({time}) {
     const [date, setDate] = useState(new Date())
     const [selectedDate, setSelectedDate] = useState('')
+    const [value, onChange] = useState(new Date());
 
     const history = useHistory();
 
@@ -25,8 +26,8 @@ function CalendarReact({time}) {
     return (
         <div>
             <Calendar 
-                value={date} 
-                onChange={dateHandler} 
+                value={value} 
+                onChange={onChange} 
                 selectRange={false}
                 minDate ={date}
                 onClickDay={selectedDateSetter}

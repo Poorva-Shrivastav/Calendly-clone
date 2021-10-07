@@ -20,7 +20,7 @@ function FifteenMin({time, selectedDate}) {
                     <h2 id="bottom-h2-date">Select a Date & Time</h2>
                     <CalendarReact selectedDate={selectedDate}/>
                     <div class="timezone">
-                    Time Zone - Yet to fix
+                    {/* Time Zone - Yet to fix */}
                     </div>
                 </div>
             </div>

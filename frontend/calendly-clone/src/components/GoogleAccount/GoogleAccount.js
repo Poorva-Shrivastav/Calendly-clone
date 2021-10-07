@@ -1,24 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GoogleLogin} from 'react-google-login'
 import './GoogleAccount.css'
 import axios from 'axios'
-// import {useHistory} from 'react-router-dom'
-
 
 function GoogleAccount({children}) {
+    const [isSignedIn, setIsSignedIn] = useState(false)
+
     const googleSuccess = (res) => {
+        // setlogOutButton(true)
         const userData = {tokenId: res.tokenId}
         axios.post('http://localhost:8000/api/googlelogin', userData)
-        // axios({
-        //     method: "POST",
-        //     url: "http://localhost:8000/api/googlelogin",
-        //     data: {tokenId: res.tokenId}
-        // })
-        .then(res => {
-            console.log(res)
-            window.location = '/user'
-            // history.push('http://localhost:3000/user')
-     
+        .then((data) => {
+            let responseJson = data;
+            sessionStorage.setItem('userData', JSON.stringify(data))
+            window.location = `/user` 
+
         })
     }
 
@@ -28,32 +24,23 @@ function GoogleAccount({children}) {
     }
 
     return (
-        <GoogleLogin
-            clientId= {process.env.REACT_APP_CLIENT_ID}
-            render={renderProps => (
-                <button id="button-Goglesignin"onClick={renderProps.onClick} disabled={renderProps.disabled}>{children}</button>
-              )}
-            onSuccess={googleSuccess}
-            onFailure={googleFailure}
-            cookiePolicy={'single_host_origin'}
-            id="button-Goglesignin"
-            isSignedIn={true}
-        />
-        // <GoogleLogin 
-        // clientId = {process.env.REACT_APP_CLIENT_ID}
-        //                 render = {(renderProps) => (
-        //                     <button id="button-Goglesignin" 
-        //                             fullWidth onClick={renderProps.onClick} 
-        //                             disabled={renderProps.disabled}
-        //                             variant="contained"
-        //                             >
-        //                             <img id="google-G" src="https://img.icons8.com/ios-glyphs/30/ffffff/google-logo--v1.png"/>{children}</button>
-        //                 )}
-        //                 onSuccess= {googleSuccess}
-        //                 onFailure={googleFailure}
-        //                 cookiePolicy ={"single_host_origin"}
-                     
-                // />
+        <>
+            <GoogleLogin
+                clientId= {process.env.REACT_APP_CLIENT_ID}
+                render={renderProps => (
+                    <button id="button-Goglesignin"onClick={renderProps.onClick} disabled={renderProps.disabled}>{children}</button>
+                )}
+                onSuccess={googleSuccess}
+                onFailure={googleFailure}
+                cookiePolicy={'single_host_origin'}
+                id="button-Goglesignin"
+             />
+            {/* <GoogleLogout
+                clientId= {process.env.REACT_APP_CLIENT_ID}
+                buttonText="Logout"
+                onLogoutSuccess={logOutSuccess}
+            /> */}
+        </>
     )
 }
 

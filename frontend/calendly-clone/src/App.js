@@ -19,7 +19,7 @@ import SigninEmail from './screens/SigninEmail/SigninEmail';
 import SigninPasswordRequired from './screens/SigninPasswordRequired/SigninPasswordRequired';
 // import { useHistory } from 'react-router';
 
-function App({email, time}) {
+function App({email, time, googleLoginName,googleLoginEmail}) {
 
   // const [selectedDate, setSelectedDate] = useState("I'm date from App.js")
   const [timeSlot, setTimeSlot] = useState('Hello from App.js')
@@ -30,6 +30,8 @@ function App({email, time}) {
   //signup
   const [firstEmail, setFirstEmail] = useState('')
   const [receiverName, setReceiverName] = useState('')
+
+  // const [loggedInUser, setLoggedInUser] = useState()
 
   const timeSlotSetter = (e) => {
     setTimeSlot(e.target.name);
@@ -42,8 +44,6 @@ function App({email, time}) {
   const dateSetter = (e) => setNewDate(e)
   
   const receiverNameChangeHandler = (e) => setReceiverName(e.target.value)
-
-  // const loginEmailSetter = (e) => setLoginEmail(e.target.value)
 
   return (
     
@@ -60,11 +60,11 @@ function App({email, time}) {
             <Route exact path="/signin"><SigninEmail /></Route> 
             <Route exact path="/signin/:loginEmail"><SigninValidation/></Route> 
             {/* <Route path="/signin-pwd" ><SigninPasswordRequired/></Route>   */}
-            <Route exact path="/user"><EventTypes time={time}/></Route>  
+            <Route exact path="/user"><EventTypes googleLoginName={googleLoginName} googleLoginEmail={googleLoginEmail} time={time} /></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
             <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter} start={start} end={end}/></Route> 
             <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot} start={start} end={end} setReceiverName={receiverNameChangeHandler} receiverName={receiverName}/></Route>
-            <Route exact path="/user/15min/date/meeting-confirmation" newDate={newDate} timeSlot={timeSlot} receiverName={receiverName}><MeetingConfirmation /></Route>
+            <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation newDate={newDate} timeSlot={timeSlot} receiverName={receiverName} /></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             
         </div>

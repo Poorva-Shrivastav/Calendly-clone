@@ -30,6 +30,27 @@ body{
     margin-right: 15%;
 }
 
+.logout-button{
+    display: flex;
+    justify-content:space-between;
+    text-align: right;
+    list-style: none;
+    width: 10%;
+    font-weight: 400;
+    font-size: 15px;
+    margin-top: 15px;
+    margin-right: 10%;
+    border: none;
+    outline: none;
+    background: none;
+    color: lightgray;
+}
+.logout-button:hover{
+    color: hotpink;
+    cursor: pointer;
+    font-family: 700;
+}
+
 a{
     text-decoration: none;
     cursor: pointer;

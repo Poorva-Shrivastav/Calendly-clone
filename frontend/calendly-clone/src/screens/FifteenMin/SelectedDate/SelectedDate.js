@@ -9,9 +9,9 @@ import Moment from 'react-moment'
 function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
   const [clicked, setClicked] = useState(false);
 
-  const dateToFormat = '2021-09-10';
-    const [date, setDate] = useState(new Date(dateToFormat))
-    const value = new Date(dateToFormat)
+  // const dateToFormat = '2021-11-11';
+    const [date, setDate] = useState(new Date())
+    const value = new Date()
 
     const history = useHistory()
     const selectedDateSetHandler = (e) => {
@@ -25,15 +25,6 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
       let path = `/user/15min/date/meeting`;  
       history.push(path)
     };
-/*
-    const dateHandler = () => setDate(date);
-
-    const selectedDateSetHandler = (value, e) => {
-      let path = `/user/15min/date`;
-      history.push(path);
-      // {selectedDateSetter}
-    };
-*/
 
   return (
     <div>
@@ -64,7 +55,7 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               /> */}
             </div>
             <div className="timezone">
-              Time Zone - Yet to fix
+              {/* Time Zone - Yet to fix */}
             </div>
           </div>
         </div>
