@@ -17,7 +17,8 @@ function SigninEmail() {
             
             const loginRequest = { email:email, password:password}
 
-            axios.post('http://localhost:8000/api/signin', loginRequest)
+            // axios.post('http://localhost:8000/api/signin', loginRequest)
+            axios.post('https://calendly-clon.herokuapp.com/api/signin', loginRequest)            
                 .then(res => { console.log(res.data)
                 window.location = '/user'
                 })
@@ -32,7 +33,7 @@ function SigninEmail() {
     return (
         <div className="signup">
             <img className="logo" src={logo} alt="logo" />
-            <p id="p-signup">Welcome back {}.</p>
+            <p id="p-signup">Welcome back.</p>
 
             <form className="inner-signup" method="POST" onSubmit={submitHandler}>
                 <div id="signin-Google-Button">

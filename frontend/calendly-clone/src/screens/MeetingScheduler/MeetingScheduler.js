@@ -3,7 +3,7 @@ import TimeBar from '../FifteenMin/TimeBar/TimeBar'
 import'./MeetingScheduler.css'
 import { useHistory, useParams } from 'react-router'
 import validator from 'validator'
-import CalendarGoogle from '../../calendarGoogleApi/CalendarGoogle'
+// import CalendarGoogle from '../../calendarGoogleApi/CalendarGoogle'
 import {useLocation} from 'react-router-dom'
 import Moment from 'react-moment'
 
@@ -29,7 +29,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
         let path = `/user/15min/date`
         history.push(path)    
     }
-    console.log(`I'm from Meeting - ${timeSlot} - ${newDate}`)
+    // console.log(`I'm from Meeting - ${timeSlot} - ${newDate}`)
 
     // const nameChangeHandler = (e) => setName(e.target.value)
 
@@ -129,10 +129,11 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
     var CLIENT_ID = process.env.REACT_APP_CLIENT_ID
     var API_KEY = process.env.REACT_APP_API_KEY
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-    var SCOPES = "https://www.googleapis.com/auth/calendar.events";
-                    
+    var SCOPES = "https://www.googleapis.com/auth/calendar.events";                    
+    // var SCOPES = ["https://www.googleapis.com/auth/calendar.events", "https://www.googleapis.com/auth/calendar"];
     
-    const submitHandler = async (e) => {
+    // const submitHandler = async (e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
         if(receiverName == ''){
             setReceiverName(true)
@@ -152,19 +153,19 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                 })
     
                 gapi.client.load('calendar', 'v3', ()=> console.log('Calendar logged'))
-    
                 gapi.auth2.getAuthInstance().signIn()
-                .then(() => {
+                .then(() => {  
+                    console.log('Signed In')       
                     var event = {
                         'summary': `Meeting with ${receiverName}`,
                         'description': '',
                         'start': {
-                            'dateTime': `${startTime}`,
-                          'timeZone': 'Asia/Calcutta'
+                            'dateTime': '2021-11-28T09:00:00-07:00',//`${startTime}`,
+                          'timeZone': 'Asia/Kolkata'
                         },
                         'end': {
-                        'dateTime': `${endTime}`,
-                          'timeZone': 'Asia/Calcutta'
+                        'dateTime': '2021-11-28T17:00:00-07:00', //`${endTime}`,
+                          'timeZone': 'Asia/Kolkata'
                         },
                         'recurrence': [
                           'RRULE:FREQ=DAILY;COUNT=2'
@@ -181,29 +182,35 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                           ]
                         }
                       }
-    
+                      
                       var request = gapi.client.calendar.events.insert({
                         'calendarId': 'primary',
                         'resource': event
                       });
-    
+                                                      
                       request.execute(event => {
+                        window.open(event.htmlLink)                         
+                        // console.log("Calendar event created");                         
                         history.push(path)
                       });
                 })
+                .catch(e => console.log(e))
     
             })
 
-            const response = await fetch("http://localhost:8000/send", {
+            // const response = await fetch("http://localhost:8000/send", {
+            const response = fetch("https://calendly-clon.herokuapp.com/send", {                
             method: "POST",
             headers: {
                 "Content-type" : "application/json",
             },
+            mode: 'no-cors',
+            credentials: 'same-origin',
             body: JSON.stringify({receiverName, mainEmail, message, timeSlot, newDate }),
             })
             .then((res) => res.json())
-            .then(async(res) => {
-                const resData = await res;
+            .then((res) => {
+                const resData = res;                
                 console.log(resData);
                 if(resData.status === "success"){
                     // alert('email sent')
@@ -211,8 +218,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                     setIsEmptyEmail(false)
                 }
                 else if(resData.status === 'fail'){
-                    alert('Email sending failed')
-                    
+                    alert('Email sending failed')                    
                 }
             })
             .then(() => {

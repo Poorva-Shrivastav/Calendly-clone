@@ -4,7 +4,6 @@ import Signup from './screens/Signup/Signup';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import Signin from './screens/Signin/Signin';
 import SigninValidation from './screens/SigninValidation/SigninValidation';
-import MainUserPage from './screens/MainUserPage/MainUserPage';
 import EventTypes from './screens/MainUserPage/EventTypes/EventTypes';
 import FifteenMin from './screens/FifteenMin/FifteenMin';
 import SelectedDate from './screens/FifteenMin/SelectedDate/SelectedDate';

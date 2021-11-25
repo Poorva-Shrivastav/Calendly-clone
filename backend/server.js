@@ -2,12 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose')
 const nodemailer = require('nodemailer');
 const app = express();
-const cors = require('cors');
+let cors = require("cors");
 require("dotenv").config();
 const signupUrls = require('./routes/signupRoute')
 const signinUrls = require('./routes/signinRoute')
 const signinPwdUrls = require('./routes/signinPasswordRoute')
 const googleloginUrls = require('./routes/auth')
+
+// app.options('*', cors())
 
 const moment = require('moment')
 const dbURI = process.env.DATABASE_ACCESS
@@ -15,9 +17,29 @@ const dbURI = process.env.DATABASE_ACCESS
 mongoose.connect(dbURI)
     .then(console.log("Database Connected"))
 
-app.use(express.json()) //activates bodyparser in the application
+/*
+app.use(cors({
+      // origin:'https://calendlyclone.netlify.app'
+      origin:"*", 
+}));
+*/
 app.use(cors());
+app.options('*', cors());
 
+// app.use(cors({origin:true,credentials: true}));
+
+/*
+app.use((req,res,next)=>{
+  res.setHeader("Acces-Control-Allow-Origin","*");
+  res.setHeader('Acces-Control-Allow-Origin','https://calendlyclone.netlify.app', 'https://content.googleapis.com', 'https://www.googleapis.com')
+  res.setHeader('Acces-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+  res.setHeader("Acces-Contorl-Allow-Headers","Origin ,Content-Type, X-Content-Range, X-Token, Authorization, Accept");
+  next(); 
+})
+*/
+
+
+app.use(express.json()) //activates bodyparser in the application
 
 app.use('/api', signupUrls)
 app.use('/api', signinUrls)
@@ -29,6 +51,10 @@ const { OAuth2 } = google.auth
 
 const PORT = process.env.PORT || 8000;
 
+app.get('/', (req, res) => {
+  res.send("Hello from backend server of Calendly-Clone")
+})
+
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -39,8 +65,6 @@ let transporter = nodemailer.createTransport({
       refreshToken: process.env.OAUTH_REFRESH_TOKEN,
   },
 });
-
-
 
 app.post('/send', (req, res) => {
     // console.log(req.body)

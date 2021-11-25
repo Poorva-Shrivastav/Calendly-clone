@@ -23,7 +23,8 @@ function SignupWithPassword(props) {
         }
         
         else{
-            axios.post('http://localhost:8000/api/signup', registered)
+            // axios.post('http://localhost:8000/api/signup', registered)
+            axios.post('https://calendly-clon.herokuapp.com/api/signup', registered)
             .then(res => { console.log(res.data)
             window.location = '/signupwithpassword-verify'
             })

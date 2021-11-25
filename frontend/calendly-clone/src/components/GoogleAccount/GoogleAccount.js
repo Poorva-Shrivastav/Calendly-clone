@@ -9,12 +9,12 @@ function GoogleAccount({children}) {
     const googleSuccess = (res) => {
         // setlogOutButton(true)
         const userData = {tokenId: res.tokenId}
-        axios.post('http://localhost:8000/api/googlelogin', userData)
+        // axios.post('http://localhost:8000/api/googlelogin', userData)
+        axios.post('https://calendly-clon.herokuapp.com/api/googlelogin', userData)        
         .then((data) => {
             let responseJson = data;
             sessionStorage.setItem('userData', JSON.stringify(data))
             window.location = `/user` 
-
         })
     }
 
