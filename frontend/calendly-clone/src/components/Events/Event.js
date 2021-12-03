@@ -1,8 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Event.css'
 import {useHistory} from 'react-router-dom'
+import Share from '../Share/Share'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 function Event({time}) {
+    const [showShare, setShowShare] = useState(false)
+    const [textCopied, setTextCopied] = useState(false)
+    const [copied, setCopied] = useState('')
 
     const history = useHistory();
     
@@ -11,20 +16,30 @@ function Event({time}) {
         history.push(path)
     }
 
-    return (
-        <div className="min-meeting">   
+    const shareHandler = () => setShowShare(true)
+    const textCopyHandler = () => setTextCopied(true)
+
+    let url = "https://calendlyclone.netlify.app/user/15"
+
+    return (       
+        <div className="min-meeting">           
             <div className="checkbox-div">
-            <input type="checkbox"/>
-            ⚙️
+            {/* <input type="checkbox"/>
+            ⚙️ */}
             </div>
             
             <h2 id="h2-tag-event">{time} Minute Meeting</h2>
             <p id="p-tag-event">{time} min, One-on-One</p>
             <button class="button-event-noBorder" onClick={bookingHandler}>View booking page</button>
             <div class="lower-container">
-                <button class="button-event-noBorder" onClick={bookingHandler}>📄 Copy link</button>
-                <button id="button-tag-event">Share</button>
-                
+            <span className={textCopied ? "event-copylink-colorChange" : "display-none"}>Copied</span>
+                <CopyToClipboard text={url}>
+                            <button className={textCopied ? "display-none" :"button-event-noBorder"} onClick={textCopyHandler}>📄 Copy link</button> 
+                </CopyToClipboard> 
+                <button id="button-tag-event" onClick={shareHandler}>Share</button>                
+                {
+                    showShare && <Share closeShare={setShowShare} />
+                }
             </div>
         </div>
     )

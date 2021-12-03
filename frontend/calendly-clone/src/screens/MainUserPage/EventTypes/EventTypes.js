@@ -4,6 +4,7 @@ import CreateEvent from '../../../components/CreateEvent/CreateEvent'
 import Event from '../../../components/Events/Event'
 import NavbarPostLogin from '../../../components/NavbarPostLogin/NavbarPostLogin'
 import './EventTypes.css'
+import InactiveEvent from '../../../components/InactiveEvent/InactiveEvent'
 
 function EventTypes({time}) {
 
@@ -31,12 +32,12 @@ function EventTypes({time}) {
                         {/* <p id="p-event"><span id="span-event"></span>Poorva Shrivastav</p>
                         <a id="a-event" href="http://localhost:3000/user/:{loginEmail}"></a> */}
                         <p id="p-event"><span id="span-event">P</span>{userName}</p>
-                        <a id="a-event" href=""> calendly.com/{userEmail}</a>
+                        <a id="a-event" href="">calendly.com/{userEmail}</a>
                     </div>
-                    <div>
-                        <button class="button-event">+ New Event Type </button>
+                    {/* <div>
+                        <button class="button-event">+ New Event Type</button>
                         <a>⚙️</a> 
-                    </div>
+                    </div> */}
                 </div>
                 {/* <div className="lower-div-main"> */}
                     <div className="lower-div-event">
@@ -45,11 +46,13 @@ function EventTypes({time}) {
                         </div>
 
                         <div className="meeting" id="_30">
-                            <Event time={30}/>
+                            {/* <Event time={30}/> */}
+                            <InactiveEvent time={30}/>
                         </div>
                         
                         <div className="meeting" id="_60">
-                            <Event time={60}/>
+                            {/* <Event time={60}/> */}
+                            <InactiveEvent time={60}/>
                         </div>
                     </div>
                 </div>

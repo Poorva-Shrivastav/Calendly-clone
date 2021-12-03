@@ -8,25 +8,26 @@ const signupUrls = require('./routes/signupRoute')
 const signinUrls = require('./routes/signinRoute')
 const signinPwdUrls = require('./routes/signinPasswordRoute')
 const googleloginUrls = require('./routes/auth')
-
-// app.options('*', cors())
-
 const moment = require('moment')
 const dbURI = process.env.DATABASE_ACCESS
 
+app.use(express.json()) //activates bodyparser in the application
+app.use(express.urlencoded({ extended: false }));
 mongoose.connect(dbURI)
     .then(console.log("Database Connected"))
 
-/*
-app.use(cors({
-      // origin:'https://calendlyclone.netlify.app'
-      origin:"*", 
-}));
-*/
-app.use(cors());
-app.options('*', cors());
+
+// app.use(cors({
+//       // origin:'https://calendlyclone.netlify.app'
+//       origin:"*", 
+// }));
+
+
+// app.options('*', cors()); 
 
 // app.use(cors({origin:true,credentials: true}));
+
+app.use(cors({origin: new URL('https://calendlyclone.netlify.app'), credentials: true}));
 
 /*
 app.use((req,res,next)=>{
@@ -37,9 +38,6 @@ app.use((req,res,next)=>{
   next(); 
 })
 */
-
-
-app.use(express.json()) //activates bodyparser in the application
 
 app.use('/api', signupUrls)
 app.use('/api', signinUrls)
@@ -57,6 +55,7 @@ app.get('/', (req, res) => {
 
 let transporter = nodemailer.createTransport({
   service: 'gmail',
+  host: 'smtp.gmail.com',
   auth: {
       user: process.env.EMAIL,
       pass: process.env.WORD, 
@@ -68,8 +67,13 @@ let transporter = nodemailer.createTransport({
 
 app.post('/send', (req, res) => {
     // console.log(req.body)
-    const emailDate = moment(`${req.body.newDate}`).format("ddd, MMM D YYYY");
-    let mailOptions = {
+    const emailDate = moment(`${req.body.newDate}`).format()
+    // const incomingDate = (`${req.body.newDate}`).toISOString().split('T')[0];
+    // const formattedDate = `${incomingDate}T$00:00:00-18:30` 
+    // const emailDate = moment(formattedDate).format("ddd, MMM D YYYY");
+
+    
+    var mailOptions = {
     from: process.env.EMAIL, // sender address
     to: `${req.body.mainEmail}`,// list of receivers
     subject: `New Event: ${req.body.receiverName} - 15 Minute Meeting - ${emailDate}, ${req.body.timeSlot}`, 
@@ -78,9 +82,9 @@ app.post('/send', (req, res) => {
           <p>Event Type: 
           15 Minute Meeting</p>
           <p>Invitee: 
-          Calendly Clone </p>
+          ${req.body.userName}</p>
           <p>Invitee Email: 
-          test.calendlyclone@gmail.com</p>
+          ${req.body.userEmail}</p>
           <p>Event Date/Time:
           ${req.body.timeSlot} - ${emailDate}</p>
           <p>Message, if any:

@@ -90,9 +90,11 @@
 }
 
 #_30{
-    border-top: 5px solid yellow;
+    /* border-top: 5px solid yellow; */
+    background-color: lightgray;
 }
 
 #_60{
-    border-top: 5px solid red;
+    /* border-top: 5px solid red; */
+    background-color: lightgray;
 }

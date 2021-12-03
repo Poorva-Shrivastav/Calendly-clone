@@ -10,11 +10,11 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
   const [clicked, setClicked] = useState(false);
 
   // const dateToFormat = '2021-11-11';
-    // const [date, setDate] = useState(new Date())
-    const value = newDate
+    const [date, setDate] = useState(new Date())
+    const value = new Date()
 
     const history = useHistory()
-    const selectedDateSetHandler = (e) => {      
+    const selectedDateSetHandler = (e) => {
         let path = `/user/15min/date`;
         history.push(path);
     };
@@ -26,16 +26,10 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
       history.push(path)
     };
 
-    const backHandler = () =>{
-        let path = `/user/15min`
-        history.push(path)    
-    }
-
   return (
     <div>
-      <div className="outerdiv-selectedDate">      
+      <div className="outerdiv-selectedDate">
         <div className="left-container-selectedDate">
-        <button className="back-button" onClick={backHandler}>⬅</button>
           <TimeBar time={15} />
         </div>
 
@@ -44,12 +38,21 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
             <h2 id="bottom-h2-date">Select a Date & Time</h2>
             <div>
             <Calendar 
-                activeStartDate={newDate}
+                activeStartDate={date}
                 selectRange={false}
-                minDate={newDate}
+                minDate={date}
                 onClickDay= {setNewDate} 
-                onChange={selectedDateSetHandler}                 
-            />           
+                onChange={selectedDateSetHandler} 
+            />
+              {/* <Calendar
+                value={date}
+                onChange={dateHandler}
+                selectRange={false}
+                minDate={date}
+                onClickDay={setSelectedDate}                
+                onClick={selectedDateSetHandler}
+                // selectedDate={selectedDate}
+              /> */}
             </div>
             <div className="timezone">
               {/* Time Zone - Yet to fix */}

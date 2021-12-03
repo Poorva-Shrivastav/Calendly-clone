@@ -15,7 +15,7 @@ function CreateEvent() {
                 </div>
             </div>
             <div class="event2">
-                <Button>+ Create</Button>
+                {/* <Button>+ Create</Button> */}
             </div>
 
         </div>

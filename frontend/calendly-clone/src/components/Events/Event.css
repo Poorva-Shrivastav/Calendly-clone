@@ -8,7 +8,7 @@
 .checkbox-div{
     display: flex;
     justify-content: space-between;
-    
+    height: 16px;
 }
 
 #h2-tag-event{
@@ -39,6 +39,7 @@
     outline: none;
     border: 1px solid rgb(0, 107, 255);
     background-color: white;
+    cursor: pointer;
 }
 
 .a-event{
@@ -53,4 +54,19 @@
     border-radius: none;
     font-size: 16px;
     cursor: pointer;
+}
+
+.display-none{
+    display: none;
+}
+
+.event-copylink-colorChange{
+    color: rgb(9, 236, 28);
+    background-color: transparent;
+    outline: none;
+    border: none;  
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 20px;
+    padding-top: 5px;
 }
