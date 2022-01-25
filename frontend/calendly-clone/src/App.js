@@ -61,9 +61,10 @@ function App({email, time, googleLoginName,googleLoginEmail}) {
             {/* <Route path="/signin-pwd" ><SigninPasswordRequired/></Route>   */}
             <Route exact path="/user"><EventTypes googleLoginName={googleLoginName} googleLoginEmail={googleLoginEmail} time={time} /></Route>  
             <Route exact path="/user/:time"><FifteenMin/></Route> 
+            <Route exact path="/user=:loginEmail/:time"><FifteenMin/></Route> 
             <Route exact path="/user/15min/date"><SelectedDate newDate={newDate} setNewDate={dateSetter} setTimeSlot={timeSlotSetter} start={start} end={end}/></Route> 
             <Route exact path="/user/15min/date/meeting"><MeetingScheduler newDate={newDate} timeSlot={timeSlot} start={start} end={end} setReceiverName={receiverNameChangeHandler} receiverName={receiverName}/></Route>
-            <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation newDate={newDate} timeSlot={timeSlot} receiverName={receiverName} /></Route>
+            <Route exact path="/user/15min/date/meeting-confirmation"><MeetingConfirmation newDate={newDate} timeSlot={timeSlot} receiverName={receiverName} setNewDate={dateSetter}/></Route>
             <Route exact path="/googlecalendar"><CalendarGoogle/></Route>  
             
         </div>

@@ -25,7 +25,8 @@ function Navbar() {
     }
 
     return (
-        <div class="navbar-list">
+        <>
+        <div class="navbar-list">            
            <img class="logo" src={logo} alt="logo"/>
            <ul className="menu-icon">
                {
@@ -39,10 +40,11 @@ function Navbar() {
                 }
            </ul>
            <div className="signin-up">
-                <p id="login" onClick={signinHandler}>Login</p>
-                <Button onClick={signupHandler}>Sign up free</Button>
+                <p id="login" onClick={signinHandler}>Log In</p>
+                <Button onClick={signupHandler}>Get Started</Button>
            </div>
         </div>
+        </>
     )
 }
 

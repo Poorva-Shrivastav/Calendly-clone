@@ -25,11 +25,11 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
     const[userName, setUserName] = useState('')
     const[userEmail, setUserEmail] = useState('')
 
-    useEffect(() => {
-        const data1 = JSON.parse(sessionStorage.getItem('userData'))
-        setUserName(data1.data.user.name)
-        setUserEmail(data1.data.user.email)
-    })
+    // useEffect(() => {
+    //     const data1 = JSON.parse(sessionStorage.getItem('userData'))
+    //     setUserName(data1.data.user.name)
+    //     setUserEmail(data1.data.user.email)
+    // })
 
 
     const {time} = useParams();
@@ -131,16 +131,16 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
     //         }
     // } 
     const formattedDate = newDate.toISOString().split('T')[0];
-    const startTime = `${formattedDate}T${start}:00-18:30`    //18:30
+    const startTime = `${formattedDate}T${start}:00-18:30`
     const endTime = `${formattedDate}T${end}:00-18:30`
 
     var gapi = window.gapi
     var CLIENT_ID = process.env.REACT_APP_CLIENT_ID
     var API_KEY = process.env.REACT_APP_API_KEY
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-    var SCOPES = "https://www.googleapis.com/auth/calendar.events";                    
-        
-    // const submitHandler = async (e) => {
+    var SCOPES = "https://www.googleapis.com/auth/calendar.events"
+    
+    
     const submitHandler = async (e) => {
         e.preventDefault();
         if(receiverName == ''){
@@ -166,8 +166,8 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                 .then(() => {  
                     console.log('Signed In')                 
                       var event = {
-                        'summary': `Meeting with ${receiverName}`,
-                        'description': '',
+                        'summary': `Meeting - Ankita Prakash and ${receiverName} `,
+                        'description': `${mainEmail}`,
                         'start': {
                             'dateTime': `${startTime}`,
                             'timeZone': 'Asia/Kolkata'
@@ -179,10 +179,11 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                         // 'recurrence': [
                         //   'RRULE:FREQ=DAILY;COUNT=2'
                         // ],
-                        // 'attendees': [
-                        //   {'email': 'lpage@example.com'},
-                        //   {'email': 'sbrin@example.com'}
-                        // ],
+                        'attendees': [
+                          {'email': `${mainEmail}`},
+                          {'email': `prankita4@gmail.com`},                              
+                        //   {'email': `poorvajethani@gmail.com`}
+                        ],
                         'reminders': {
                           'useDefault': false,
                           'overrides': [
@@ -194,7 +195,8 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                       
                       var request = gapi.client.calendar.events.insert({
                         'calendarId': 'primary',
-                        'resource': event
+                        'resource': event,
+                        "sendUpdates": "all",
                       });
                                                       
                       request.execute(event => {
@@ -203,7 +205,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                         history.push(path)
                       });                      
                 })            
-                .catch(e => console.log(e))
+                // .catch(e => console.log(e))
     
             })
 
@@ -216,7 +218,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
             },
             // mode: 'no-cors',
             credentials: 'same-origin',
-            body: JSON.stringify({receiverName, mainEmail, message, timeSlot, newDate, userName, userEmail }),
+            body: JSON.stringify({receiverName, mainEmail, message, timeSlot, newDate }), //userName, userEmail
             })
             .then((res) => res.json())
             .then(async(res) => {
@@ -238,6 +240,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                 setEmailList('')
                 setUserName('')
                 setUserEmail('')
+                
             })
             .catch(err => console.log(err))
    
@@ -279,7 +282,7 @@ function MeetingScheduler({ newDate ,timeSlot, start, end, setReceiverName, rece
                             <div className={isEmptyEmail? "input-meeting-error-hidden" : "display-none"}>Can't be blank.</div>
                         </div>
                         <button className={addGuests ? "display-none" : "add-guest-meeting"}
-                                onClick = {(e) => setAddGuests(e.target)}    
+                                // onClick = {(e) => setAddGuests(e.target)}    
                             >Add Guests
                         </button>
 

@@ -28,6 +28,7 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
 
     const backHandler = () =>{
         let path = `/user/15min`
+        setNewDate(new Date())
         history.push(path)    
     }
 
@@ -69,7 +70,7 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               onClick={(e) => setClicked(e.target.value)}
             >
               <div>
-                <button className={clicked == "9" ? "newSetTime" : "setTime"} value="9" name="9:00am - 9:15am" data-start="9:00" data-end="9:15"onClick={setTimeSlot}>
+                <button className={clicked == "9" ? "newSetTime" : "setTime"} value="9" name="9:00am - 9:15am" data-start="9:00" data-end="9:15" onClick={setTimeSlot}>
                   9:00am
                 </button>
                 <button
@@ -233,8 +234,7 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "11.45" ? "newSetTime" : "setTime"} value="11.45"name="11:45am - 12:00pm" data-start="11:45" data-end="12:00" onClick={setTimeSlot}>
-                >
+                  className={clicked == "11.45" ? "newSetTime" : "setTime"} value="11.45"name="11:45am - 12:00pm" data-start="11:45" data-end="12:00" onClick={setTimeSlot}>              
                   11:45am
                 </button>
                 <button
@@ -249,7 +249,7 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "12" ? "newSetTime" : "setTime"} value="12" name="12.00pm - 12:15pm" data-start="12:00" data-end="12:15" onClick={setTimeSlot}>
+                  className={clicked == "12" ? "newSetTime" : "setTime"} value="12" name="12.00 - 12:15" data-start="12:00" data-end="12:15" onClick={setTimeSlot}>
                 12:00pm
                 </button>
                 <button
@@ -264,7 +264,7 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "12.15" ? "newSetTime" : "setTime"} value="12.15"name="12.15pm - 12:30pm" data-start="12:15" data-end="12:30" onClick={setTimeSlot}>
+                  className={clicked == "12.15" ? "newSetTime" : "setTime"} value="12.15"name="12.15p - 12:30" data-start="12:15" data-end="12:30" onClick={setTimeSlot}>
                   12:15pm
                 </button>
                 <button
@@ -279,7 +279,7 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "12.30" ? "newSetTime" : "setTime"} value="12.30" name="12.30pm - 12:45pm" data-start="12:30" data-end="12:45" onClick={setTimeSlot}>
+                  className={clicked == "12.30" ? "newSetTime" : "setTime"} value="12.30" name="12.30 - 12:45" data-start="12:30" data-end="12:45" onClick={setTimeSlot}>
                 12:30pm
                 </button>
                 <button
@@ -294,7 +294,7 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "12.45" ? "newSetTime" : "setTime"} value="12.45"name="12.45pm - 1:00pm" data-start="12:45" data-end="1:00" onClick={setTimeSlot}>
+                  className={clicked == "12.45" ? "newSetTime" : "setTime"} value="12.45"name="12.45 - 13:00" data-start="12:45" data-end="13:00" onClick={setTimeSlot}>
                 12:45pm
                 </button>
                 <button
@@ -309,14 +309,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1" ? "newSetTime" : "setTime"} value="1" name="1.00pm - 1:15pm" data-start="1:00" data-end="1:15" onClick={setTimeSlot}>
+                  className={clicked == "13" ? "newSetTime" : "setTime"} value="13" name="13.00 - 13:15" data-start="13:00" data-end="13:15" onClick={setTimeSlot}>
                 1:00pm
                 </button>
                 <button
                   className={
                     clicked == "1" ? "available-onClick" : "display-none"
                   }
-                  value="1"
+                  value="13"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -324,15 +324,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1.15" ? "newSetTime" : "setTime"} value="1.15" name="1.15pm - 1:30pm" data-start="1:15" data-end="1:30" onClick={setTimeSlot}>
-                >
+                  className={clicked == "13.15" ? "newSetTime" : "setTime"} value="13.15" name="13.15 - 13:30" data-start="13:15" data-end="13:30" onClick={setTimeSlot}>              
                   1:15pm
                 </button>
                 <button
                   className={
-                    clicked == "1.15" ? "available-onClick" : "display-none"
+                    clicked == "13.15" ? "available-onClick" : "display-none"
                   }
-                  value="1.15"
+                  value="13.15"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -340,14 +339,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1.30" ? "newSetTime" : "setTime"} value="1.30" name="1.30pm - 1:45pm" data-start="1:30" data-end="1:45" onClick={setTimeSlot}>
+                  className={clicked == "13.30" ? "newSetTime" : "setTime"} value="13.30" name="13.30 - 13:45" data-start="13:30" data-end="13:45" onClick={setTimeSlot}>
                 1:30pm
                 </button>
                 <button
                   className={
-                    clicked == "1.30" ? "available-onClick" : "display-none"
+                    clicked == "13.30" ? "available-onClick" : "display-none"
                   }
-                  value="1.30"
+                  value="13.30"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -355,14 +354,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "1.45" ? "newSetTime" : "setTime"} value="1.45" name="1.45pm - 2:00pm" data-start="1:45" data-end="2:00" onClick={setTimeSlot}>
+                  className={clicked == "13.45" ? "newSetTime" : "setTime"} value="13.45" name="13.45 - 14:00" data-start="13:45" data-end="14:00" onClick={setTimeSlot}>
                 1:45pm
                 </button>
                 <button
                   className={
-                    clicked == "1.45" ? "available-onClick" : "display-none"
+                    clicked == "13.45" ? "available-onClick" : "display-none"
                   }
-                  value="1.45"
+                  value="13.45"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -370,14 +369,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "2" ? "newSetTime" : "setTime"} value="2" name="2.00pm - 2:15pm" data-start="2:00" data-end="2:15" onClick={setTimeSlot}>
+                  className={clicked == "14" ? "newSetTime" : "setTime"} value="14" name="14.00 - 14:15" data-start="14:00" data-end="14:15" onClick={setTimeSlot}>
                 2:00pm
                 </button>
                 <button
                   className={
-                    clicked == "2" ? "available-onClick" : "display-none"
+                    clicked == "14" ? "available-onClick" : "display-none"
                   }
-                  value="2"
+                  value="14"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -385,14 +384,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "2.15" ? "newSetTime" : "setTime"} value="2.15" name="2.15pm - 2:30pm" data-start="2:15" data-end="2:30" onClick={setTimeSlot}>
+                  className={clicked == "14.15" ? "newSetTime" : "setTime"} value="14.15" name="14.15 - 14:30" data-start="14:15" data-end="14:30" onClick={setTimeSlot}>
                 2:15pm
                 </button>
                 <button
                   className={
-                    clicked == "2.15" ? "available-onClick" : "display-none"
+                    clicked == "14.15" ? "available-onClick" : "display-none"
                   }
-                  value="2.15"
+                  value="14.15"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -400,14 +399,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "2.30" ? "newSetTime" : "setTime"} value="2.30" name="2.30pm - 2:45pm" data-start="2:30" data-end="2:45" onClick={setTimeSlot}>
+                  className={clicked == "14.30" ? "newSetTime" : "setTime"} value="14.30" name="14.30 - 14:45" data-start="14:30" data-end="14:45" onClick={setTimeSlot}>
                 2:30pm
                 </button>
                 <button
                   className={
-                    clicked == "2.30" ? "available-onClick" : "display-none"
+                    clicked == "14.30" ? "available-onClick" : "display-none"
                   }
-                  value="2.30"
+                  value="14.30"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -415,14 +414,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "2.45" ? "newSetTime" : "setTime"}value="2.45" name="2.45pm - 3:00pm" data-start="2:45" data-end="3:00" onClick={setTimeSlot}>
-                2:45pm
+                  className={clicked == "14.45" ? "newSetTime" : "setTime"}value="14.45" name="14.45 - 14:00" data-start="14:45" data-end="15:00" onClick={setTimeSlot}>
+                14:45pm
                 </button>
                 <button
                   className={
-                    clicked == "2.45" ? "available-onClick" : "display-none"
+                    clicked == "14.45" ? "available-onClick" : "display-none"
                   }
-                  value="2.45"
+                  value="14.45"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -430,14 +429,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "3" ? "newSetTime" : "setTime"} value="3" name="3.00pm - 3:15pm" data-start="3:00" data-end="3:15" onClick={setTimeSlot}>
+                  className={clicked == "3" ? "newSetTime" : "setTime"} value="15" name="15.00 - 15:15" data-start="15:00" data-end="15:15" onClick={setTimeSlot}>
                  3:00pm
                 </button>
                 <button
                   className={
-                    clicked == "3" ? "available-onClick" : "display-none"
+                    clicked == "15" ? "available-onClick" : "display-none"
                   }
-                  value="3"
+                  value="15"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -446,14 +445,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
 
               <div>
                 <button
-                  className={clicked == "3.15" ? "newSetTime" : "setTime"} value="3.15"  name="3.15pm - 3:30pm" data-start="3:15" data-end="3:30" onClick={setTimeSlot}>
+                  className={clicked == "15.15" ? "newSetTime" : "setTime"} value="15.15"  name="15.15 - 15:30" data-start="15:15" data-end="15:30" onClick={setTimeSlot}>
                   3:15pm
                 </button>
                 <button
                   className={
-                    clicked == "3.15" ? "available-onClick" : "display-none"
+                    clicked == "15.15" ? "available-onClick" : "display-none"
                   }
-                  value="3.15"
+                  value="15.15"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -461,14 +460,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "3.30" ? "newSetTime" : "setTime"} value="3.30" name="3.30pm - 3:35pm" data-start="3:30" data-end="3:45" onClick={setTimeSlot}>
+                  className={clicked == "15.30" ? "newSetTime" : "setTime"} value="15.30" name="15.30 - 15:35" data-start="15:30" data-end="15:45" onClick={setTimeSlot}>
                 3:30pm
                 </button>
                 <button
                   className={
-                    clicked == "3.30" ? "available-onClick" : "display-none"
+                    clicked == "15.30" ? "available-onClick" : "display-none"
                   }
-                  value="3.30"
+                  value="15.30"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -476,14 +475,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "3.45" ? "newSetTime" : "setTime"} value="3.45" name="3.45pm - 4:00pm" data-start="3:45" data-end="4:00" onClick={setTimeSlot}>
+                  className={clicked == "15.45" ? "newSetTime" : "setTime"} value="15.45" name="15.45 - 16:00" data-start="15:45" data-end="16:00" onClick={setTimeSlot}>
                   3:45pm
                 </button>
                 <button
                   className={
-                    clicked == "3.45" ? "available-onClick" : "display-none"
+                    clicked == "15.45" ? "available-onClick" : "display-none"
                   }
-                  value="3.45"
+                  value="15.45"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -491,12 +490,12 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "4" ? "newSetTime" : "setTime"} value="4" name="4.00pm - 4:15pm" data-start="4:00" data-end="4:15" onClick={setTimeSlot}>
+                  className={clicked == "16" ? "newSetTime" : "setTime"} value="16" name="16.00 - 16:15" data-start="16:00" data-end="16:15" onClick={setTimeSlot}>
                 4:00pm
                 </button>
                 <button
                   className={
-                    clicked == "4" ? "available-onClick" : "display-none"
+                    clicked == "16" ? "available-onClick" : "display-none"
                   }
                   value="4"
                   onClick={meetingScheduleHandler}
@@ -507,14 +506,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
 
               <div>
                 <button
-                  className={clicked == "4.15" ? "newSetTime" : "setTime"} value="4.15" name="4.15pm - 4:30pm" data-start="4:15" data-end="4:30" onClick={setTimeSlot}>
+                  className={clicked == "16.15" ? "newSetTime" : "setTime"} value="16.15" name="16.15 - 16:30" data-start="16:15" data-end="16:30" onClick={setTimeSlot}>
                  4:15pm
                 </button>
                 <button
                   className={
-                    clicked == "4.15" ? "available-onClick" : "display-none"
+                    clicked == "16.15" ? "available-onClick" : "display-none"
                   }
-                  value="4.15"
+                  value="16.15"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -522,14 +521,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "4.30" ? "newSetTime" : "setTime"} value="4.30" name="4.15pm - 4:30pm" data-start="4:15" data-end="4:30" onClick={setTimeSlot}>
+                  className={clicked == "16.30" ? "newSetTime" : "setTime"} value="16.30" name="16.15 - 16:30" data-start="16:15" data-end="16:30" onClick={setTimeSlot}>
                   4:30pm
                 </button>
                 <button
                   className={
-                    clicked == "4.30" ? "available-onClick" : "display-none"
+                    clicked == "16.30" ? "available-onClick" : "display-none"
                   }
-                  value="4.30"
+                  value="16.30"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm
@@ -537,14 +536,14 @@ function SelectedDate({ time, setNewDate, newDate, setTimeSlot, start, end }) {
               </div>
               <div>
                 <button
-                  className={clicked == "4.45" ? "newSetTime" : "setTime"} value="4.45" name="4.45pm - 5:00pm" data-start="4:45" data-end="5:00" onClick={setTimeSlot}>
+                  className={clicked == "16.45" ? "newSetTime" : "setTime"} value="16.45" name="16.45 - 17:00" data-start="16:45" data-end="17:00" onClick={setTimeSlot}>
                 4:45pm
                 </button>
                 <button
                   className={
-                    clicked == "4.45" ? "available-onClick" : "display-none"
+                    clicked == "16.45" ? "available-onClick" : "display-none"
                   }
-                  value="4.45"
+                  value="16.45"
                   onClick={meetingScheduleHandler}
                 >
                   Confirm

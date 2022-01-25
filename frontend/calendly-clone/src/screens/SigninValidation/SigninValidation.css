@@ -26,7 +26,8 @@ body{
 }
 
 .anchor-signinVal{
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
     font-weight: 600;
     font-size: 15px;
 }
@@ -34,7 +35,7 @@ body{
 .inner-signin{
     border: 1px solid rgb(226, 225, 225);
     border-radius: 8px;
-    text-align: left;
+    /* text-align: left; */
     padding-left: 35px;
     margin-top: 25px;
     height: 150px;
@@ -62,7 +63,7 @@ body{
     font-size: 14px;
     font-weight: 100;
     padding-top: 1%;
-    padding-left: 85px;
+    /* padding-left: 85px; */
     color: rgb(100, 100, 100);
 }
 

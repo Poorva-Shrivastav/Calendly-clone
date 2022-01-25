@@ -21,19 +21,19 @@ body{
     
 }
 
-.content{
+.content-signin{
     /* position: absolute; */
     margin-left: 20px;
     margin-top: 1%;
     width: 50%;
     margin-right: 20%;
 }
-.h1-banner{
+.h1-banner-signin{
     font-size: 90px; 
     font-weight: 900;
 }
 
-.p-tag-banner{
+.p-tag-banner-signin{
     /* width: 45%; */
     font-size: 17px;
     font-weight: 300;

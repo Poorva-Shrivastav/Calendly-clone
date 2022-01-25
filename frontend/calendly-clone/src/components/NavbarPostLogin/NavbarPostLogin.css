@@ -17,6 +17,7 @@ body{
 .logo-user{
     height: 60px;
     cursor: pointer;
+    /* width: 5vw; */
 }
 
 .menu-icon-user{
@@ -30,7 +31,7 @@ body{
     margin-right: 15%;
 }
 
-.logout-button{
+#logout-button{
     display: flex;
     justify-content:space-between;
     text-align: right;
@@ -45,7 +46,7 @@ body{
     background: none;
     color: lightgray;
 }
-.logout-button:hover{
+#logout-button:hover{
     color: hotpink;
     cursor: pointer;
     font-family: 700;
@@ -58,5 +59,6 @@ a{
 }
 
 a:hover{
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
 }

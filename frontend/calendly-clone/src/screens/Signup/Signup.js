@@ -20,7 +20,7 @@ function Signup({firstEmail}) {
     return (
         <div className="signup">
             <img className="logo" src={logo} alt="logo" />
-            <p id="p-signup">Sign up with Calendly for free</p>
+            <p id="p-signup">Sign up with CalendarApp for free</p>
 
             <form className="inner-signup" method="POST" onSubmit={submitHandler}>
                 <h3 id="h3">Enter your email to get started.</h3>

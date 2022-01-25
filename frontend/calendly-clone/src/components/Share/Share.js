@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './Share.css'
 
 function Share({showShare, closeShare}) {
     const [textCopied, setTextCopied] = useState(false)
     const [copied, setCopied] = useState('')
-    
-    const textCopyHandler = () => setTextCopied(true)
+    const[userEmail, setUserEmail] = useState('')
 
-    let url = "https://calendlyclone.netlify.app/user/15"
+    const textCopyHandler = () => setTextCopied(true)    
+
+    useEffect(() => {
+        const data1 = JSON.parse(sessionStorage.getItem('userData'))
+        // setUserEmail(data1.data.user.email)
+        const trimmedEmail = data1.data.user.email
+        const finalEmail = trimmedEmail.replace(/@.*$/,"")
+        setUserEmail(finalEmail)
+    })
+
+    let url = `https://calendlyclone.netlify.app/user=${userEmail}/15`
 
     return (
         <div className="outermost-div-share">

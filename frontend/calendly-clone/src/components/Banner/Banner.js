@@ -16,8 +16,8 @@ function Banner({setFirstEmail, firstEmail}) {
         <div id="main-div">
         <div className="banner">
             <div className="content">
-                <h1 id="h1-banner">Easy scheduling ahead</h1>
-                <p id="p-tag">Calendly is your hub for scheduling mettings professionally and efficiently, eliminating the hassle of back-and-forth emails so you can get back to work</p>
+                <h1 id="h1-banner">Scheduling App <span id="span-react-node">React & NodeJS</span></h1>
+                <p id="p-tag">CalendarApp is your hub for scheduling mettings professionally and efficiently, eliminating the hassle of back-and-forth emails so you can get back to work</p>
                 <div className="signup-banner">
                     <input type="email" id="input-banner"  value={firstEmail} placeholder="Enter your email" onChange={setFirstEmail}/>
                     <button id="button-banner" onClick={signupHandler}>Sign Up</button>
@@ -27,7 +27,7 @@ function Banner({setFirstEmail, firstEmail}) {
             <img className="img" src={img} alt="banner"></img>
             
         </div>
-        
+  
        </div>
     )
 }

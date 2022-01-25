@@ -38,7 +38,8 @@ a{
 }
 
 a:hover{
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
 }
 
 .signin-up{
@@ -53,5 +54,6 @@ a:hover{
 }
 
 #login:hover{
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
 }

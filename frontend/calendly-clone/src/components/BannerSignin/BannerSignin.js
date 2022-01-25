@@ -15,9 +15,9 @@ function BannerSignin({email}) {
     }
     return (
         <div className="banner">
-            <div className="content">
-                <h1 class="h1-banner">Welcome back to Calendly</h1>
-                <p class="p-tag">Log in to your account.   </p>
+            <div className="content-signin">
+                <h1 class="h1-banner-signin">Welcome back to Calendly</h1>
+                <p class="p-tag-signin">Log in to your account.   </p>
                 {/* <Button onClick={signinHandler}>Log In</Button> */}
                 <div className="signin-banner">
                     <input type="email" id="input-banner-signin"  value={loginEmail} placeholder="Enter your email" onChange={(e) => setLoginEmail(e.target.value)}/>

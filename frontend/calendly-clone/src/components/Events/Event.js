@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './Event.css'
 import {useHistory} from 'react-router-dom'
 import Share from '../Share/Share'
@@ -8,6 +8,7 @@ function Event({time}) {
     const [showShare, setShowShare] = useState(false)
     const [textCopied, setTextCopied] = useState(false)
     const [copied, setCopied] = useState('')
+    const[userEmail, setUserEmail] = useState('')
 
     const history = useHistory();
     
@@ -19,7 +20,16 @@ function Event({time}) {
     const shareHandler = () => setShowShare(true)
     const textCopyHandler = () => setTextCopied(true)
 
-    let url = "https://calendlyclone.netlify.app/user/15"
+    
+    useEffect(() => {
+        const data1 = JSON.parse(sessionStorage.getItem('userData'))
+        // setUserEmail(data1.data.user.email)
+        const trimmedEmail = data1.data.user.email
+        const finalEmail = trimmedEmail.replace(/@.*$/,"")
+        setUserEmail(finalEmail)
+    })
+
+    let url = `https://calendlyclone.netlify.app/user=${userEmail}/15`
 
     return (       
         <div className="min-meeting">           

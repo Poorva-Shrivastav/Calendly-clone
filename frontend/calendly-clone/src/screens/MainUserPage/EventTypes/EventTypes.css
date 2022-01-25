@@ -58,9 +58,11 @@
     border-radius: 20px;
     margin-top: 10px;
     margin-right: 10px;
-    border: 1px solid rgb(0, 107, 255);
+    /* border: 1px solid rgb(0, 107, 255); */
+    border: 1px solid #ef6234;
     outline: none;
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
 
 }
 

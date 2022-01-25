@@ -8,7 +8,8 @@ const signupUrls = require('./routes/signupRoute')
 const signinUrls = require('./routes/signinRoute')
 const signinPwdUrls = require('./routes/signinPasswordRoute')
 const googleloginUrls = require('./routes/auth')
-const moment = require('moment')
+// const moment = require('moment')
+var moment = require('moment-timezone');
 const dbURI = process.env.DATABASE_ACCESS
 
 app.use(express.json()) //activates bodyparser in the application
@@ -67,24 +68,26 @@ let transporter = nodemailer.createTransport({
 
 app.post('/send', (req, res) => {
     // console.log(req.body)
-    const emailDate = moment(`${req.body.newDate}`).format()
-    // const incomingDate = (`${req.body.newDate}`).toISOString().split('T')[0];
-    // const formattedDate = `${incomingDate}T$00:00:00-18:30` 
-    // const emailDate = moment(formattedDate).format("ddd, MMM D YYYY");
+    // const emailDate = moment(`${req.body.newDate}`).format("ddd, MMM D YYYY");
 
-    
+    const incomingDate = `${req.body.newDate}`.toLocaleString('en-US', {timeZone: 'Aisa/Kolkata'}).split('T')[0];
+    const emailDate = moment(`${incomingDate}T24:00:00-00:00`).format("ddd, MMM D YYYY")
+                                
     var mailOptions = {
     from: process.env.EMAIL, // sender address
     to: `${req.body.mainEmail}`,// list of receivers
     subject: `New Event: ${req.body.receiverName} - 15 Minute Meeting - ${emailDate}, ${req.body.timeSlot}`, 
+    // <p>Invitee: ${req.body.userName}</p> <p>Invitee Email:${req.body.userEmail}</p>
     html:`<p> Hi ${req.body.receiverName},</p> 
           <p>A new event has been scheduled</p>
           <p>Event Type: 
           15 Minute Meeting</p>
-          <p>Invitee: 
-          ${req.body.userName}</p>
-          <p>Invitee Email: 
-          ${req.body.userEmail}</p>
+          <p>Invitee:          
+          Ankita Prakash
+          </p>
+          <p>Invitee Email:
+          prankita4@gmail.com
+          </p>
           <p>Event Date/Time:
           ${req.body.timeSlot} - ${emailDate}</p>
           <p>Message, if any:

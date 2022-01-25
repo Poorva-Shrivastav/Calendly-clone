@@ -35,19 +35,24 @@
     width: 85px;
     height: 30px;
     border-radius: 20px;
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
     outline: none;
-    border: 1px solid rgb(0, 107, 255);
+    /* border: 1px solid rgb(0, 107, 255); */
+    border: 1px solid #ef6234;
     background-color: white;
     cursor: pointer;
 }
 
 .a-event{
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
 }
 
 .button-event-noBorder{
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    /* color: #635bff; */
+    color:#ef6234;
     background-color: transparent;
     border: 0px;
     outline: none;

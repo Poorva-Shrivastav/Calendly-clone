@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import {Menu} from './Menu'
 import Button from '../Button/Button' 
 import './NavbarPostLogin.css'
-import logo from '../Images/logoC.jpeg'
+// import logo from '../Images/logoC.jpeg'
+import logo from '../Images/logo.png'
 import { useHistory } from 'react-router-dom'
 import { GoogleLogout} from 'react-google-login'
 
@@ -37,14 +38,13 @@ function NavbarPostLogin() {
                     })
                 }
            </ul>
-           <div className="logout-button">               
+           <div id="logout-button">               
                 <GoogleLogout
                     clientId= {process.env.REACT_APP_CLIENT_ID}
                     buttonText="Logout"
                     onLogoutSuccess={logoutSuccessHandler}
                     onFailure={logoutFailureHandler}
                     icon={false}
-
                     >
                 </GoogleLogout>
             </div>

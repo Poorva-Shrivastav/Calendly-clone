@@ -2,11 +2,13 @@
 #button-Goglesignin{
     height: 45px;
     width: 180px;
-    background-color: rgb(0, 107, 255);
+    /* background-color: rgb(0, 107, 255); */
+    background-color: #ef6234;
     color: white;
     border-radius:22px;
     outline: none;
-    border: 1px solid rgb(0, 107, 255);
+    /* border: 1px solid rgb(0, 107, 255); */
+    border: 1px solid #ef6234;
     cursor: pointer;
     /* margin-top: 8%; */
     /* margin-left: 25%; */

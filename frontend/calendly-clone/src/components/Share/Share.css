@@ -44,7 +44,8 @@ cursor:default;
     font-size: 16px;
     font-weight: 600;
     text-decoration: underline;
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
     width: 100px;
     margin-left:40%;
     padding-bottom: 15px;
@@ -82,11 +83,13 @@ cursor:default;
 .share-copylink{
     height: 40px;
     width: 90px;
-    background-color: rgb(0, 107, 255);
+    /* background-color: rgb(0, 107, 255); */
+    background-color: #ef6234;
     color: white;
     border-radius: 24px;
     outline: none;
-    border: 1px solid rgb(0, 107, 255);
+    /* border: 1px solid rgb(0, 107, 255); */
+    border: 1px solid #ef6234;
     font-weight: 600;
     cursor: pointer;
     margin-left: 30px;

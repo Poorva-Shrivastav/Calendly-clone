@@ -20,7 +20,7 @@ function SignupWithGoogle() {
                 <p>Hi {email}!</p>
             </div>
             <div id="lower-container-signupG">
-                <p id="first-p-signupG">The easiest way for you to sign up is with Google. This will automatically connect your calendar so you can start using Calendly right away!</p>
+                <p id="first-p-signupG">The easiest way for you to sign up is with Google. This will automatically connect your calendar so you can start using CalendarApp right away!</p>
                 <div id="signup-Google-Button">
                 <GoogleAccount >Sign up with Google</GoogleAccount>
                 </div>
@@ -34,7 +34,7 @@ function SignupWithGoogle() {
                 </div>
             </div>
 
-            <p id="last-p-signupG">By creating a Calendly account, you agree to Calendly's Terms and Privacy Policy</p>
+            <p id="last-p-signupG">By creating an account, you agree to CalendarApp's Terms and Privacy Policy</p>
         </div>
     )
 }

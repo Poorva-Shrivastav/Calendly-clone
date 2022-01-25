@@ -76,7 +76,8 @@ body{
 
 #back-link-p-meetingConf{
     /* color: #5ac8a4; */
-    color: rgb(0, 107, 255);
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
     height: 16px;
     margin-left: 30%;
     border: none;

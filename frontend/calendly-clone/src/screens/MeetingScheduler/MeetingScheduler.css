@@ -28,7 +28,8 @@ body{
 .back-button{
     border-radius: 30px;
     line-height: 40px;
-    color: #0e70fb;
+    /* color: #0e70fb; */
+    color: #ef6234;
     cursor: pointer;
     width: 43px;
     border: 1px solid lightgray;
@@ -39,11 +40,12 @@ body{
 }
 
 .back-button:hover{
-    background-color: #d9e9fe;
+    background-color: #f5d0c4;
 }
 
 #event-string-p{
-    color: #5ac8a4;
+    /* color: #5ac8a4; */
+    color: #767676;
 }
 
 #time-zone{
@@ -87,7 +89,8 @@ body{
     color: #383838;
 }
 .input-meeting:focus{
-    border: 2px solid #0e70fb;
+    /* border: 2px solid #0e70fb; */
+    border: 2px solid #ef6234;
 }
 
 .input-meeting-error{
@@ -123,16 +126,18 @@ body{
     width: 100px;
     border-radius: 20px;
     outline: none;
-    border: 1px solid #1c78fb;
+    /* border: 1px solid #1c78fb; */
+    border: 1px solid #ef6234;
     background-color: white;
-    color:#1c78fb;
+    /* color:#1c78fb; */
+    color: #ef6234;
     cursor: pointer;
     margin-top: -50px;
     margin-bottom: 30px;
 }
 
 .add-guest-meeting:hover{
-    background-color: #d9e9fe;
+    background-color: #d8d6fa;
 }
 
 .textarea-meeting-hidden{
@@ -251,8 +256,10 @@ body{
     width: 147px;
     border-radius: 30px;
     outline: none;
-    border: 1px solid #1c78fb;
-    background-color: #1c78fb;
+    /* border: 1px solid #1c78fb;
+    background-color: #1c78fb; */
+    border: 1px solid #ef6234;
+    background-color: #ef6234;
     color:white;
     cursor: pointer;
     margin-bottom: 30px;

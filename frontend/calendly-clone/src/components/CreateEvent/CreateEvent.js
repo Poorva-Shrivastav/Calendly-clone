@@ -7,7 +7,7 @@ function CreateEvent() {
     return (    
         <div class="main-event">
             <div class="event1">
-                <p id="p-heading">My Calendly</p>
+                <p id="p-heading">My Calendar App</p>
                 <div class="ptags-holder-event">
                     <a onClick={<EventTypes/>} href="./user/event-types">Event Types</a>
                     <a>Scheduled Events</a>

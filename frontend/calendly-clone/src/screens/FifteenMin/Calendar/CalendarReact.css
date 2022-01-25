@@ -69,16 +69,19 @@ abbr[title]{
     padding: 15px;
 }
 .react-calendar__tile--active{
-    background: #eef5fe;
+    /* background: #eef5fe; */
+    background: #f5d0c4;
     border-radius: 30px;
     line-height: 10px;
-    color: #0e70fb;
+    /* color: #0e70fb; */
+    color: #ef6234;
     cursor: pointer;
 }
 
 /* .react-calendar--selectRange  */
 .react-calendar__tile--hover{
-    background: #006edc;
+    /* background: #006edc; */
+    background: #ef6234;
     border-radius: 30px;
     line-height: 10px;
     color: white;
@@ -86,7 +89,8 @@ abbr[title]{
 }
 
 .react-calendar button:enabled:focus {
-    background: #006edc;
+    /* background: #006edc; */
+    background: #ef6234;
     border-radius: 30px;
     line-height: 10px;  
     color: white;

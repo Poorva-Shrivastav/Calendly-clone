@@ -3,13 +3,14 @@ import './MeetingConfirmation.css'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router'
 
-function MeetingConfirmation({receiverName, newDate, timeSlot }) {
+function MeetingConfirmation({receiverName, newDate, timeSlot, setNewDate }) {
     const history = useHistory();
     const goBackToHomeHandler = () => {
         let path = `/user`
+        setNewDate(new Date())
         history.push(path)    
     }
-
+    
     console.log({timeSlot});
     return (
         // <div>
@@ -17,7 +18,8 @@ function MeetingConfirmation({receiverName, newDate, timeSlot }) {
                 <div className="sub-container-meetingConf">
                     <div className="upper-div-meetingConf">
                         <h3 id="h3-meetingConf">Confirmed</h3>
-                        <p id="p-meetingConf">You are scheduled with {receiverName}</p>
+                        {/* <p id="p-meetingConf">You are scheduled with {receiverName}</p> */}
+                        <p id="p-meetingConf">The meeting is scheduled for Ankita Prakash and {receiverName}</p>
                     </div>                    
                     <div className="lower-div-meetingConf">
                         {/* <h4 id="event-string-h4-meetingConf">🟡 15 Minute Meeting</h4> */}

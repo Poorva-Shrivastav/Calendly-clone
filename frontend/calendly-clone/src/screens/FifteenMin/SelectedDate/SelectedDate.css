@@ -21,7 +21,8 @@ body{
 #back-button-selectedDate{
     border-radius: 30px;
     line-height: 40px;
-    color: #0e70fb;
+    /* color: #0e70fb; */
+    color:#ef6234;
     cursor: pointer;
     width: 43px;
     /* height: 30px; */
@@ -60,7 +61,10 @@ body{
 }
 
 #momentDate-selectedDate{
-    color: rgb(240, 9, 47);
+    margin-left: 50px;
+    /* color: rgb(240, 9, 47); */
+      color: black;
+
 }
 
 .button-container{
@@ -74,10 +78,12 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     padding: 15px;
     background-color: white;
-    border: .5px solid #67a6ff;
+    /* border: .5px solid #67a6ff; */
+    border: .5px solid #ef6234;
     width: 80%;
     border-radius: 4px;
-    color: #0e70fb;
+    /* color: #0e70fb; */
+    color: #ef6234;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -86,7 +92,8 @@ body{
 }
 
 .setTime:hover{
-    border: 2px solid #0e70fb;
+    /* border: 2px solid #0e70fb; */
+    border: 2px solid #ef6234;
 }
 
 .newSetTime{
@@ -113,10 +120,12 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     padding: 15px;
     color: white;
-    border: .5px solid #67a6ff;
+    /* border: .5px solid #67a6ff; */
+    border: .5px solid #ef6234;
     width: 38.5%;
     border-radius: 4px;
-    background-color: #0e70fb;
+    /* background-color: #0e70fb; */
+    background-color: #ef6234;
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 10px;
@@ -125,8 +134,10 @@ body{
 }
 
 .available-onClick:hover{
-    border: 2px solid #0e70fb;
-    background-color: #0e70fb;
+    /* border: 2px solid #0e70fb;
+    background-color: #0e70fb; */
+    border: 2px solid #ef6234;
+    background-color: #ef6234;
     opacity: 0.7;
     transform: none;
 }
