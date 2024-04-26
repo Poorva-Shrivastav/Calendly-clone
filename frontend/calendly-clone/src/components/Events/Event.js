@@ -22,8 +22,6 @@ function Event({ time }) {
 
   useEffect(() => {
     const data1 = JSON.parse(sessionStorage.getItem("userEmail"));
-    // setUserEmail(data1.data.user.email)
-
     const finalEmail = data1.replace(/@.*$/, "");
     setUserEmail(finalEmail);
   });
