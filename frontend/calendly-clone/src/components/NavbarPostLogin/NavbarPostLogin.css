@@ -1,64 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap");
 
-body{
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
-.navbar-user{
-    width: 80%;
-    margin-left:15%;
-    margin-right: 5%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: -2px;
-    /* font-family: Arial, Helvetica, sans-serif; */
+.navbar-user {
+  width: 80%;
+  margin-left: 15%;
+  margin-right: 5%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -2px;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
-.logo-user{
-    height: 60px;
-    cursor: pointer;
-    /* width: 5vw; */
+.logo-user {
+  height: 60px;
+  cursor: pointer;
+  /* width: 5vw; */
 }
 
-.menu-icon-user{
-    display: flex;
-    justify-content:space-between;
-    text-align: left;
-    list-style: none;
-    width: 41%;
-    font-weight: 400;
-    font-size: 15px;
-    margin-right: 15%;
+.menu-icon-user {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  list-style: none;
+  width: 41%;
+  font-weight: 400;
+  font-size: 15px;
+  margin-right: 15%;
 }
 
-#logout-button{
-    display: flex;
-    justify-content:space-between;
-    text-align: right;
-    list-style: none;
-    width: 10%;
-    font-weight: 400;
-    font-size: 15px;
-    margin-top: 15px;
-    margin-right: 10%;
-    border: none;
-    outline: none;
-    background: none;
-    color: lightgray;
-}
-#logout-button:hover{
-    color: hotpink;
-    cursor: pointer;
-    font-family: 700;
+#logout-div {
+  margin: 8px;
+  padding: 10px;
 }
 
-a{
-    text-decoration: none;
-    cursor: pointer;
-    color: rgb(87, 87, 87);
+#logout-button {
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
 }
 
-a:hover{
-    /* color: rgb(0, 107, 255); */
-    color: #ef6234;
+#logout-button:hover {
+  background: hotpink;
+  cursor: pointer;
+  font-family: 700;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: rgb(87, 87, 87);
+}
+
+a:hover {
+  /* color: rgb(0, 107, 255); */
+  color: #ef6234;
 }

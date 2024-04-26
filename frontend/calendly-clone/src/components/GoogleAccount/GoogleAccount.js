@@ -15,6 +15,7 @@ function GoogleAccount({ children }) {
         const user = result.user;
         if (user) {
           setIsSignedIn(true);
+          console.log(user);
           sessionStorage.setItem("userEmail", JSON.stringify(user.email));
           sessionStorage.setItem("userName", JSON.stringify(user.displayName));
           history.push(`/user`);

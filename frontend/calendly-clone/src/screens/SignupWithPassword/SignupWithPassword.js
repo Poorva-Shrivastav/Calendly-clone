@@ -29,10 +29,7 @@ function SignupWithPassword(props) {
           console.log(user);
           if (user) {
             sessionStorage.setItem("userEmail", JSON.stringify(user.email));
-            sessionStorage.setItem(
-              "userName",
-              JSON.stringify(user.displayName)
-            );
+            sessionStorage.setItem("userName", JSON.stringify(user.email));
             history.push(`/user`);
           }
         })

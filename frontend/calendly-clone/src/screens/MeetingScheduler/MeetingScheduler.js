@@ -32,12 +32,6 @@ function MeetingScheduler({
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
-  // useEffect(() => {
-  //     const data1 = JSON.parse(sessionStorage.getItem('userData'))
-  //     setUserName(data1.data.user.name)
-  //     setUserEmail(data1.data.user.email)
-  // })
-
   const { time } = useParams();
   const history = useHistory();
   const backHandler = () => {
@@ -45,8 +39,6 @@ function MeetingScheduler({
     history.push(path);
   };
   console.log(`I'm from Meeting - ${timeSlot} - ${newDate}`);
-
-  // const nameChangeHandler = (e) => setName(e.target.value)
 
   const emailChangeHandler = (e) => setMainEmail(e.target.value);
 
@@ -113,12 +105,15 @@ function MeetingScheduler({
   const endTime = `${formattedDate}T${end}:00-18:30`;
 
   var gapi = window.gapi;
-  var CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-  var API_KEY = process.env.REACT_APP_API_KEY;
-  var DISCOVERY_DOCS = [
-    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+  var CLIENT_ID =
+    "1051195399308-odlc2nv9r2ml1ud7rro852lc1uj49mpi.apps.googleusercontent.com";
+  var API_KEY = "AIzaSyBwoqrDjr3840k7PTkQbcyK-u107c7TuNM";
+  var DISCOVERY_DOCS =
+    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
+  var SCOPES = [
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/calendar.events",
   ];
-  var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -133,11 +128,10 @@ function MeetingScheduler({
         console.log("loaded client");
 
         gapi.client.init({
-          apiKey: process.env.REACT_APP_CALENDAR_API,
-          clientId: process.env.REACT_APP_CLIENT_ID,
-          discoveryDocs:
-            "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-          scope: "https://www.googleapis.com/auth/calendar.events",
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: [DISCOVERY_DOCS],
+          scope: SCOPES,
         });
 
         gapi.client.load("calendar", "v3", () =>
@@ -148,8 +142,14 @@ function MeetingScheduler({
           .signIn()
           .then(() => {
             console.log("Signed In");
+            console.log(
+              "receiverName: ",
+              receiverName,
+              "mainEmail: ",
+              mainEmail
+            );
             var event = {
-              summary: `Meeting - Ankita Prakash and ${receiverName} `,
+              summary: `Meeting - Poorva Shrivastav and ${receiverName} `,
               description: `${mainEmail}`,
               start: {
                 dateTime: `${startTime}`,
@@ -162,7 +162,7 @@ function MeetingScheduler({
 
               attendees: [
                 { email: `${mainEmail}` },
-                { email: `prankita4@gmail.com` },
+                { email: `poorva024@gmail.com` },
               ],
               reminders: {
                 useDefault: false,
@@ -181,15 +181,15 @@ function MeetingScheduler({
 
             request.execute((event) => {
               window.open(event.htmlLink);
-              // console.log("Calendar event created");
+              console.log("Calendar event created");
               history.push(path);
             });
           });
         // .catch(e => console.log(e))
       });
 
-      // const response = await fetch("http://localhost:8000/send", {
-      const response = await fetch("https://calendly-clon.herokuapp.com/send", {
+      const response = await fetch("http://localhost:8000/send", {
+        // const response = await fetch("https://calendly-clon.herokuapp.com/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -210,7 +210,7 @@ function MeetingScheduler({
           const resData = res;
           console.log(resData);
           if (resData.status === "success") {
-            // alert('email sent')
+            alert("email sent");
             setIsEmptyName(false);
             setIsEmptyEmail(false);
           } else if (resData.status === "fail") {
@@ -366,6 +366,7 @@ function MeetingScheduler({
                 className="textarea-meeting"
                 value={message}
                 onChange={messageChangeHandler}
+                placeholder="❗️Please note, you might not be able to book your calendar as Google calendar API is a sensitive API, and this product is under testing. If you would like to test the product, please write a note to poorva024@gmail.com. Thank you."
               ></textarea>
 
               <div>

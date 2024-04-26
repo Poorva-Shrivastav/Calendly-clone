@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API,
+  apiKey: "AIzaSyBmJmjRQcMmBE5PIkz5IeAvrOzjgYtiLrQ",
   authDomain: "calendly-clone-288c2.firebaseapp.com",
   projectId: "calendly-clone-288c2",
   storageBucket: "calendly-clone-288c2.appspot.com",
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MSGSENDERID,
-  appId: process.env.REACT_APP_FIREBASE_APPID,
+  messagingSenderId: "198026764163",
+  appId: "1:198026764163:web:483dc5e8a3ae6d0846a0b6",
 };
 
 // Initialize Firebase
