@@ -1,0 +1,14 @@
+
+.main-div-timebar{
+    margin-top: 30px;
+}
+#h4-date{
+    /* color: gray; */
+    color: #ef6234;
+    font-size: 16px;
+}
+#h2-date{
+    margin-top: -15px;
+    font-size: 25px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

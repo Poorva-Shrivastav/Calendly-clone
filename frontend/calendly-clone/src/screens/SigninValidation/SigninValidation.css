@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+
+body{
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.signup{
+    width: 31%;
+    /* background-color: aquamarine; */
+    margin-left: 34.5%;
+    margin-top: 5.5%;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    }
+
+.logo{
+    height: 42px;
+    /* width: 40%; */
+}    
+#p-signin{
+    font-size: 18px;
+    color: rgb(100, 100, 100);
+    padding-top: 10px;
+    margin-bottom: 5px;
+}
+
+.anchor-signinVal{
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.inner-signin{
+    border: 1px solid rgb(226, 225, 225);
+    border-radius: 8px;
+    /* text-align: left; */
+    padding-left: 35px;
+    margin-top: 25px;
+    height: 150px;
+    width: 380px;
+}
+
+
+
+/* #button-signin{
+    height: 45px;
+    width: 180px;
+    background-color: rgb(0, 107, 255);
+    color: white;
+    border-radius:22px;
+    outline: none;
+    border: 1px solid rgb(0, 107, 255);
+    cursor: pointer;
+    margin-top: 8%;
+    margin-left: 25%;
+    font-size: 15px;
+
+} */
+
+.existing{
+    font-size: 14px;
+    font-weight: 100;
+    padding-top: 1%;
+    /* padding-left: 85px; */
+    color: rgb(100, 100, 100);
+}
+

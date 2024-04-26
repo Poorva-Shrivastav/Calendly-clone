@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+
+.button-inactiveEvent-noBorder{
+    color: gray;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;   
+    cursor: pointer; 
+}
+
+#button-tag-share{
+    width: 85px;
+    height: 30px;
+    border-radius: 20px;
+    color: gray;
+    outline: none;
+    border: 1px solid gray;
+    background-color: white;
+    cursor: pointer; 
+
+}

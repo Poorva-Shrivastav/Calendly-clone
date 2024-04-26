@@ -1,0 +1,58 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+
+body{
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+} */
+body{
+    background-color:#fbfcfd; 
+}
+
+.main-date-container{
+    display: flex;
+    flex-direction: row;
+    width: 56%;
+    height: 670px;
+    margin-left: 22%;
+    margin-top: 70px;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
+    background-color:#ffffff;
+    box-shadow: 20px 20px 50px #e9e9e9;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.left-container-15{
+    margin-top: 10px;
+    width: 45.5%;
+    margin-left: 30px;
+    border-right: 1px solid #e9e9e9;
+}
+.back-button-15{
+    border-radius: 30px;
+    line-height: 40px;
+    /* color: #0e70fb; */
+    color:#ef6234;
+    cursor: pointer;
+    width: 43px;    
+    border: 1px solid lightgray;
+    background-color: white;
+    font-size: 18px;
+    font-weight: 100;
+
+}
+
+.right-container-15{
+    display: flex;
+    width: 42%;
+    margin-left: 30px;
+    margin-top: 50px;
+    color: #333333;
+    /* background-color: red; */
+}
+
+#bottom-h2-date{
+    margin-top: -15px;
+    padding-bottom: 7px;
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

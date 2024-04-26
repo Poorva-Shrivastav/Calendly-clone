@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+
+body{
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    background-color:#fbfcfd; 
+}
+.outerdiv-selectedDate{
+    width: 75%;
+    height: 670px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 180px;
+    margin-top: 70px;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
+    background-color:#ffffff;
+    box-shadow: 20px 20px 50px #e9e9e9;
+    /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+#back-button-selectedDate{
+    border-radius: 30px;
+    line-height: 40px;
+    /* color: #0e70fb; */
+    color:#ef6234;
+    cursor: pointer;
+    width: 43px;
+    /* height: 30px; */
+    border: 1px solid lightgray;
+    background-color: white;
+    font-size: 18px;
+    font-weight: 100;
+}
+.left-container-selectedDate{
+    width: 37%;
+    margin-left: 30px;
+    margin-top: 20px;
+    border-right: 1px solid #e9e9e9;
+}
+
+.right-container-selectedDate{
+    width: 40%;
+    padding-right: 10px;
+    margin-left: 20px;
+    margin-top: 50px;
+    
+}
+
+.rightmost-popup-selectedDate{
+    width: 30%;
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-top: 7%;
+}
+
+.selected-date{
+    color: rgb(68, 68, 68);
+    padding:5px;
+    margin-top:-10px;
+    margin-left:15px;
+}
+
+#momentDate-selectedDate{
+    margin-left: 50px;
+    /* color: rgb(240, 9, 47); */
+      color: black;
+
+}
+
+.button-container{
+    height: 530px;
+    overflow: auto;
+
+}
+
+
+.setTime{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 15px;
+    background-color: white;
+    /* border: .5px solid #67a6ff; */
+    border: .5px solid #ef6234;
+    width: 80%;
+    border-radius: 4px;
+    /* color: #0e70fb; */
+    color: #ef6234;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.setTime:hover{
+    /* border: 2px solid #0e70fb; */
+    border: 2px solid #ef6234;
+}
+
+.newSetTime{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: .5px solid rgba(0, 0, 0, 0.6);
+    width: 38.5%;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.display-none{
+    display: none;
+}
+
+
+.available-onClick{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 15px;
+    color: white;
+    /* border: .5px solid #67a6ff; */
+    border: .5px solid #ef6234;
+    width: 38.5%;
+    border-radius: 4px;
+    /* background-color: #0e70fb; */
+    background-color: #ef6234;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.available-onClick:hover{
+    /* border: 2px solid #0e70fb;
+    background-color: #0e70fb; */
+    border: 2px solid #ef6234;
+    background-color: #ef6234;
+    opacity: 0.7;
+    transform: none;
+}

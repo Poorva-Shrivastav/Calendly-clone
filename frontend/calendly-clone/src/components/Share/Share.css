@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+.outermost-div-share{
+background-color: rgb(236, 234, 234);
+opacity: .95;
+margin-top: -50%;
+margin-left: -18%;
+height: 110vh;
+width: 100%;
+position:absolute;
+cursor:default;
+
+}
+
+.outer-div-share{
+    background-color: white;
+    opacity: 2;
+    width: 52%;
+    height: 60%;
+    margin-top: 17%;
+    margin-left: 25%;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+}
+.content-div-share{
+    padding-top: 3%;
+    padding-left: 20px;
+}
+
+#share-title{
+    font-size: 17px;    
+}
+
+#share-timeclock{
+    font-size: 16px;
+}
+.border-inner-share{
+    border: 0.5px solid lightgray;
+    width: 100%;
+    margin-left: -2%;
+}
+
+#share-a-link{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: underline;
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
+    width: 100px;
+    margin-left:40%;
+    padding-bottom: 15px;
+}
+
+.inner-div-share{
+    margin-left: 20%;
+    font-size: 15px;
+}
+
+#url-to-share{
+    margin-top:20px;
+    background-color: rgb(236, 235, 235);
+    height: 4vh;
+    width: 24vw;
+    padding-top: 11px;
+    padding-left: 10px;
+    border-radius: 4px;
+    cursor:text;
+
+}
+.lower-div-share{
+    margin-top: 32%;
+    margin-left: 65%;
+    font-size: 16px;
+}
+
+ #share-close-button{
+    background-color: transparent;
+    outline: none;
+    border: none;   
+    cursor: pointer;
+ }
+
+.share-copylink{
+    height: 40px;
+    width: 90px;
+    /* background-color: rgb(0, 107, 255); */
+    background-color: #ef6234;
+    color: white;
+    border-radius: 24px;
+    outline: none;
+    /* border: 1px solid rgb(0, 107, 255); */
+    border: 1px solid #ef6234;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.share-copylink-colorChange{
+    color: rgb(9, 236, 28);
+    background-color: transparent;
+    outline: none;
+    border: none;  
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 20px;
+
+}
+
+.display-none{
+    display: none;
+}

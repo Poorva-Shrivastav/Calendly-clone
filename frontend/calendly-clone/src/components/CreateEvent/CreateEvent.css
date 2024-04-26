@@ -1,0 +1,33 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+
+body{
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+} */
+
+.main-event{
+    display: flex;
+    flex-direction: row;
+    width: 68%;
+    margin-left:16%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+.event1{
+    width: 100%;
+}
+
+#p-heading{
+    font-size: 25px;
+    /* color: #ef6234; */
+
+}
+
+.ptags-holder-event{
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+}

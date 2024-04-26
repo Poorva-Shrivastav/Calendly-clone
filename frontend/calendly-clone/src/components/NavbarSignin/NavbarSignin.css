@@ -1,0 +1,14 @@
+.navbar-list{
+    width: 85%;
+    margin-left: 8%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+#logo-signin{
+    height: 40px;
+    cursor: pointer;
+}

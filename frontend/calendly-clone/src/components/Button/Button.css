@@ -1,0 +1,14 @@
+#button{
+    height: 50px;
+    width: 120px;
+    background-color: #ef6234;
+    /* background-color: rgb(0, 107, 255); */
+    color: white;
+    border-radius: 24px;
+    outline: none;
+    /* border: 1px solid rgb(0, 107, 255) #6b64fb;; */
+    border: 1px solid #ef6234;
+    font-weight: 600;
+    cursor: pointer;
+    /* position: inherit; */
+}

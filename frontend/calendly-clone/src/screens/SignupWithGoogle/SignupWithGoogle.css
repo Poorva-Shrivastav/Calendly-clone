@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+.main-container-signupG{
+    margin-left: 34.5%;
+    margin-top: 5%;
+    margin-right: 34.5%;
+    color: rgb(75, 75, 75);
+    font-weight: 300; 
+}
+
+.logo-welcome-signupG{
+    margin-left: 30%;
+}
+
+#logo-signupG{
+    height: 44px;
+}
+
+#lower-container-signupG{
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    margin-top: 45px;
+    padding-left: 38px;
+    padding-right: 40px;
+    padding-top: 10px;
+    height: 270px;
+    font-size: 15px;
+}
+
+#first-p-signupG{
+    line-height: 24px;
+
+}
+
+/* #Google-signup-signupG{
+    background-color: #006bff;
+    border-radius: 30px;
+    font-size: 15px;
+    width: 200px;
+    height: 40px;
+    color: white;
+    outline: none;
+    border: none;
+    margin-left: 27%;
+    margin-right: 27%;
+    margin-top: 20px;
+
+} */
+#signup-Google-Button{
+    margin-left: 27%;
+}
+
+#inner-container-p-signupG{
+    margin-top: 30px;
+    font-size: 12px;
+}
+
+#a-p-signupG{
+    margin-top: -10px;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+#a-signupG{
+    /* color:#006bff; */
+    color: #ef6234;
+}
+#a-signupG:hover{
+    text-decoration: underline;
+}
+
+#last-p-signupG{
+    margin-top: 30px;
+    font-size: 11.5px;
+}

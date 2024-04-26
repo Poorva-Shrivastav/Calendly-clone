@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+
+body{
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+.banner{
+    display: flex;
+    width: 92%;
+    margin-left: 7%;
+    margin-top: -2%;
+    position: relative;
+
+}
+.img-banner{
+    height: 130vh;
+    /* width: 120vw; */
+    margin-top: -8%;
+    margin-left: 50px;
+    /* width: 70%; */
+    /* z-index: -1; */
+    
+}
+
+.content-signin{
+    /* position: absolute; */
+    margin-left: 20px;
+    margin-top: 1%;
+    width: 50%;
+    margin-right: 20%;
+}
+.h1-banner-signin{
+    font-size: 90px; 
+    font-weight: 900;
+}
+
+.p-tag-banner-signin{
+    /* width: 45%; */
+    font-size: 17px;
+    font-weight: 300;
+}
+
+#a-tag{
+    font-weight: 600;
+}
+
+.signin-banner{
+    display: flex;
+    width: 400px;
+    position: relative;
+    height: 60px;
+    border-radius: 40px;
+    border: 1px solid lightgray;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* background-color: red; */
+
+}
+
+#input-banner-signin{
+    width: 100%;
+    padding-left: 20px;
+    background-color: transparent;
+    /* z-index: -1; */
+    float: left;
+    height: inherit;
+    /* background-color: green; */
+    font-size: 16px;
+    color: back;
+    border: none;
+    outline: none;
+    cursor: text;
+    
+    
+}
+
+#input-banner-signin::selection{
+    background-color: transparent;
+    outline-color: none;
+}
+
+#button-banner-signin{
+    position: absolute;
+    background-color: black;
+    color: white;
+    top:0;
+    right:0;
+    display: inline;
+    z-index: 2;
+    border-radius: 30px;
+    height: inherit;
+    width: 120px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

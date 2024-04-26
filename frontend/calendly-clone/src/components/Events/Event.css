@@ -1,0 +1,77 @@
+.min-meeting{
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+    
+}
+
+.checkbox-div{
+    display: flex;
+    justify-content: space-between;
+    height: 16px;
+}
+
+#h2-tag-event{
+    color: rgb(61, 61, 61);
+    font-size: 20px;
+    font-weight: 100;
+
+}
+#p-tag-event{
+    color: rgb(168, 167, 167);
+}
+
+.lower-container{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid lightgray;
+    margin-top: 20px;
+    padding-top: 15px;
+    font-size: 14px;
+    
+}
+
+#button-tag-event{
+    width: 85px;
+    height: 30px;
+    border-radius: 20px;
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
+    outline: none;
+    /* border: 1px solid rgb(0, 107, 255); */
+    border: 1px solid #ef6234;
+    background-color: white;
+    cursor: pointer;
+}
+
+.a-event{
+    /* color: rgb(0, 107, 255); */
+    color: #ef6234;
+}
+
+.button-event-noBorder{
+    /* color: rgb(0, 107, 255); */
+    /* color: #635bff; */
+    color:#ef6234;
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+    border-radius: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.display-none{
+    display: none;
+}
+
+.event-copylink-colorChange{
+    color: rgb(9, 236, 28);
+    background-color: transparent;
+    outline: none;
+    border: none;  
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 20px;
+    padding-top: 5px;
+}

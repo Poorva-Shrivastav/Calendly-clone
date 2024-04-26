@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
+.outermost-div-inactivemodal{
+background-color: rgb(236, 234, 234);
+opacity: .95;
+margin-top: -50%;
+margin-left: -35%;
+height: 110vh;
+width: 90%;
+position:absolute;
+cursor:default;
+
+}
+
+.outer-div-inactivemodal{
+    /* background-color: rgb(236, 235, 235); */
+    background-color: white;
+    opacity: 2;
+    width: 30%;
+    height: 30%;
+    margin-top: 20%;
+    margin-left: 35%;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+}
+.content-div-inactivemodal{
+    padding-top:20%;
+    padding-left: 80px;
+    /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+#inactivemodal-title{
+    font-size: 17px;    
+}
+
+.lower-div-inactivemodal{
+    margin-top: 22%;
+    margin-left: 70%;
+    font-size: 16px;
+}
+
+#inactivemodal-close-button{
+    background-color: transparent;
+    outline: none;
+    border: none;   
+    cursor: pointer;
+}
