@@ -1,52 +1,42 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "react-google-login";
 import "./GoogleAccount.css";
-import axios from "axios";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function GoogleAccount({ children }) {
+  const history = useHistory();
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   const googleSuccess = (res) => {
-    // setlogOutButton(true)
-    const userData = { tokenId: res.tokenId };
-    // axios.post('http://localhost:8000/api/googlelogin', userData)
-    axios
-      .post("https://calendly-clon.herokuapp.com/api/googlelogin", userData)
-      .then((data) => {
-        let responseJson = data;
-        sessionStorage.setItem("userData", JSON.stringify(data));
-        window.location = `/user`;
-      });
-  };
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          setIsSignedIn(true);
+          sessionStorage.setItem("userEmail", JSON.stringify(user.email));
+          sessionStorage.setItem("userName", JSON.stringify(user.displayName));
+          history.push(`/user`);
+        }
+      })
 
-  const googleFailure = (error) => {
-    console.log(error);
-    console.log("Google login was unsuccessful. Try Again later");
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(error);
+      });
   };
 
   return (
     <>
-      <GoogleLogin
-        clientId={process.env.REACT_APP_CLIENT_ID}
-        render={(renderProps) => (
-          <button
-            id="button-Goglesignin"
-            onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
-          >
-            {children}
-          </button>
-        )}
-        onSuccess={googleSuccess}
-        onFailure={googleFailure}
-        cookiePolicy={"single_host_origin"}
-        id="button-Goglesignin"
-      />
-      {/* <GoogleLogout
-                clientId= {process.env.REACT_APP_CLIENT_ID}
-                buttonText="Logout"
-                onLogoutSuccess={logOutSuccess}
-            /> */}
+      <button onClick={googleSuccess} id="login-with-google-btn">
+        Sign in with Google
+      </button>
     </>
   );
 }

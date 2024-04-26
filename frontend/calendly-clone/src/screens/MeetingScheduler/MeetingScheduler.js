@@ -133,9 +133,8 @@ function MeetingScheduler({
         console.log("loaded client");
 
         gapi.client.init({
-          apiKey: "AIzaSyBwoqrDjr3840k7PTkQbcyK-u107c7TuNM",
-          clientId:
-            "1051195399308-odlc2nv9r2ml1ud7rro852lc1uj49mpi.apps.googleusercontent.com",
+          apiKey: process.env.REACT_APP_CALENDAR_API,
+          clientId: process.env.REACT_APP_CLIENT_ID,
           discoveryDocs:
             "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
           scope: "https://www.googleapis.com/auth/calendar.events",
