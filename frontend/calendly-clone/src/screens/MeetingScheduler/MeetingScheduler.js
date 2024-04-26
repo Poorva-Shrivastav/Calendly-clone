@@ -110,10 +110,7 @@ function MeetingScheduler({
   var API_KEY = "AIzaSyBwoqrDjr3840k7PTkQbcyK-u107c7TuNM";
   var DISCOVERY_DOCS =
     "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
-  var SCOPES = [
-    "https://www.googleapis.com/auth/calendar",
-    "https://www.googleapis.com/auth/calendar.events",
-  ];
+  var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -137,6 +134,7 @@ function MeetingScheduler({
         gapi.client.load("calendar", "v3", () =>
           console.log("Calendar logged")
         );
+
         gapi.auth2
           .getAuthInstance()
           .signIn()
@@ -188,23 +186,26 @@ function MeetingScheduler({
         // .catch(e => console.log(e))
       });
 
-      const response = await fetch("http://localhost:8000/send", {
-        // const response = await fetch("https://calendly-clon.herokuapp.com/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // "Content-Type": "application/json;charset=utf-8"
-        },
-        // mode: 'no-cors',
-        credentials: "same-origin",
-        body: JSON.stringify({
-          receiverName,
-          mainEmail,
-          message,
-          timeSlot,
-          newDate,
-        }), //userName, userEmail
-      })
+      // const response = await fetch("http://localhost:8000/send", {
+      const response = await fetch(
+        "https://calendly-backend-xd7d.onrender.com/send",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // "Content-Type": "application/json;charset=utf-8"
+          },
+          // mode: 'no-cors',
+          credentials: "same-origin",
+          body: JSON.stringify({
+            receiverName,
+            mainEmail,
+            message,
+            timeSlot,
+            newDate,
+          }), //userName, userEmail
+        }
+      )
         .then((res) => res.json())
         .then(async (res) => {
           const resData = res;
