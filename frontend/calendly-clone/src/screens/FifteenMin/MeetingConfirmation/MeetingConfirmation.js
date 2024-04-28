@@ -1,6 +1,5 @@
 import React from "react";
 import "./MeetingConfirmation.css";
-import Moment from "react-moment";
 import { useHistory } from "react-router";
 
 function MeetingConfirmation({ receiverName, newDate, timeSlot, setNewDate }) {
@@ -8,10 +7,9 @@ function MeetingConfirmation({ receiverName, newDate, timeSlot, setNewDate }) {
   const goBackToHomeHandler = () => {
     let path = `/user`;
     setNewDate(new Date());
-    history.push(path);
+    sessionStorage.getItem("userName") ? history.push(path) : history.push("/");
   };
 
-  console.log({ timeSlot });
   return (
     // <div>
     <div className="outerdiv-meetingConf">

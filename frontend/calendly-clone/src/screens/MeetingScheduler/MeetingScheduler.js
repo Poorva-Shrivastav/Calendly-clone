@@ -38,7 +38,6 @@ function MeetingScheduler({
     let path = `/user/15min/date`;
     history.push(path);
   };
-  console.log(`I'm from Meeting - ${timeSlot} - ${newDate}`);
 
   const emailChangeHandler = (e) => setMainEmail(e.target.value);
 
@@ -69,7 +68,7 @@ function MeetingScheduler({
         id: new Date().getTime().toString(),
         email: email,
       };
-      console.log(emailList);
+
       setEmailList([...emailList, emailData]);
 
       if (validator.isEmail(email)) {
@@ -90,7 +89,6 @@ function MeetingScheduler({
     setToggleUpdated(false);
     setEmail(newEditedEmail.email);
     setIsEditEmail(id);
-    console.log(isEditEmail);
   };
 
   const deleteHandler = (index) => {
@@ -140,12 +138,7 @@ function MeetingScheduler({
           .signIn()
           .then(() => {
             console.log("Signed In");
-            console.log(
-              "receiverName: ",
-              receiverName,
-              "mainEmail: ",
-              mainEmail
-            );
+
             var event = {
               summary: `Meeting - Poorva Shrivastav and ${receiverName} `,
               description: `${mainEmail}`,
@@ -183,7 +176,6 @@ function MeetingScheduler({
               history.push(path);
             });
           });
-        // .catch(e => console.log(e))
       });
 
       // const response = await fetch("http://localhost:8000/send", {
@@ -209,7 +201,6 @@ function MeetingScheduler({
         .then((res) => res.json())
         .then(async (res) => {
           const resData = res;
-          console.log(resData);
           if (resData.status === "success") {
             alert("email sent");
             setIsEmptyName(false);

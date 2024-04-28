@@ -7,7 +7,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 function Event({ time }) {
   const [showShare, setShowShare] = useState(false);
   const [textCopied, setTextCopied] = useState(false);
-  const [copied, setCopied] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
   const history = useHistory();
@@ -17,7 +16,9 @@ function Event({ time }) {
     history.push(path);
   };
 
-  const shareHandler = () => setShowShare(true);
+  const shareHandler = () => {
+    setShowShare(true);
+  };
   const textCopyHandler = () => setTextCopied(true);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ function Event({ time }) {
         <button id="button-tag-event" onClick={shareHandler}>
           Share
         </button>
-        {showShare && <Share closeShare={setShowShare} />}
+        {showShare && <Share closeShare={setShowShare} userEmail={userEmail} />}
       </div>
     </div>
   );

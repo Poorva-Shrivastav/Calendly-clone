@@ -10,21 +10,6 @@ function SigninPasswordRequired({ loginEmail }) {
   const history = useHistory();
   const submitHandler = (e) => {
     e.preventDefault();
-
-    if (password !== "") {
-      // let path = `/user`
-      // history.push(path)
-      // const loginPassword = {loginEmail:loginEmail, password: password}
-      // // axios.post('http://localhost:8000/api/signinpwd', loginPassword)
-      // axios.post('https://calendly-clon.herokuapp.com/api/signinpwd', loginPassword)
-      //     .then(res => { console.log(res.data)
-      //     window.location = '/user'
-      //     })
-      // .catch(err => {
-      //     alert("Invalid Password")
-      //     console.log(err)
-      // })
-    }
   };
 
   return (

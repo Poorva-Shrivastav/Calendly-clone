@@ -26,7 +26,6 @@ function SignupWithPassword(props) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
           if (user) {
             sessionStorage.setItem("userEmail", JSON.stringify(user.email));
             sessionStorage.setItem("userName", JSON.stringify(user.email));
